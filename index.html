@@ -2,157 +2,115 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Facil Express - Global Logistics</title>
+<title>Facil Express — Global Logistics</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#0a1220;color:#e2e8f0}
-:root{--blue:#2563eb;--border:#1e293b;--card:#121c30;--muted:#94a3b8}
+body{background:#0a1220;color:#e2e8f0;line-height:1.6;overflow-x:hidden}
+:root{--blue:#2563eb;--border:#1e293b;--card:#121c30;--muted:#94a3b8;--yellow:#facc15}
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
-/* LOGO LOADING ANIMATION EVERYWHERE */
-#pageLoader{position:fixed;inset:0;background:#0a1220;z-index:99999;display:grid;place-items:center;transition:opacity .5s}
+#pageLoader{position:fixed;inset:0;background:#0a1220;z-index:99999;display:grid;place-items:center;transition:opacity .6s}
 #pageLoader.hide{opacity:0;pointer-events:none}
-.logo-anim{width:84px;height:84px;background:#2563eb;border-radius:18px;display:grid;place-items:center;font-size:36px;animation:logoPulse 1.3s infinite;box-shadow:0 0 0 0 rgba(37,99,235,.7)}
-@keyframes logoPulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,.7)}50%{transform:scale(1.08);box-shadow:0 0 0 22px rgba(37,99,235,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
-.dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
-.dots span{width:7px;height:7px;background:#2563eb;border-radius:50%;animation:bounce 1.2s infinite}
-.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
-header{background:#0a1220;border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
-.header-inner{display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;color:#fff;display:flex;align-items:center;gap:8px}
-.logo-box{width:32px;height:32px;background:var(--blue);border-radius:8px;display:grid;place-items:center}
-.hero{padding:70px 0 30px}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px}
+.truck-box{width:72px;height:72px;background:var(--blue);border-radius:14px;display:grid;place-items:center;animation:truckPulse 1.5s infinite}
+@keyframes truckPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.loader-line{width:120px;height:2px;background:#1e293b;margin:18px auto 0;overflow:hidden;position:relative;border-radius:2px}
+.loader-fill{position:absolute;left:-40%;width:40%;height:100%;background:var(--blue);animation:slide 1.2s infinite ease}
+@keyframes slide{0%{left:-40%}100%{left:100%}}
+.track-loader{display:none;text-align:center;padding:20px 0}
+.reveal{opacity:0;transform:translateY(20px);transition:.7s}.reveal.show{opacity:1;transform:translateY(0)}
+header{border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;background:rgba(10,18,32,.92);backdrop-filter:blur(12px);z-index:100}
+.h-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;font-size:16px}
+.logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:grid;place-items:center}
+.nav{display:flex;gap:20px;font-size:13px;align-items:center}
+.nav a{color:var(--muted);cursor:pointer;text-decoration:none}
+.btn{border:none;border-radius:10px;padding:12px 18px;font-weight:600;font-size:13px;cursor:pointer}
+.btn-blue{background:var(--blue);color:#fff}.btn-white{background:#fff;color:#0a1220}
+.hero{padding:60px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-.hero h1{font-size:52px;font-weight:800;line-height:1.05}
-.hero h1 span{color:#facc15}
-.search-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-top:18px}
-.search-row{display:flex;gap:10px}
-.search-row input{flex:1;background:#0a1220;border:1px solid var(--border);border-radius:10px;padding:14px;color:#fff;outline:none}
-.btn{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:14px 20px;font-weight:600;cursor:pointer;width:100%;margin-top:10px}
-.btn:hover{background:#1d4ed8}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
-.section{padding:60px 0}.kicker{color:#60a5fa;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.kicker{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#60a5fa;font-weight:700}
+.hero h1{font-size:54px;font-weight:800;line-height:.95;letter-spacing:-1.5px;margin-top:12px;color:#fff}
+@media(max-width:640px){.hero h1{font-size:32px}}
+.hero h1 span{color:var(--yellow)}
+.hero p{color:var(--muted);font-size:14px;margin-top:14px;max-width:480px}
+.search-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-top:20px}
+.search-row{display:flex;gap:8px}
+.search-row input{flex:1;background:#0a1220;border:1px solid var(--border);border-radius:10px;padding:13px 14px;color:#fff;font-size:13px;outline:none}
+.hero-img{border-radius:16px;overflow:hidden;border:1px solid var(--border);position:relative;height:420px;background:#121c30}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img-overlay{position:absolute;bottom:12px;left:12px;right:12px;background:rgba(10,18,32,.85);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-top:16px}
+.stat{background:var(--card);padding:14px}.stat b{font-size:20px;color:#fff;display:block}.stat span{font-size:10px;color:var(--muted);text-transform:uppercase}
+.section{padding:72px 0;border-top:1px solid var(--border)}
+.section h2{font-size:36px;font-weight:800;letter-spacing:-1px;color:#fff}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-top:24px}
 @media(max-width:800px){.grid-3{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
-.footer{background:#0f172a;border-top:1px solid var(--border);padding:40px 0;margin-top:40px}
-.footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr .8fr;gap:20px}
+.card{background:var(--card);padding:20px}.card h3{font-size:14px;color:#fff;margin-top:8px}.card p{font-size:12.5px;color:var(--muted);margin-top:6px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-top:24px}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);padding:20px}.step-num{font-size:32px;font-weight:800;color:#1e293b}
+.corridor{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;align-items:center}
+@media(max-width:800px){.corridor{grid-template-columns:1fr}}
+.map-img{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#121c30;height:300px}.map-img img{width:100%;height:100%;object-fit:cover}
+.why{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px}
+@media(max-width:800px){.why{grid-template-columns:1fr}}
+.why li{list-style:none;display:flex;gap:10px;margin:12px 0;font-size:13px;color:var(--muted)}
+.why li::before{content:"✓";width:20px;height:20px;background:#1e293b;border-radius:50%;display:grid;place-items:center;color:#22c55e;font-size:10px;flex-shrink:0}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+@media(max-width:900px){.reviews{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.reviews{grid-template-columns:1fr}}
+.review{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.review-stars{color:var(--yellow);font-size:12px;letter-spacing:2px}
+.avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;background:#1e293b;flex-shrink:0}.avatar img{width:100%;height:100%;object-fit:cover}
+.send-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:800px){.send-grid{grid-template-columns:1fr}}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.form-card label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-top:12px;display:block}
+.form-card input,.form-card select,.form-card textarea{width:100%;background:#0a1220;border:1px solid var(--border);border-radius:8px;padding:10px;margin-top:6px;color:#fff;font-size:12.5px;outline:none}
+.row{display:flex;gap:8px}.row>div{flex:1}
+.support{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;margin-top:24px}
+@media(max-width:900px){.support{grid-template-columns:1fr}}
+.support-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.topic{padding:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted);cursor:pointer}
+.topic:hover{color:#fff}
+.result-box{display:none;background:#0a1220;border:1px solid var(--blue);border-radius:10px;padding:14px;margin-top:12px}
+.footer{background:#0f172a;border-top:1px solid var(--border);padding:48px 0 20px}
+.footer-grid{display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr;gap:24px}
 @media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr}}
-.footer a{color:var(--muted);font-size:13px;display:block;margin:6px 0;cursor:pointer}
-.track-loading{display:none;text-align:center;padding:28px}
-.result-box{display:none;background:var(--card);border:1px solid var(--blue);border-radius:14px;padding:16px;margin-top:14px}
-.live-chat{position:fixed;bottom:20px;right:20px;z-index:9999;background:#fff;color:#0f172a;border-radius:24px;padding:10px 18px;font-weight:700;font-size:13px;display:flex;gap:8px;align-items:center;border:none;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.chat-win{display:none;position:fixed;bottom:70px;right:20px;width:360px;height:480px;background:#fff;border-radius:16px;flex-direction:column;overflow:hidden;z-index:9999;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.footer h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#fff;margin-bottom:14px}
+.footer a{color:var(--muted);font-size:12.5px;display:block;margin:7px 0;cursor:pointer;text-decoration:none}
+.admin-bottom{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center}
+.admin-link{border:1px solid #1e293b;padding:8px 14px;border-radius:8px;color:#60a5fa!important;font-weight:600;cursor:pointer;font-size:12px}
+.live-chat{position:fixed;bottom:20px;right:20px;z-index:9999;background:#fff;color:#0a1220;border-radius:100px;padding:10px 16px;font-weight:600;font-size:12px;display:flex;gap:8px;align-items:center;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.chat-win{display:none;position:fixed;bottom:70px;right:20px;width:380px;height:500px;background:#121c30;border-radius:14px;flex-direction:column;overflow:hidden;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,.6);border:1px solid var(--border)}
 @media(max-width:480px){.chat-win{width:94%;right:3%}}
-.chat-head{background:#0f172a;color:#fff;padding:14px;display:flex;justify-content:space-between}
-.chat-body{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:#f8fafc}
-.msg{max-width:80%;padding:10px 12px;border-radius:14px;font-size:13px}.msg.user{background:var(--blue);color:#fff;align-self:flex-end}.msg.admin{background:#e2e8f0;color:#0f172a;align-self:flex-start}
-.chat-input{display:flex;gap:6px;padding:10px;border-top:1px solid #e2e8f0;background:#fff}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:10000;padding:20px}
-.modal-box{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:420px;color:#0f172a}
+.chat-head{background:#121c30;padding:12px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--border);font-size:12px}
+.chat-body{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:#0a1220}
+.msg{max-width:80%;padding:9px 12px;border-radius:12px;font-size:12.5px}.msg.user{background:#fff;color:#0a1220;align-self:flex-end}.msg.admin{background:#1e293b;color:#e2e8f0;align-self:flex-start}
+.chat-input{display:flex;gap:6px;padding:10px;border-top:1px solid var(--border);background:#121c30}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;place-items:center;z-index:10000;padding:20px}
+.modal-box{background:#fff;border-radius:12px;padding:22px;width:100%;max-width:420px;color:#0a1220}
 </style>
 </head>
 <body>
 
-<div id="pageLoader"><div style="text-align:center"><div class="logo-anim">📦</div><div style="margin-top:16px;color:#fff;font-weight:700">Facil Express</div><small style="color:var(--muted)">Loading secure network...</small><div class="dots"><span></span><span></span><span></span></div></div></div>
+<div id="pageLoader"><div style="text-align:center"><div class="truck-box"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="7" width="13" height="8" rx="1.5"></rect><path d="M14 10h4l3 3v2h-7z"></path><circle cx="5.5" cy="17.5" r="1.2" fill="#fff" stroke="none"></circle><circle cx="17.5" cy="17.5" r="1.2" fill="#fff" stroke="none"></circle></svg></div><div style="margin-top:12px;font-weight:800;color:#fff">FACIL EXPRESS</div><div style="font-size:10px;color:var(--muted)">Global Logistics • Loading</div><div class="loader-line"><div class="loader-fill"></div></div></div></div>
 
-<header><div class="container header-inner"><div class="logo"><div class="logo-box">📦</div> Facil Express</div><div style="display:flex;gap:16px;font-size:13px"><a style="color:#fff">Track</a><a onclick="openAdmin()" style="color:var(--muted)">Admin Login</a></div></div></header>
+<header><div class="container h-inner"><div class="logo"><div class="logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="7" width="13" height="8" rx="1.5"></rect><path d="M14 10h4l3 3v2h-7z"></path></svg></div> FACIL EXPRESS</div><div class="nav"><a onclick="document.getElementById('track').scrollIntoView({behavior:'smooth'})">Track</a><a onclick="document.getElementById('ship').scrollIntoView({behavior:'smooth'})">Ship Package</a><a onclick="document.getElementById('support').scrollIntoView({behavior:'smooth'})">Support</a></div></div></header>
 
-<div class="hero container hero-grid">
-<div>
-<div class="kicker">Global logistics, one seamless network</div>
-<h1>Wherever you send it, we <span>deliver the trust.</span></h1>
-<p style="color:var(--muted);margin-top:12px">Ship parcels and cargo across borders with total clarity. Track every scan in real time, from the moment it leaves your hands to the second it arrives.</p>
-<div class="search-card">
-<div class="search-row"><input id="trackInput" placeholder="Enter Tracking ID, phone or email" value="FX-7RBVF5"><span>🔍</span></div>
-<button class="btn" onclick="track()">📍 Track Shipment</button>
-<div id="trackLoading" class="track-loading"><div class="logo-anim" style="margin:0 auto;width:64px;height:64px;font-size:28px">📦</div><div style="margin-top:12px;color:#fff;font-weight:600">Facil Express</div><small style="color:var(--muted)">Looking up your shipment...</small><div class="dots"><span></span><span></span><span></span></div></div>
-<div id="trackResult" class="result-box"></div>
-<div style="margin-top:14px;display:flex;gap:12px;font-size:12px;color:var(--muted)"><span>✓ Insured handling</span><span>✓ Real-time tracking</span><span>✓ 220+ countries</span></div>
-</div>
-</div>
-<div>
-<div class="stats" style="margin:0"><div><b style="font-size:22px">220+</b><small style="display:block;color:var(--muted)">Countries served</small></div><div><b style="font-size:22px">1.4K</b><small style="display:block;color:var(--muted)">Routes covered</small></div><div><b style="font-size:22px">48</b><small style="display:block;color:var(--muted)">Regional hubs</small></div><div><b style="font-size:22px">99.4%</b><small style="display:block;color:var(--muted)">On-time delivery</small></div></div>
-<div class="card" style="margin-top:14px"><h3>Why Facil Express?</h3><p style="color:var(--muted);font-size:13px">Borderless shipping with transparent tracking. No demo, only real shipments.</p></div>
-</div>
-</div>
+<section class="hero" id="track"><div class="container hero-grid"><div class="reveal"><div class="kicker">Global logistics, one seamless network</div><h1>Wherever you send it, we <span>deliver the trust.</span></h1><p>Ship parcels and cargo across borders with total clarity. Track every scan in real time.</p><div class="search-card"><div class="search-row"><input id="trackInput" placeholder="Enter Tracking ID, phone or email" value="FX-7RBVF5"><button class="btn btn-white" style="width:auto;margin:0" onclick="track()">Track</button></div><div id="trackLoader" class="track-loader"><div class="truck-box" style="margin:0 auto;width:52px;height:52px;border-radius:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="7" width="13" height="8" rx="1.5"></rect><path d="M14 10h4l3 3v2h-7z"></path></svg></div><div style="font-weight:700;color:#fff;font-size:12px;margin-top:8px">FACIL EXPRESS</div><div class="loader-line"><div class="loader-fill"></div></div></div><div id="trackResult" class="result-box"></div><div style="display:flex;gap:14px;margin-top:12px;font-size:11px;color:var(--muted);flex-wrap:wrap"><span>✓ Insured handling</span><span>✓ 220+ countries</span><span>✓ Real-time tracking</span></div></div></div><div class="reveal"><div class="hero-img"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop" alt="Sky pic"><div style="position:absolute;bottom:12px;left:12px;right:12px;background:rgba(10,18,32,.85);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center"><div style="width:32px;height:32px;background:var(--blue);border-radius:8px;display:grid;place-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="7" width="13" height="8" rx="1.5"></rect><path d="M14 10h4l3 3v2h-7z"></path></svg></div><div><div style="font-size:12px;font-weight:600;color:#fff">Live in transit • FX-7RBVF5</div><div style="font-size:10px;color:var(--muted)">New York → London • In Transit • 2.5KG</div></div></div></div><div class="stats"><div class="stat"><b>220+</b><span>Countries served</span></div><div class="stat"><b>99.4%</b><span>On-time delivery</span></div></div></div></div></section>
 
-<div class="section container"><div class="kicker">What we move</div><h2 style="font-size:32px;font-weight:800">Logistics built around every kind of parcel</h2><div class="grid-3"><div class="card"><h3>✈️ Express Air</h3><p>Priority air freight 24-72h</p></div><div class="card"><h3>🚛 Standard Ground</h3><p>Reliable road & rail</p></div><div class="card"><h3>🚢 Ocean Freight</h3><p>Full container visibility</p></div><div class="card"><h3>🛃 Customs Brokerage</h3><p>Zero paperwork headaches</p></div><div class="card"><h3>⚡ Same-Day Local</h3><p>City-wide within hours</p></div><div class="card"><h3>🔒 Secure & Insured</h3><p>Tamper-proof handling</p></div></div></div>
+<section class="section reveal" id="ship"><div class="container"><div class="kicker">Ship a package</div><h2>Ship Package — Full shipment options</h2><p style="color:var(--muted);font-size:13px;margin-top:8px">Create real shipment — get Tracking ID instantly like FX-7RBVF5</p><div class="send-grid"><div class="form-card"><div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#60a5fa">Sender & Receiver</div><label>Sender Name</label><input id="sName" placeholder="Your full name"><label>Sender Phone</label><input id="sPhone" placeholder="+1..."><div class="row"><div><label>Origin City</label><input id="oCity" placeholder="New York"></div><div><label>Origin Country</label><select id="oCountry"><option>USA</option><option>United Kingdom</option><option>Canada</option><option>Germany</option><option>France</option><option>Australia</option></select></div></div><label>Receiver Name</label><input id="rName" placeholder="Receiver full name"><label>Receiver Phone</label><input id="rPhone" placeholder="+44..."><div class="row"><div><label>Destination City</label><input id="dCity" placeholder="London"></div><div><label>Destination Country</label><select id="dCountry"><option>United Kingdom</option><option>USA</option><option>Canada</option><option>Germany</option><option>France</option><option>Australia</option></select></div></div><label>Full Delivery Address</label><textarea id="rAddr" rows="2" placeholder="Street, city, postal code"></textarea></div><div class="form-card"><div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#60a5fa">Package Details</div><label>Package Type</label><select id="pType"><option>Documents</option><option>Small Box (0-5kg)</option><option>Large Box</option><option>Electronics</option></select><div class="row"><div><label>Weight KG</label><input id="pWeight" type="number" placeholder="2.5"></div><div><label>Service Type</label><select id="sType"><option>Express (24hrs) — $25</option><option>Standard — $15</option><option>International — $60</option></select></div></div><label>Description</label><textarea id="pDesc" rows="2" placeholder="What is inside?"></textarea><button class="btn btn-blue" style="width:100%;margin-top:12px" onclick="createShipment()">Ship Package & Get Tracking ID</button><div id="newTracking" style="display:none;margin-top:12px;background:#0a1220;border:1px solid var(--blue);padding:12px;border-radius:10px"></div></div></div></div></section>
 
-<div class="footer"><div class="container footer-grid"><div><div class="logo"><div class="logo-box">📦</div> Facil Express</div><p style="color:var(--muted);font-size:13px;margin-top:8px">Moves what matters, worldwide. Real-time tracking, no demo IDs.</p></div><div><b style="font-size:13px">Company</b><a>About Us</a><a>Services</a><a>Contact</a></div><div><b style="font-size:13px">Solutions</b><a>Express Air</a><a>Ocean Freight</a><a>Customs Brokerage</a></div><div><b style="font-size:13px">Support</b><a onclick="document.getElementById('trackInput').focus()">Track a Shipment</a><a onclick="openAdmin()" style="color:#60a5fa">Admin Login</a></div></div><div class="container" style="margin-top:20px;border-top:1px solid var(--border);padding-top:12px;font-size:11px;color:var(--muted)">© 2026 Facil Express Global Logistics</div></div>
+<section class="section reveal" id="services"><div class="container"><div class="kicker">What we move</div><h2>Logistics built around every kind of parcel</h2><div class="grid-3"><div class="card"><h3>✈️ Express Air</h3><p>Priority air freight 24–72 hours.</p></div><div class="card"><h3>🚛 Standard Ground</h3><p>Reliable road and rail network.</p></div><div class="card"><h3>🚢 Ocean Freight</h3><p>Full container visibility.</p></div><div class="card"><h3>🛃 Customs Brokerage</h3><p>Zero paperwork headaches.</p></div><div class="card"><h3>⚡ Same-Day Local</h3><p>City-wide within hours.</p></div><div class="card"><h3>🔒 Secure & Insured</h3><p>Tamper-proof handling.</p></div></div></div></section>
 
-<button class="live-chat" onclick="toggleChat()"><span style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block"></span> Live Chat</button>
+<section class="section reveal"><div class="container"><div class="kicker">One network, every major corridor</div><h2>One network, every major corridor</h2><div class="corridor"><div><p style="color:var(--muted);font-size:13px;margin-top:8px">220+ countries, 48 regional hubs, 1,400+ routes. From New York to London, one tracking ID.</p><div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px"><b style="color:#fff">48h</b><br><small style="color:var(--muted)">Intra-USA</small></div><div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px"><b style="color:#fff">72h</b><br><small style="color:var(--muted)">Intercontinental</small></div></div></div><div class="map-img"><img src="https://images.unsplash.com/photo-1526772661823-3f88f33771cd?w=800&h=400&fit=crop" alt="Global map"></div></div></div></section>
 
-<div class="chat-win" id="chatWin">
-<div class="chat-head"><div><b>Facil Express Support</b><br><small style="color:#22c55e">● Online — we typically reply in a few minutes</small></div><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
-<div style="padding:12px;background:#0f172a">
-<div style="background:var(--card);border-radius:12px;padding:14px;border:1px solid var(--border)">
-<div style="color:#fff;font-weight:600;font-size:14px;margin-bottom:4px">Start a conversation</div><small style="color:var(--muted)">Tell us your name so our support team knows who they are chatting with.</small>
-<input id="chatName" placeholder="Your name" style="width:100%;padding:12px;border-radius:8px;border:1px solid var(--border);background:#0a1220;color:#fff;margin-top:10px">
-<button class="btn" onclick="startChat()" style="margin-top:8px">↗ Start chatting</button>
-</div>
-</div>
-<div class="chat-body" id="chatBody" style="display:none"></div>
-<div class="chat-input" id="chatInputArea" style="display:none"><input id="chatInput" placeholder="Type your message..." style="flex:1;padding:10px;border:1px solid #e2e8f0;border-radius:8px"><button onclick="sendChat()" class="btn" style="width:auto;margin:0;padding:10px 16px">Send</button></div>
-</div>
-
-<div class="modal" id="adminModal"><div class="modal-box"><h3>Admin Login</h3><input id="admU" placeholder="admin" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:8px;margin-top:12px"><input id="admP" type="password" placeholder="facil2026" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:8px;margin-top:8px"><button class="btn" onclick="loginAdmin()">Login</button><button onclick="closeAdmin()" style="width:100%;margin-top:8px;padding:10px;border:1px solid #e2e8f0;border-radius:8px;background:#fff">Cancel</button><p id="admErr" style="display:none;color:red;font-size:12px;margin-top:8px">Invalid credentials</p><div id="adminPanel" style="display:none;margin-top:12px"><input id="newId" placeholder="FX- ID e.g. FX-9W2R8B" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px"><input id="newCity" placeholder="Destination City" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:6px"><select id="newStatus" style="width:100%;padding:10px;border-radius:8px;margin-top:6px"><option>In Transit</option><option>Picked Up</option><option>Customs Clearance</option><option>Out for Delivery</option><option>Delivered</option></select><button class="btn" onclick="addShip()">Save Real Shipment</button><div id="shipList" style="margin-top:8px;font-size:12px"></div></div></div></div>
-
-<script>
-let db=JSON.parse(localStorage.getItem('facil_pro')||'{"FX-7RBVF5":{"id":"FX-7RBVF5","city":"London","status":"In Transit","lat":51.5074,"lng":-0.1278}}');
-let chats=JSON.parse(localStorage.getItem('facil_chats')||'[]');
-let userName='';
-function save(){localStorage.setItem('facil_pro',JSON.stringify(db));localStorage.setItem('facil_chats',JSON.stringify(chats));}
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('pageLoader').classList.add('hide');},1300);});
-function track(){
- let id=document.getElementById('trackInput').value.trim().toUpperCase();
- let load=document.getElementById('trackLoading');
- let res=document.getElementById('trackResult');
- if(!id){alert('Enter Tracking ID');return;}
- res.style.display='none';load.style.display='block';
- setTimeout(()=>{
-  load.style.display='none';
-  let d=db[id];
-  if(!d){res.style.display='block';res.innerHTML='<div style="color:#f87171"><b>'+id+' not found</b><br><small>This tracking ID does not exist. Please contact support.</small></div>';return;}
-  res.style.display='block';
-  res.innerHTML='<div style="display:flex;justify-content:space-between"><div><small style="color:var(--muted)">TRACKING ID</small><h3>'+d.id+'</h3></div><span style="background:#1e293b;color:#93c5fd;padding:6px 12px;border-radius:20px;font-size:12px">● '+d.status+'</span></div><div style="margin-top:12px;height:200px;border-radius:10px;overflow:hidden"><iframe width="100%" height="100%" frameborder="0" src="https://maps.google.com/maps?q='+d.lat+','+d.lng+'&z=5&output=embed"></iframe></div><p style="margin-top:10px;font-size:12px;color:var(--muted)">Destination: '+d.city+' • Status: '+d.status+'</p>';
- },1500);
-}
-function toggleChat(){let w=document.getElementById('chatWin');w.style.display=w.style.display==='flex'?'none':'flex';}
-function startChat(){
- let n=document.getElementById('chatName').value.trim();
- if(!n){alert('Enter your name');return;}
- userName=n;
- document.getElementById('chatBody').style.display='flex';
- document.getElementById('chatInputArea').style.display='flex';
- let b=document.getElementById('chatBody');
- b.innerHTML='<div class="msg admin">Hello '+userName+'! 👋 How can we help you today? Share your tracking ID if you have one.</div>';
- chats.forEach(c=>{let d=document.createElement('div');d.className='msg '+(c.from==='user'?'user':'admin');d.innerText=c.text;b.appendChild(d);});
- b.scrollTop=b.scrollHeight;
- // Remove the start form
- document.querySelector('#chatWin > div:nth-child(2)').style.display='none';
-}
-function sendChat(){
- let i=document.getElementById('chatInput'),b=document.getElementById('chatBody');
- if(!i.value.trim())return;
- let text=i.value;
- b.style.display='flex';
- let m=document.createElement('div');m.className='msg user';m.innerText=text;b.appendChild(m);
- chats.push({from:'user',text:text});save();
- i.value='';b.scrollTop=b.scrollHeight;
- setTimeout(()=>{
-  let r=document.createElement('div');r.className='msg admin';r.innerText='Thanks '+userName+'! We have received your message: "'+text+'". Our team will reply shortly. For tracking, please include your ID like FX-7RBVF5.';
-  b.appendChild(r);chats.push({from:'admin',text:r.innerText});save();b.scrollTop=b.scrollHeight;
- },800);
-}
-function openAdmin(){document.getElementById('adminModal').style.display='grid';}
-function closeAdmin(){document.getElementById('adminModal').style.display='none';}
-function loginAdmin(){if(document.getElementById('admU').value==='admin'&&document.getElementById('admP').value==='facil2026'){document.getElementById('adminPanel').style.display='block';document.getElementById('admErr').style.display='none';render();}else{document.getElementById('admErr').style.display='block';}}
-function addShip(){let id=document.getElementById('newId').value.trim().toUpperCase(),city=document.getElementById('newCity').value||'London',st=document.getElementById('newStatus').value;if(!id)return;db[id]={id,city,status:st,lat:51.5,lng:-0.12};save();render();alert('Real shipment '+id+' saved!');}
-function render(){let l=document.getElementById('shipList');l.innerHTML='';Object.values(db).forEach(s=>{l.innerHTML+='<div style="padding:4px;border-bottom:1px solid #eee"><b>'+s.id+'</b> - '+s.city+' - '+s.status+'</div>';});}
-</script>
-</body>
- </html>
+<section class="section reveal"><div class="container"><div class="kicker">Customer reviews • 4.9/5 from 8,400+ verified</div><h2>Teams that ship with confidence</h2><div class="reviews">
+<div class="review"><div class="review-stars">★★★★★</div><p style="color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6">"Facil Express cut our delivery complaints by 80%. Real-time tracking changed everything."</p><div style="display:flex;gap:10px;align-items:center;margin-top:14px"><div class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"></div><div><b style="font-size:12px;color:#fff">Emily Carter</b><br><small style="font-size:10px;color:var(--muted)">Operations Lead • New York • Verified ✓</small></div></div></div>
+<div class="review"><div class="review-stars">★★★★★</div><p style="color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6">"From 2 parcels a week to 200. Facil scaled with us. Tracking is bulletproof."</p><div style="display:flex;gap:10px;align-items:center;margin-top:14px"><div class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"></div><div><b style="font-size:12px;color:#fff">James Anderson</b><br><small style="font-size:10px;color:var(--muted)">E-commerce Founder • London • Verified ✓</small></div></div></div>
+<div class="review"><div class="review-stars">★★★★★</div><p style="color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6">"Customs used to be nightmare. Now it's automatic. Facil handles everything."</p><div style="display:flex;gap:10px;align-items:center;margin-top:14px"><div class="avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"></div><div><b style="font-size:12px;color:#fff">Sophia Martinez</b><br><small style="font-size:10px;color:var(--muted)">Logistics Manager • Berlin • Verified ✓</small></div></div></div>
+<div class="review"><div class="review-stars">★★★★★</div><p style="color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6">"Same-day delivery is real. Ordered 9am, delivered 2pm. Reliable."</p><div style="display:flex;gap:10px;align-items:center;margin-top:14px"><div class="avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"></div><div><b style="font-size:12px;color:#fff">Michael Brown</b><br><small style="font-size:10px;color:var(--muted)">Retail Owner • Toronto • Verified ✓</small></div></div></div>
+<div class="review"><div class="review-stars">★★★★★</div><p style="color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6">"International shipping to UK in 3 days. Tracking updated every 6 hours."</p><div style="display:flex;gap:10px;align-items:center;margin-top:14px"><div class="avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"></div><div><b style="font-size:12p
