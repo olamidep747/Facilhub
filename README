@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facil Express - Track Your Shipment</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+body{background:#f8fafc;color:#0f172a}
+header{background:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid #e2e8f0}
+.logo{font-weight:900;font-size:20px;cursor:pointer;user-select:none}
+.logo b{color:#f97316}
+.btn{background:#f97316;color:#fff;padding:10px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+.btn-black{background:#0f172a}
+.card{background:#fff;border-radius:18px;border:1px solid #e2e8f0;padding:20px}
+.hero{background:#fff;padding:30px 18px;text-align:center;border-bottom:1px solid #e2e8f0}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:10px}
+.muted{color:#64748b;font-size:14px}
+.search-wrap{max-width:600px;margin:22px auto 0;background:#f1f5f9;padding:10px;border-radius:16px;display:flex;gap:8px}
+.search-wrap input{flex:1;padding:14px 16px;border-radius:12px;border:1px solid #e2e8f0;font-size:15px}
+.search-wrap button{padding:14px 20px;border-radius:12px;border:none;background:#0f172a;color:#fff;font-weight:700;cursor:pointer}
+.container{max-width:800px;margin:0 auto;padding:18px}
+.hidden{display:none!important}
+.t-item{display:flex;gap:14px;padding:16px 0;border-left:2px solid #e2e8f0;margin-left:10px;padding-left:24px;position:relative}
+.t-item.done{border-left-color:#f97316}
+.t-dot{width:28px;height:28px;border-radius:50%;background:#e2e8f0;position:absolute;left:-15px;top:16px;display:flex;align-items:center;justify-content:center}
+.t-item.done .t-dot{background:#f97316;color:#fff}
+#map{height:320px;border-radius:16px;margin-top:16px;border:1px solid #e2e8f0}
+.admin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:999;display:flex;align-items:center;justify-content:center;padding:18px}
+.admin-box{background:#fff;width:100%;max-width:480px;border-radius:20px;padding:24px;max-height:90vh;overflow:auto}
+.admin-box input,.admin-box select,.admin-box textarea{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;margin:8px 0 12px}
+.ship-row{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:10px 0}
+</style>
+</head>
+<body>
+<header>
+<div class="logo" id="logoBtn">Facil <b>Express</b></div>
+<button class="btn btn-black" onclick="document.getElementById('trackSection').scrollIntoView()">Track</button>
+</header>
+
+<div id="firstSetup" class="admin-overlay hidden">
+<div class="admin-box">
+<h2>Create Admin Account</h2>
+<p class="muted">This shows ONLY ONCE. After this, nobody else can create admin.</p>
+<input id="setupUser" placeholder="Create Username">
+<input id="setupPass" type="password" placeholder="Create Password">
+<button class="btn" style="width:100%;margin-top:10px" onclick="createAdmin()">Create & Lock Forever</button>
+</div>
+</div>
+
+<div id="adminLogin" class="admin-overlay hidden">
+<div class="admin-box">
+<h2>Admin Login</h2>
+<input id="loginUser" placeholder="Username">
+<input id="loginPass" type="password" placeholder="Password">
+<button class="btn" style="width:100%" onclick="doLogin()">Login</button>
+<button style="width:100%;margin-top:8px;background:none;border:none;color:#64748b" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<div id="adminPanel" class="admin-overlay hidden">
+<div class="admin-box" style="max-width:650px">
+<h2>Deliverer Panel</h2>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px;margin:14px 0">
+<b>Create New Shipment</b>
+<input id="cCustomer" placeholder="Customer Name">
+<input id="cDestination" placeholder="Destination">
+<input id="cOrigin" placeholder="Origin">
+<select id="cStatus"><option>Created</option><option>Picked Up</option><option>In Transit</option><option>Customs Clearance</option><option>Out for Delivery</option><option>Delivered</option></select>
+<input id="cLocation" placeholder="Current Location">
+<textarea id="cNote" placeholder="Note"></textarea>
+<button class="btn" style="width:100%" onclick="createShipment()">Create Tracking</button>
+<p id="newIdShow" style="font-weight:800;color:#16a34a;margin-top:8px"></p>
+</div>
+<div><b>All Shipments</b><div id="shipList"></div></div>
+<button style="width:100%;margin-top:12px;background:none;border:none;color:#64748b" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<section class="hero" id="trackSection">
+<h1>Track Your Package<br>Fast & Secure</h1>
+<div class="search-wrap">
+<input id="trackInput" placeholder="e.g FX-7RBVF5">
+<button onclick="doTrack()">Track</button>
+</div>
+<p class="muted" style="margin-top:10px">No demo codes - only real shipments</p>
+</section>
+
+<div class="container">
+<div id="resultBox" class="card hidden">
+<div style="display:flex;justify-content:space-between"><div><small class="muted">TRACKING ID</small><h2 id="rId"></h2></div><div id="rStatus" style="background:#fff7ed;color:#f97316;padding:8px 14px;border-radius:20px;font-weight:800;font-size:12px"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px"><div><small class="muted">From</small><br><b id="rOrigin"></b></div><div><small class="muted">To</small><br><b id="rDest"></b></div><div><small class="muted">Customer</small><br><b id="rCust"></b></div><div><small class="muted">Current</small><br><b id="rCurr"></b></div></div>
+<div id="map"></div>
+<div id="rTimeline" style="margin-top:18px"></div>
+</div>
+<div id="noResult" class="card hidden" style="text-align:center;padding:40px"><h3>Tracking ID Not Found</h3><p class="muted">Only admin-created shipments work.</p></div>
+</div>
+
+<script>
+let clicks=0,map;
+document.getElementById('logoBtn').addEventListener('click',()=>{clicks++;if(clicks>=5){clicks=0;openLogin();}setTimeout(()=>clicks=0,2000);});
+if(window.location.search.includes('admin'))openLogin();
+function getData(){return JSON.parse(localStorage.getItem('fe_shipments')||'[]');}
+function saveData(d){localStorage.setItem('fe_shipments',JSON.stringify(d));}
+function checkFirst(){if(!localStorage.getItem('fe_admin'))document.getElementById('firstSetup').classList.remove('hidden');}
+checkFirst();
+function createAdmin(){const u=document.getElementById('setupUser').value.trim();const p=document.getElementById('setupPass').value.trim();if(!u||!p)return alert('Fill both');localStorage.setItem('fe_admin',JSON.stringify({u,p}));document.getElementById('firstSetup').classList.add('hidden');alert('Admin locked! Click logo 5x to login');}
+function openLogin(){if(!localStorage.getItem('fe_admin')){checkFirst();return;}document.getElementById('adminLogin').classList.remove('hidden');}
+function doLogin(){const u=document.getElementById('loginUser').value.trim();const p=document.getElementById('loginPass').value.trim();const a=JSON.parse(localStorage.getItem('fe_admin')||'{}');if(u===a.u&&p===a.p){localStorage.setItem('fe_logged','1');document.getElementById('adminLogin').classList.add('hidden');document.getElementById('adminPanel').classList.remove('hidden');renderList();}else alert('Wrong');}
+function closeAll(){document.querySelectorAll('.admin-overlay').forEach(e=>e.classList.add('hidden'))}
+function genId(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='FX-';for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s;}
+function createShipment(){const cust=document.getElementById('cCustomer').value.trim();const dest=document.getElementById('cDestination').value.trim();const origin=document.getElementById('cOrigin').value.trim();const status=document.getElementById('cStatus').value;const curr=document.getElementById('cLocation').value.trim()||origin;const note=document.getElementById('cNote').value.trim()||status;if(!cust||!dest||!origin)return alert('Fill fields');const id=genId();const now=new Date();const item={id,customer:cust,destination:dest,origin:origin,current:curr,status:status,history:[{status:status,location:curr,note:note,time:now.toLocaleString()}]};const data=getData();data.unshift(item);saveData(data);document.getElementById('newIdShow').innerText='Created: '+id;renderList();}
+function renderList(){const data=getData();const div=document.getElementById('shipList');div.innerHTML='';data.forEach((s,i)=>{div.innerHTML+=`<div class="ship-row"><b>${s.id}</b> - ${s.customer}<br><small>${s.origin} → ${s.destination}</small><br><input id="loc_${i}" value="${s.current}"><select id="st_${i}"><option ${s.status==='Created'?'selected':''}>Created</option><option ${s.status==='Picked Up'?'selected':''}>Picked Up</option><option ${s.status==='In Transit'?'selected':''}>In Transit</option><option ${s.status==='Customs Clearance'?'selected':''}>Customs Clearance</option><option ${s.status==='Out for Delivery'?'selected':''}>Out for Delivery</option><option ${s.status==='Delivered'?'selected':''}>Delivered</option></select><button class="btn" style="width:100%;margin-top:6px" onclick="updateShip(${i})">Update</button></div>`;});}
+function updateShip(i){const data=getData();const loc=document.getElementById('loc_'+i).value.trim();const st=document.getElementById('st_'+i).value;data[i].current=loc;data[i].status=st;data[i].history.unshift({status:st,location:loc,note:'Updated',time:new Date().toLocaleString()});saveData(data);renderList();}
+function doTrack(){const id=document.getElementById('trackInput').value.trim().toUpperCase();const data=getData();const found=data.find(x=>x.id.toUpperCase()===id);if(!found){document.getElementById('resultBox').classList.add('hidden');document.getElementById('noResult').classList.remove('hidden');return;}document.getElementById('noResult').classList.add('hidden');document.getElementById('resultBox').classList.remove('hidden');document.getElementById('rId').innerText=found.id;document.getElementById('rStatus').innerText=found.status;document.getElementById('rOrigin').innerText=found.origin;document.getElementById('rDest').innerText=found.destination;document.getElementById('rCust').innerText=found.customer;document.getElementById('rCurr').innerText=found.current;const tl=document.getElementById('rTimeline');tl.innerHTML='';const order=['Created','Picked Up','In Transit','Customs Clearance','Out for Delivery','Delivered'];order.forEach(st=>{const hist=found.history.filter(h=>h.status===st)[0];const done=found.history.some(h=>h.status===st)||order.indexOf(st)<order.indexOf(found.status);tl.innerHTML+=`<div class="t-item ${done?'done':''}"><div class="t-dot">${done?'✓':'•'}</div><div><b>${st}</b><br><small class="muted">${hist?hist.location+' • '+hist.time:'Pending'}</small></div></div>`;});setTimeout(()=>{if(map)map.remove();map=L.map('map').setView([4.9,6.3],10);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);L.marker([4.9,6.3]).addTo(map).bindPopup(found.current).openPopup();},300);}
+</script>
+</body>
+</html>
