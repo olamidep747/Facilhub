@@ -242,6 +242,7 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <div class="form-section-title">2. Receiver details</div>
 <div class="field"><label for="recipientName">RECEIVER FULL NAME *</label><input id="recipientName" required maxlength="100" placeholder="Person receiving the package"></div>
 <div class="field"><label for="recipientPhone">RECEIVER PHONE *</label><input id="recipientPhone" type="tel" required maxlength="40" placeholder="+ country code and number"></div>
+<div class="field"><label for="recipientEmail">RECEIVER EMAIL *</label><input id="recipientEmail" type="email" required maxlength="200" autocomplete="email" placeholder="receiver@example.com"></div>
 <div class="field full"><label for="destination">DELIVERY CITY / COUNTRY *</label><input id="destination" required maxlength="150" placeholder="Where should we deliver it?"></div>
 
 <div class="form-section-title">3. Shipping and package details</div>
@@ -304,7 +305,7 @@ document.getElementById("packageForm").addEventListener("submit",async function(
  submit.disabled=true;submit.textContent="Sending request…";out.textContent="Securely submitting your package request…";
  try{
   const fd=new FormData();
-  const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
+  const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","recipientEmail","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
   fields.forEach(id=>fd.append(id,document.getElementById(id).value.trim()));
   const photo=photoInput.files&&photoInput.files[0];if(photo)fd.append("packagePhoto",photo,photo.name);
   const client=await window.facilSupabaseReady;
@@ -358,7 +359,7 @@ async function loadAdminRequests(){
  if(error){target.innerHTML='<div class="admin-empty">Could not load requests. Please sign in again if your session expired.</div>';return;}
  if(!data||!data.length){target.innerHTML='<div class="admin-empty">No package requests yet. New customer bookings will appear here.</div>';return;}
  target.innerHTML=data.map(r=>{
-  const details=[["From",r.origin],["To",r.destination],["Method",r.service_type],["Speed",r.delivery_speed],["Package",r.package_type],["Weight",r.weight_kg+" kg"],["Pickup",r.pickup_date||"Not selected"],["Time",r.pickup_time||"Flexible"],["Sender",r.sender_name+" · "+r.sender_email],["Phone",r.sender_phone],["Receiver",r.recipient_name+" · "+r.recipient_phone],["Description",r.package_description||"—"]];
+  const details=[["From",r.origin],["To",r.destination],["Method",r.service_type],["Speed",r.delivery_speed],["Package",r.package_type],["Weight",r.weight_kg+" kg"],["Pickup",r.pickup_date||"Not selected"],["Time",r.pickup_time||"Flexible"],["Sender",r.sender_name+" · "+r.sender_email],["Phone",r.sender_phone],["Receiver",r.recipient_name+" · "+r.recipient_phone],["Receiver email",r.recipient_email||"—"],["Description",r.package_description||"—"]];
   const detailHtml=details.map(([k,v])=>'<p><strong>'+safe(k)+':</strong> '+safe(v==null?"":v)+'</p>').join("");
   const photo=r.package_photo_path?'<button type="button" class="btn btn-ghost photo-button" data-path="'+safe(r.package_photo_path)+'">View package photo</button>':"";
   const statuses=["pending","reviewing","quoted","approved","rejected","converted"];
@@ -377,6 +378,9 @@ async function updateRequestStatus(id,status){
  if(!allowed.includes(status))return;
  const {error}=await client.from("package_requests").update({status,updated_at:new Date().toISOString()}).eq("id",id);
  if(error){alert("Could not update the request status.");return;}
+ const {data:notice,error:noticeError}=await client.functions.invoke("notify-shipment-status",{body:{requestId:id,status}});
+ if(noticeError||!notice?.ok){alert("Status saved, but the notification email could not be sent. Check the Resend email configuration in Supabase.");}
+ else if((notice.sent||[]).length){alert("Status saved. Email notification sent to "+notice.sent.length+" contact(s).");}
  await loadAdminRequests();
 }
 async function createShipmentFromRequest(id,button){
@@ -389,7 +393,7 @@ async function createShipmentFromRequest(id,button){
   const trackingId="FX-"+crypto.randomUUID().replaceAll("-","").slice(0,12).toUpperCase();
   const {data:shipment,error:insertError}=await client.from("shipments").insert({
    tracking_id:trackingId,sender_name:r.sender_name,sender_email:r.sender_email,
-   recipient_name:r.recipient_name,recipient_phone:r.recipient_phone,
+   recipient_name:r.recipient_name,recipient_phone:r.recipient_phone,recipient_email:r.recipient_email,
    origin:r.origin,destination:r.destination,package_description:r.package_description||r.package_type,
    service_type:r.service_type==="air"?"Express Air":r.service_type==="ocean"?"Ocean Freight":"Road Freight",
    weight_kg:r.weight_kg,status:"Created"
@@ -397,7 +401,8 @@ async function createShipmentFromRequest(id,button){
   if(insertError||!shipment)throw new Error("Shipment could not be created. Check your admin permissions.");
   const {error:updateError}=await client.from("package_requests").update({status:"converted",tracking_id:trackingId,updated_at:new Date().toISOString()}).eq("id",id);
   if(updateError)throw new Error("Shipment created with tracking ID "+trackingId+", but the request record did not update. Please record the ID and refresh.");
-  alert("Shipment created. Tracking ID: "+trackingId);
+  const {data:notice,error:noticeError}=await client.functions.invoke("notify-shipment-status",{body:{requestId:id,status:"converted"}});
+  alert("Shipment created. Tracking ID: "+trackingId+(noticeError||!notice?.ok?"\nEmail notification needs configuration.":"\nEmail notification sent."));
   await loadAdminRequests();
  }catch(error){alert(error instanceof Error?error.message:"Could not create the shipment.");button.disabled=false;button.textContent="Create shipment & tracking ID";}
 }
