@@ -163,7 +163,7 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 .loader-truck .truck-body{stroke:#f7f9fc;stroke-width:3;stroke-linejoin:round;fill:#1478ee}
 .loader-truck .truck-window{fill:#07152b;stroke:#f7f9fc;stroke-width:2}
 .loader-truck .truck-wheel{fill:#1478ee;stroke:#f7f9fc;stroke-width:2}
-.loader-truck .wheel-inner{fill:#d9eaff}
+.loader-truck .wheel-inner{fill:#1478ee}
 .loader-truck .wheel-group{transform-box:fill-box;transform-origin:center;animation:wheel-roll .65s linear infinite}
 .loader-road{width:150px;height:3px;margin:0 auto 20px;background:linear-gradient(90deg,transparent,#1478ee,#7eb8ff,transparent);animation:road-glow 1s ease-in-out infinite}
 .loader-title{font-size:18px;font-weight:800;letter-spacing:-.3px}
@@ -230,7 +230,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 <div class="eyebrow">Shipping made straightforward</div>
 <h1>Wherever you send it,<br><span>we deliver the trust.</span></h1>
 <p>From important documents to parcels and freight, Facil Express helps make shipping simpler, clearer, and easier to follow.</p>
-<div class="actions"><a class="btn" href="#contact">Send a shipment <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#services">Explore services</a></div>
+<div class="actions"><a class="btn" href="#send-package">Send a Package <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#services">Explore services</a></div>
 <div class="trustline"><span class="trust-icon">✓</span><span>Clear updates. Helpful support. Shipping with confidence.</span></div>
 </div>
 <div class="hero-art" aria-label="Shipment route illustration">
@@ -422,7 +422,7 @@ function showPackageSuccess(data,emails){
  const target=document.getElementById("packageSuccess");
  const reference="FXR-"+String(data.requestId||"").replaceAll("-","").slice(0,8).toUpperCase();
  const sent=Number(data.emailsQueued||0), expected=Number(data.emailsExpected||2);
- const senderSent=sent>=1, receiverSent=sent>=2;
+ const sameEmail=(emails.senderEmail||"").toLowerCase()===(emails.recipientEmail||"").toLowerCase(); const senderSent=sent>=1, receiverSent=sent>=2||(sameEmail&&sent>=1);
  const emailState=(label,email,ok)=>'<div class="email-state '+(ok?"":"failed")+'"><strong><span class="email-icon">'+(ok?"✓":"!")+'</span>'+label+'</strong>'+safe(email||"Email address")+'<br><span>'+(ok?"Confirmation accepted for delivery":"Email delivery could not be confirmed; please contact support")+'</span></div>';
  target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your request has been saved securely. Keep this reference code to identify your request while the Facil Express team reviews the shipment details.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Return to home</button><button class="btn btn-ghost" type="button" onclick="startAnotherRequest()">Send another package</button></div></div>';
  target.hidden=false;
