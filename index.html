@@ -388,8 +388,6 @@ async function createShipmentFromRequest(id,button){
    weight_kg:r.weight_kg,status:"Created"
   }).select("id").single();
   if(insertError||!shipment)throw new Error("Shipment could not be created. Check your admin permissions.");
-  const {error:eventError}=await client.from("shipment_events").insert({shipment_id:shipment.id,status:"Created",location:r.origin,note:"Shipment created from website booking request"});
-  if(eventError)console.error("Shipment created but initial event could not be added:",eventError.message);
   const {error:updateError}=await client.from("package_requests").update({status:"converted",tracking_id:trackingId,updated_at:new Date().toISOString()}).eq("id",id);
   if(updateError)throw new Error("Shipment created with tracking ID "+trackingId+", but the request record did not update. Please record the ID and refresh.");
   alert("Shipment created. Tracking ID: "+trackingId);
