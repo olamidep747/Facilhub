@@ -477,7 +477,7 @@ function startAnotherRequest(){
  document.getElementById("packageResult").textContent="";
  window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll('a[href="?page=send-package"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();window.location.assign(new URL("?page=send-package",window.location.href.split("?")[0]).href);}));
+// Send Package uses a normal page URL so it still navigates if JavaScript navigation handlers fail.
  if(new URLSearchParams(location.search).get("page")==="send-package"){document.body.classList.add("booking-mode");document.getElementById("bookingBack").hidden=false;document.getElementById("packageForm").hidden=false;document.querySelector(".package-intro").hidden=false;window.scrollTo(0,0);}
 document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener("click",e=>{if(document.body.classList.contains("booking-mode")){e.preventDefault();leaveBooking();}}));
 document.querySelectorAll('a[href="#tracking"]').forEach(a=>a.addEventListener("click",e=>{
@@ -487,7 +487,9 @@ document.querySelectorAll('a[href="#tracking"]').forEach(a=>a.addEventListener("
  setTimeout(()=>{hideShipmentLoader();history.replaceState(null,"",location.pathname+location.search+"#tracking");document.getElementById("tracking").scrollIntoView({behavior:"smooth"});},600);
 }));
 
-function openAdminLogin(e){if(e)e.preventDefault();document.getElementById("adminModal").classList.add("open");document.body.style.overflow="hidden";}
+function openAdminLogin(e){if(e)e.preventDefault();const modal=document.getElementById("adminModal");if(modal){modal.classList.add("open");modal.style.display="flex";document.body.style.overflow="hidden";}}
+window.openAdminLogin=openAdminLogin;
+document.querySelectorAll('a.admin-nav, footer a[href="#admin-login"]').forEach(a=>a.addEventListener("click",function(e){e.preventDefault();openAdminLogin(e);}));
 function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open");document.body.style.overflow="";}
 async function adminSignOut(){
  const client=await window.facilSupabaseReady;
@@ -690,7 +692,8 @@ document.getElementById("supportReplyForm").addEventListener("submit",async e=>{
  catch(err){alert(err.message||"Could not send reply.");}
  finally{button.disabled=false;}
 });
-function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));if(open)refreshVisitorMessages();}
+function toggleChat(){const chat=document.getElementById("chat");if(!chat)return;const open=chat.classList.toggle("open");document.getElementById("chatToggle")?.setAttribute("aria-expanded",String(open));if(open)refreshVisitorMessages();}
+window.toggleChat=toggleChat;
 setInterval(()=>{if(document.getElementById("chat")?.classList.contains("open"))refreshVisitorMessages();if(!document.getElementById("adminDashboard")?.hidden)loadSupportInboxWithoutThread();},8000);
 document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 </script>
