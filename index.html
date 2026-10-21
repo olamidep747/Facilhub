@@ -114,11 +114,34 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 #messages{padding:14px;min-height:100px;font-size:12px;max-height:230px;overflow:auto;color:#c4d1e0}
 .chatrow{display:flex;padding:11px;gap:7px;border-top:1px solid #29415d}
 .chatrow input{margin:0}.chatrow button{padding:8px 11px;border:0;border-radius:6px;background:var(--yellow);font-size:11px;font-weight:800}
+
+.admin-nav{color:var(--yellow)!important;font-weight:800}
+#send-package .section-head{max-width:760px}
+.package-form{margin-top:28px}
+.form-section-title{grid-column:1/-1;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);padding:16px 0 11px;border-bottom:1px solid #2b4360;margin-bottom:14px}
+.form-section-title:first-child{padding-top:0}
+.form-panel .field{min-width:0}
+.form-panel input[type="file"]{padding:10px;background:#07172e}
+.upload-hint{font-size:10px;color:var(--muted);margin:-8px 0 15px}
+.image-preview{display:none;max-width:100%;max-height:180px;object-fit:contain;border:1px solid #304866;border-radius:8px;margin:0 0 15px}
+.form-note{padding:12px 14px;border:1px solid #665221;background:#332a12;border-radius:8px;color:#f4d986;font-size:11px;line-height:1.6;margin:0 0 18px}
+.package-form .btn{margin-top:4px}
+#adminModal{display:none;position:fixed;inset:0;z-index:70;background:#020916d9;align-items:center;justify-content:center;padding:20px}
+#adminModal.open{display:flex}
+.admin-card{width:min(420px,100%);background:#10243f;border:1px solid #304866;border-radius:14px;padding:25px;box-shadow:0 24px 70px #0008}
+.admin-card-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px}
+.admin-card h2{font-size:25px;margin:0}
+.admin-close{background:transparent;color:white;border:0;font-size:25px;cursor:pointer}
+.admin-card p{font-size:12px;color:var(--muted);margin:10px 0 18px}
+.admin-card input{margin-bottom:14px}
+.admin-card .btn{width:100%}
+#adminMessage{font-size:11px;color:var(--yellow);margin-top:12px}
+
 @media(max-width:900px){header{gap:14px}.hero-layout{gap:24px}.hero-art{min-height:320px}.route-card{padding:20px}.trackbox{grid-template-columns:1fr 1.4fr auto}.contact-layout{gap:28px}}
 @media(max-width:700px){
  header{height:68px;padding:0 20px}.brand{font-size:20px}.brand-mark{width:38px;height:38px}nav{display:none;position:absolute;top:67px;left:0;right:0;padding:15px 22px 20px;background:#091a31;border-bottom:1px solid #263e5a;flex-direction:column;align-items:stretch;gap:0}nav.open{display:flex}nav a{padding:12px 0;border-bottom:1px solid #1e334d}.header-cta{display:none}.menu-toggle{display:block}
  .wrap{width:calc(100% - 36px)}.hero{padding:52px 0 45px}.hero-layout{grid-template-columns:1fr;gap:28px}.hero-copy{max-width:590px}h1{font-size:clamp(42px,11vw,58px);letter-spacing:-2px}.hero-copy>p{font-size:14px}.hero-art{min-height:295px}.route-card{width:100%;max-width:460px}.floating-note{right:-3px;bottom:3px}.tracking-band{margin-top:25px}.trackbox{grid-template-columns:1fr;gap:12px;padding:17px}.trackbox .btn{width:100%}#heroResult{grid-column:auto}.stats{grid-template-columns:1fr 1fr;gap:19px 12px;padding-top:24px}.stat strong{font-size:20px}
- section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
+ section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.form-section-title{grid-column:auto}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
 }
 @media(max-width:390px){.grid{grid-template-columns:1fr}.actions .btn{flex:1;padding:12px 10px}.route-card{padding:16px}.floating-note{transform:scale(.9);transform-origin:right bottom}}
 </style>
@@ -130,9 +153,9 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <span>Facil <span class="express">Express</span></span>
 </a>
 <nav id="mainNav" aria-label="Main navigation">
-<a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#how">How it works</a><a href="#contact">Contact</a>
+<a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#how">How it works</a><a href="#send-package">Send a Package</a><a href="#contact">Contact</a><a href="#admin-login" class="admin-nav" onclick="openAdminLogin(event)">Admin Login</a>
 </nav>
-<a class="btn header-cta" href="#contact">Ship with us <span aria-hidden="true">↗</span></a>
+<a class="btn header-cta" href="#send-package">Send a Package <span aria-hidden="true">↗</span></a>
 <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 </header>
 <main>
@@ -195,27 +218,104 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <div class="track-panel"><label for="trackInput">TRACKING NUMBER</label><div class="trackrow"><input id="trackInput" autocomplete="off" placeholder="Enter your tracking ID"><button class="btn btn-blue" onclick="track('trackInput')">Track now</button></div><div id="trackingResult" role="status" aria-live="polite"><p>Tracking updates will appear here when a valid shipment record is available.</p></div></div>
 </div>
 </section>
-<section class="content" id="contact">
-<div class="wrap contact-layout">
-<div class="section-head"><div class="eyebrow">Get started</div><h2>Let's move your shipment.</h2><p>Tell us a little about what you need to send. Prepare a request to share with the Facil Express team.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Share your destination and shipment type.</span></div><div class="contact-point"><span>✓</span><span>Include any important package details.</span></div><div class="contact-point"><span>✓</span><span>Review your request before sending it.</span></div></div></div>
-<form class="form-panel" id="quoteForm">
+<section class="content" id="send-package">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow">Book a shipment</div><h2>Send a package, right here.</h2><p>Enter the sender and receiver details, choose your shipping method, add package weight and pickup timing, and attach a photo if you wish.</p></div>
+<form class="form-panel package-form" id="packageForm">
 <div class="form-grid">
-<div class="field"><label for="name">FULL NAME *</label><input id="name" required maxlength="100" autocomplete="name" placeholder="Your full name"></div>
-<div class="field"><label for="email">EMAIL ADDRESS *</label><input id="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@example.com"></div>
-<div class="field"><label for="type">SHIPMENT TYPE *</label><select id="type" required><option value="">Select a service</option><option>Documents</option><option>Parcel / Box</option><option>Express Air</option><option>Ocean Freight</option><option>International Shipping</option></select></div>
-<div class="field"><label for="destination">DESTINATION *</label><input id="destination" required maxlength="150" placeholder="City and country"></div>
-<div class="field full"><label for="details">SHIPMENT DETAILS</label><textarea id="details" rows="4" maxlength="1500" placeholder="Approximate weight, dimensions, and any special details"></textarea></div>
+<div class="form-section-title">1. Sender details</div>
+<div class="field"><label for="senderName">SENDER FULL NAME *</label><input id="senderName" required maxlength="100" autocomplete="name" placeholder="Your full name"></div>
+<div class="field"><label for="senderEmail">SENDER EMAIL *</label><input id="senderEmail" type="email" required maxlength="200" autocomplete="email" placeholder="you@example.com"></div>
+<div class="field"><label for="senderPhone">SENDER PHONE *</label><input id="senderPhone" type="tel" required maxlength="40" autocomplete="tel" placeholder="+ country code and number"></div>
+<div class="field"><label for="origin">PICKUP CITY / COUNTRY *</label><input id="origin" required maxlength="150" placeholder="Where is the package now?"></div>
+
+<div class="form-section-title">2. Receiver details</div>
+<div class="field"><label for="recipientName">RECEIVER FULL NAME *</label><input id="recipientName" required maxlength="100" placeholder="Person receiving the package"></div>
+<div class="field"><label for="recipientPhone">RECEIVER PHONE *</label><input id="recipientPhone" type="tel" required maxlength="40" placeholder="+ country code and number"></div>
+<div class="field full"><label for="destination">DELIVERY CITY / COUNTRY *</label><input id="destination" required maxlength="150" placeholder="Where should we deliver it?"></div>
+
+<div class="form-section-title">3. Shipping and package details</div>
+<div class="field"><label for="shipMethod">SHIPPING METHOD *</label><select id="shipMethod" required><option value="air" selected>Air freight — usually faster</option><option value="ocean">Ocean freight — usually more economical for large cargo</option><option value="road">Road freight</option></select></div>
+<div class="field"><label for="speed">DELIVERY SPEED *</label><select id="speed" required><option value="express" selected>Express / fastest available</option><option value="standard">Standard</option><option value="economy">Economy</option></select></div>
+<div class="field"><label for="packageType">PACKAGE TYPE *</label><select id="packageType" required><option value="">Select package type</option><option>Documents</option><option>Parcel / box</option><option>Clothing / personal items</option><option>Electronics</option><option>Business goods</option><option>Commercial cargo</option><option>Other</option></select></div>
+<div class="field"><label for="weight">WEIGHT (KG) *</label><input id="weight" type="number" required min="0.1" max="30000" step="0.1" placeholder="e.g. 2.5"></div>
+<div class="field"><label for="length">LENGTH (CM)</label><input id="length" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="width">WIDTH (CM)</label><input id="width" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="height">HEIGHT (CM)</label><input id="height" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="pickupDate">PREFERRED PICKUP DATE</label><input id="pickupDate" type="date"></div>
+<div class="field"><label for="pickupTime">PREFERRED PICKUP TIME</label><select id="pickupTime"><option value="">Choose a time window</option><option>08:00–10:00</option><option>10:00–12:00</option><option>12:00–14:00</option><option>14:00–16:00</option><option>16:00–18:00</option><option>Flexible</option></select></div>
+<div class="field full"><label for="packagePhoto">PACKAGE PHOTO (OPTIONAL)</label><input id="packagePhoto" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-hint">Choose one JPG, PNG or WebP image, up to 5 MB. Avoid photos showing sensitive documents.</div><img id="imagePreview" class="image-preview" alt="Preview of selected package photo"></div>
+<div class="field full"><label for="packageNotes">PACKAGE DESCRIPTION / SPECIAL INSTRUCTIONS</label><textarea id="packageNotes" rows="4" maxlength="1500" placeholder="Describe the contents, dimensions if known, and any handling instructions. Do not include prohibited items."></textarea></div>
 </div>
-<button class="btn btn-blue" type="submit">Prepare shipment request <span aria-hidden="true">→</span></button><div id="formResult" class="notice" role="status" aria-live="polite"></div>
+<div class="form-note">Please note: this booking form is now on the website, but it is not yet connected to secure shipment storage or image uploads. Do not submit sensitive information until the secure backend connection is completed.</div>
+<button class="btn btn-blue" type="submit">Review package request <span aria-hidden="true">→</span></button>
+<div id="packageResult" class="notice" role="status" aria-live="polite"></div>
 </form>
 </div>
 </section>
+<section class="content dark" id="contact">
+<div class="wrap contact-layout">
+<div class="section-head"><div class="eyebrow">Need help?</div><h2>Questions about your shipment?</h2><p>Use the package request form to provide your shipment details. For help with the site, open the support chat preview.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Choose air, ocean, or road freight.</span></div><div class="contact-point"><span>✓</span><span>Provide package weight and pickup preferences.</span></div><div class="contact-point"><span>✓</span><span>Add a package photo if it helps describe your shipment.</span></div></div></div>
+<div class="form-panel"><h3 style="font-size:16px;margin-bottom:9px">Ready to ship?</h3><p style="font-size:12px;color:var(--muted);margin-bottom:18px">Start your request on the website instead of opening an email draft.</p><a class="btn btn-blue" href="#send-package">Send a Package <span aria-hidden="true">→</span></a><p class="notice">Delivery speed and price depend on route, cargo, and availability. Air freight is often faster; ocean freight can be more economical for larger shipments.</p></div>
+</div>
+</section>
 </main>
-<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#contact">Contact</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#send-package">Send a Package</a><a href="#contact">Contact</a><a href="#admin-login" onclick="openAdminLogin(event)">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Secure admin authentication is not connected yet. This form will not send or verify your password.</div></form></div></div>
 <button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle">● &nbsp; Live Chat</button>
 <div id="chat" aria-label="Facil Express chat preview"><div class="chathead">Facil Express Support <button onclick="toggleChat()" aria-label="Close chat">×</button></div><div id="messages">Welcome to Facil Express. Send a message to preview the chat experience. This chat is not connected to a live support agent yet.</div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Type a message"><button onclick="sendChat()">Send</button></div></div>
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+
+const photoInput=document.getElementById("packagePhoto");
+const imagePreview=document.getElementById("imagePreview");
+photoInput.addEventListener("change",function(){
+ const file=this.files&&this.files[0];
+ imagePreview.style.display="none";imagePreview.removeAttribute("src");
+ if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+  this.value="";document.getElementById("packageResult").textContent="Please choose one JPG, PNG or WebP image smaller than 5 MB.";return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{imagePreview.src=reader.result;imagePreview.style.display="block";};
+ reader.readAsDataURL(file);
+});
+document.getElementById("packageForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const method=document.getElementById("shipMethod").selectedOptions[0].text;
+ const speed=document.getElementById("speed").selectedOptions[0].text;
+ const summary=[
+ "Package request details reviewed",
+ "Sender: "+document.getElementById("senderName").value.trim(),
+ "Sender email: "+document.getElementById("senderEmail").value.trim(),
+ "Sender phone: "+document.getElementById("senderPhone").value.trim(),
+ "Pickup: "+document.getElementById("origin").value.trim(),
+ "Receiver: "+document.getElementById("recipientName").value.trim(),
+ "Receiver phone: "+document.getElementById("recipientPhone").value.trim(),
+ "Destination: "+document.getElementById("destination").value.trim(),
+ "Shipping: "+method,
+ "Delivery speed: "+speed,
+ "Package type: "+document.getElementById("packageType").value,
+ "Weight: "+document.getElementById("weight").value+" kg",
+ "Dimensions (cm): "+[document.getElementById("length").value||"—",document.getElementById("width").value||"—",document.getElementById("height").value||"—"].join(" × "),
+ "Pickup date: "+(document.getElementById("pickupDate").value||"Not selected"),
+ "Pickup time: "+(document.getElementById("pickupTime").value||"Not selected"),
+ "Description: "+(document.getElementById("packageNotes").value.trim()||"None"),
+ "Photo selected: "+((photoInput.files&&photoInput.files[0])?photoInput.files[0].name:"No")
+ ].join("\n");
+ const out=document.getElementById("packageResult");
+ out.textContent="Your details passed the browser form checks. This is a preview only: no booking has been sent or saved because secure Supabase storage and photo uploads still need to be connected.";
+ const preview=document.createElement("pre");
+ preview.style.cssText="white-space:pre-wrap;overflow-wrap:anywhere;background:#07172e;border:1px solid #304866;border-radius:8px;padding:14px;margin-top:14px;font:12px/1.7 ui-monospace,monospace;color:#d5e2f0";
+ preview.textContent=summary;
+ const old=document.getElementById("requestPreview");if(old)old.remove();
+ preview.id="requestPreview";out.after(preview);
+});
+function openAdminLogin(e){if(e)e.preventDefault();document.getElementById("adminModal").classList.add("open");document.body.style.overflow="hidden";}
+function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open");document.body.style.overflow="";}
+document.getElementById("adminForm").addEventListener("submit",function(e){e.preventDefault();document.getElementById("adminMessage").textContent="Sign-in is not active yet. Supabase Auth and administrator permissions must be securely connected before login can work. Your password was not sent.";});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAdminLogin();});
+
 const nav = document.getElementById("mainNav");
 const menuToggle = document.getElementById("menuToggle");
 menuToggle.addEventListener("click", function(){const open=nav.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.textContent=open?"×":"☰";});
