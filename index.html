@@ -185,7 +185,11 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 main>section#send-package{display:none}
 body.booking-mode main>section#send-package{display:block}
 body.booking-mode main>section:not(#send-package){display:none}
-body.booking-mode nav,body.booking-mode .header-cta,body.booking-mode footer,body.booking-mode .chatbtn{display:none!important}
+body.booking-mode header,body.booking-mode footer,body.booking-mode .chatbtn{display:none!important}
+body.booking-mode main{padding-top:0}
+body.booking-mode #send-package{width:100%;min-height:100vh;padding:34px 0 48px}
+body.booking-mode #send-package>.wrap{width:min(900px,100% - 36px)}
+body.booking-mode #send-package .booking-back{margin-bottom:24px}
 body.booking-mode #send-package{min-height:calc(100vh - 78px);padding-top:38px}
 body.booking-mode #send-package .section-head{max-width:760px}
 body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
@@ -445,13 +449,11 @@ function enterBooking(){
  document.getElementById("packageForm").hidden=false;
  document.querySelector(".package-intro").hidden=false;
  document.getElementById("bookingBack").hidden=false;
- history.replaceState(null,"",location.pathname+location.search+"#send-package");
+ history.replaceState(null,"",location.pathname+"?page=send-package");
  window.scrollTo({top:0,behavior:"smooth"});
 }
 function leaveBooking(){
- document.body.classList.remove("booking-mode");
- history.replaceState(null,"",location.pathname+location.search+"#home");
- window.scrollTo({top:0,behavior:"smooth"});
+ window.location.href=location.pathname+"#home";
 }
 function showPackageSuccess(data,emails){
  document.body.classList.add("booking-mode");
@@ -463,7 +465,7 @@ function showPackageSuccess(data,emails){
  const sent=Number(data.emailsQueued||0), expected=Number(data.emailsExpected||2);
  const sameEmail=(emails.senderEmail||"").toLowerCase()===(emails.recipientEmail||"").toLowerCase(); const senderSent=sent>=1, receiverSent=sent>=2||(sameEmail&&sent>=1);
  const emailState=(label,email,ok)=>'<div class="email-state '+(ok?"":"failed")+'"><strong><span class="email-icon">'+(ok?"✓":"!")+'</span>'+label+'</strong>'+safe(email||"Email address")+'<br><span>'+(ok?"Confirmation accepted for delivery":"Email delivery could not be confirmed; please contact support")+'</span></div>';
- target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your request has been saved securely. Keep this reference code to identify your request while the Facil Express team reviews the shipment details.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Return to home</button><button class="btn btn-ghost" type="button" onclick="startAnotherRequest()">Send another package</button></div></div>';
+ target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your request has been saved securely. Keep this reference code to identify your request while the Facil Express team reviews the shipment details.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Go back to home</button><button class="btn btn-ghost" type="button" onclick="window.location.href=location.pathname+'#tracking'">Track your package</button></div></div>';
  target.hidden=false;
  document.getElementById("copyReference").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(reference);document.getElementById("copyMessage").textContent="Reference copied.";}catch{document.getElementById("copyMessage").textContent="Reference: "+reference;}});
  window.scrollTo({top:0,behavior:"smooth"});
@@ -475,7 +477,8 @@ function startAnotherRequest(){
  document.getElementById("packageResult").textContent="";
  window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll('a[href="#send-package"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showShipmentLoader("Opening Send a Package","Preparing your secure shipment form");setTimeout(()=>{hideShipmentLoader();enterBooking();},650);}));
+document.querySelectorAll('a[href="#send-package"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showShipmentLoader("Opening Send a Package","Preparing your separate shipment form");setTimeout(()=>{window.location.href=location.pathname+"?page=send-package";},450);}));
+ if(new URLSearchParams(location.search).get("page")==="send-package"){document.body.classList.add("booking-mode");document.getElementById("bookingBack").hidden=false;document.getElementById("packageForm").hidden=false;document.querySelector(".package-intro").hidden=false;window.scrollTo(0,0);}
 document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener("click",e=>{if(document.body.classList.contains("booking-mode")){e.preventDefault();leaveBooking();}}));
 document.querySelectorAll('a[href="#tracking"]').forEach(a=>a.addEventListener("click",e=>{
  if(document.body.classList.contains("booking-mode"))return;
