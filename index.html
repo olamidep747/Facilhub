@@ -165,21 +165,6 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 }
 @media(max-width:390px){.grid{grid-template-columns:1fr}.actions .btn{flex:1;padding:12px 10px}.route-card{padding:16px}.floating-note{transform:scale(.9);transform-origin:right bottom}}
 
-/* Booking flow and branded loading animation */
-#shipmentLoader{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(4,14,29,.96);backdrop-filter:blur(10px)}
-#shipmentLoader.active{display:flex}
-.loader-card{text-align:center;width:min(390px,100%);padding:30px 24px;border:1px solid #294767;border-radius:18px;background:linear-gradient(145deg,#102846,#08182d);box-shadow:0 25px 90px #0008}
-.loader-truck{width:170px;height:105px;margin:0 auto 18px;overflow:visible}
-.loader-truck .truck-body{stroke:#f7f9fc;stroke-width:3;stroke-linejoin:round;fill:#1478ee}
-.loader-truck .truck-window{fill:#07152b;stroke:#f7f9fc;stroke-width:2}
-.loader-truck .truck-wheel{fill:#1478ee;stroke:#f7f9fc;stroke-width:2}
-.loader-truck .wheel-inner{fill:#1478ee}
-.loader-truck .wheel-group{transform-box:fill-box;transform-origin:center;animation:wheel-roll .65s linear infinite}
-.loader-road{width:150px;height:3px;margin:0 auto 20px;background:linear-gradient(90deg,transparent,#1478ee,#7eb8ff,transparent);animation:road-glow 1s ease-in-out infinite}
-.loader-title{font-size:18px;font-weight:800;letter-spacing:-.3px}
-.loader-copy{font-size:12px;color:#a9b8cc;margin-top:7px}
-.loader-dots:after{content:"";animation:loader-dots 1.2s steps(4,end) infinite}
-@keyframes wheel-roll{to{transform:rotate(360deg)}}@keyframes road-glow{0%,100%{opacity:.4;transform:scaleX(.75)}50%{opacity:1;transform:scaleX(1)}}@keyframes loader-dots{0%{content:""}25%{content:"."}50%{content:".."}75%,100%{content:"..."}}
 .booking-back{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;background:transparent;border:1px solid #3a5472;border-radius:7px;padding:10px 14px;color:#e8eef7;font-size:12px;font-weight:800;cursor:pointer}
 .booking-back:hover{border-color:#1478ee;background:#1478ee12}
 main>section#send-package{display:none}
@@ -208,9 +193,6 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 .success-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
 .success-actions .btn{min-width:155px}
 @media(max-width:700px){body.booking-mode #send-package{min-height:calc(100vh - 68px);padding-top:24px}.email-confirmations{grid-template-columns:1fr}.loader-card{padding:27px 20px}}
-@media(prefers-reduced-motion:reduce){.loader-truck .wheel-group,.loader-road,.loader-dots:after{animation:none}}
-
-
 /* Subtle connected-node network motif on the midnight-blue surfaces */
 .hero{isolation:isolate}
 .network-visual{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:1;display:block}
@@ -240,20 +222,6 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 </style>
 </head>
 <body>
-<div id="shipmentLoader" role="status" aria-live="polite" aria-hidden="true">
- <div class="loader-card">
-  <svg class="loader-truck" viewBox="0 0 180 110" role="img" aria-label="Facil Express truck loading">
-   <path class="truck-body" d="M14 20h91v57H14z"/><path class="truck-body" d="M105 42h34l26 25v10h-60z"/>
-   <path class="truck-window" d="M116 48h19l16 16h-35z"/>
-   <path d="M25 31h67M25 40h55" stroke="#bcdcff" stroke-width="3" stroke-linecap="round"/>
-   <g class="wheel-group"><circle class="truck-wheel" cx="45" cy="80" r="14"/><circle class="wheel-inner" cx="45" cy="80" r="5"/></g>
-   <g class="wheel-group"><circle class="truck-wheel" cx="133" cy="80" r="14"/><circle class="wheel-inner" cx="133" cy="80" r="5"/></g>
-   <path d="M8 96h164" stroke="#3d628a" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 7"/>
-  </svg>
-  <div class="loader-road"></div><div class="loader-title" id="loaderTitle">Getting your shipment ready</div>
-  <p class="loader-copy" id="loaderCopy">Please wait while Facil Express prepares the next step<span class="loader-dots"></span></p>
- </div>
-</div>
 <header>
 <a href="#home" class="brand" aria-label="Facil Express home">
 <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 8.5h16v14H3z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M19 13h5.5l4.5 5v4.5H19z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M22 13v5h7" stroke="white" stroke-width="2"/><circle cx="9" cy="24" r="3" fill="#3d8bff" stroke="white" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="#3d8bff" stroke="white" stroke-width="1.5"/></svg></span>
@@ -402,7 +370,6 @@ document.getElementById("packageForm").addEventListener("submit",async function(
  const form=this, out=document.getElementById("packageResult"), submit=form.querySelector('button[type="submit"]');
  const startedAt=Date.now();
  submit.disabled=true;submit.textContent="Submitting securely…";
- showShipmentLoader("Submitting your package","Saving your request and preparing your reference");
  try{
   const fd=new FormData();
   const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","recipientEmail","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
@@ -418,7 +385,6 @@ document.getElementById("packageForm").addEventListener("submit",async function(
   }
   if(!data||!data.ok)throw new Error(data?.error||"Request could not be submitted.");
   await new Promise(resolve=>setTimeout(resolve,Math.max(0,750-(Date.now()-startedAt))));
-  hideShipmentLoader();
   showPackageSuccess(data, {
    senderEmail:document.getElementById("senderEmail").value.trim(),
    recipientEmail:document.getElementById("recipientEmail").value.trim()
@@ -426,7 +392,6 @@ document.getElementById("packageForm").addEventListener("submit",async function(
   form.reset();imagePreview.style.display="none";imagePreview.removeAttribute("src");
  }catch(error){
   await new Promise(resolve=>setTimeout(resolve,Math.max(0,650-(Date.now()-startedAt))));
-  hideShipmentLoader();
   out.textContent=error instanceof Error?error.message:"We couldn't submit the request. Please try again.";
  }finally{
   submit.disabled=false;submit.innerHTML='Submit package request <span aria-hidden="true">→</span>';
@@ -434,15 +399,6 @@ document.getElementById("packageForm").addEventListener("submit",async function(
 });
 
 
-function showShipmentLoader(title,copy){
- const loader=document.getElementById("shipmentLoader");
- document.getElementById("loaderTitle").textContent=title||"Getting your shipment ready";
- document.getElementById("loaderCopy").textContent=copy||"Please wait while Facil Express prepares the next step";
- loader.classList.add("active");loader.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-}
-function hideShipmentLoader(){
- const loader=document.getElementById("shipmentLoader");loader.classList.remove("active");loader.setAttribute("aria-hidden","true");document.body.style.overflow="";
-}
 function enterBooking(){
  document.body.classList.add("booking-mode");
  document.getElementById("packageSuccess").hidden=true;
@@ -483,8 +439,8 @@ document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener("clic
 document.querySelectorAll('a[href="#tracking"]').forEach(a=>a.addEventListener("click",e=>{
  if(document.body.classList.contains("booking-mode"))return;
  e.preventDefault();
- showShipmentLoader("Opening package tracking","Preparing the tracking lookup");
- setTimeout(()=>{hideShipmentLoader();history.replaceState(null,"",location.pathname+location.search+"#tracking");document.getElementById("tracking").scrollIntoView({behavior:"smooth"});},600);
+ history.replaceState(null,"",location.pathname+location.search+"#tracking");
+ document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
 }));
 
 function openAdminLogin(e){if(e)e.preventDefault();const modal=document.getElementById("adminModal");if(modal){modal.classList.add("open");modal.style.display="flex";document.body.style.overflow="hidden";}}
@@ -596,7 +552,6 @@ async function track(inputId){
  output.innerHTML=loading;heroOutput.innerHTML=loading;
  const trackButtons=[...document.querySelectorAll('button[onclick*="track("]')];
  trackButtons.forEach(button=>{button.disabled=true;button.dataset.originalText=button.textContent;button.textContent="Searching…";});
- showShipmentLoader("Tracking your package","Connecting to your shipment record");
  try{
   const client=await window.facilSupabaseReady;
   if(!client)throw new Error("Tracking service could not load. Please try again.");
@@ -614,7 +569,6 @@ async function track(inputId){
  }catch(error){output.textContent=error instanceof Error?error.message:"Tracking is temporarily unavailable.";heroOutput.textContent="No tracking result available.";}
  finally{
   await new Promise(resolve=>setTimeout(resolve,Math.max(0,700-(Date.now()-startedAt))));
-  hideShipmentLoader();
   trackButtons.forEach(button=>{button.disabled=false;button.textContent=button.dataset.originalText||"Track now";delete button.dataset.originalText;});
  }
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
