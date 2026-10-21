@@ -113,7 +113,7 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 .chathead button{background:transparent;color:white;border:0;font-size:21px;cursor:pointer}
 #messages{padding:14px;min-height:100px;font-size:12px;max-height:230px;overflow:auto;color:#c4d1e0}
 .chatrow{display:flex;padding:11px;gap:7px;border-top:1px solid #29415d}
-.chatrow input{margin:0;border-radius:6px;background:#08182d;border-color:#304866}.chatrow button{padding:9px 13px;border:1px solid #3d8bff;border-radius:6px;background:#1478ee;color:#fff;font-size:11px;font-weight:800}
+.admin-chat{margin-top:28px;padding-top:24px;border-top:1px solid #29415d}.support-admin-layout{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr);gap:12px}.support-conversations{display:grid;align-content:start;gap:8px}.support-conversation{width:100%;text-align:left;background:#0b1d37;border:1px solid #29415d;color:#dbe7f5;border-radius:8px;padding:12px;cursor:pointer}.support-conversation.active{border-color:#3d8bff;background:#102b4b}.support-conversation strong,.support-conversation small{display:block;overflow-wrap:anywhere}.support-conversation small{color:#9eb0c7;font-size:10px;margin-top:4px}.support-thread{min-width:0;border:1px solid #29415d;border-radius:9px;overflow:hidden}.support-thread-title{padding:12px;background:#0b1d37;border-bottom:1px solid #29415d;font-size:12px;font-weight:800}.support-thread-messages{padding:12px;min-height:180px;max-height:320px;overflow:auto;display:flex;flex-direction:column;gap:9px}.support-msg{max-width:90%;padding:9px 11px;border:1px solid #29415d;border-radius:7px;background:#142b47;font-size:12px;overflow-wrap:anywhere}.support-msg.admin{align-self:flex-end;background:#174477;border-color:#2c5d91}.support-msg small{display:block;color:#9eb0c7;font-size:9px;margin-bottom:4px}.support-reply-form{display:flex;gap:8px;padding:10px;border-top:1px solid #29415d}.support-reply-form input{margin:0}.support-reply-form button{flex-shrink:0}.chatrow input{margin:0;border-radius:6px;background:#08182d;border-color:#304866}.chatrow button{padding:9px 13px;border:1px solid #3d8bff;border-radius:6px;background:#1478ee;color:#fff;font-size:11px;font-weight:800}
 .chathead{padding:15px 16px;background:#0b1d37;border-bottom:1px solid #263e5c}
 .chat-brand{display:flex;align-items:center;gap:10px}.chat-brand strong{display:block;font-size:13px;letter-spacing:.1px}.chat-brand small{display:block;color:#9eb0c7;font-size:10px;font-weight:500;margin-top:2px}
 .chat-shield{display:grid;place-items:center;width:34px;height:34px;border:1px solid #3d8bff66;border-radius:7px;background:#1478ee20;color:#72b2ff;font-size:17px}
@@ -371,9 +371,9 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 </section>
 </main>
 <footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#send-package">Send a Package</a><a href="#contact">Contact</a><a href="#admin-login" onclick="openAdminLogin(event)">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
-<div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Sign in with an administrator account.</div></form><div id="adminDashboard" hidden><div class="admin-card-head"><h3 style="font-size:17px">Shipment requests</h3><div class="admin-toolbar"><button class="btn btn-ghost" type="button" onclick="loadAdminRequests()">Refresh</button><button class="btn" type="button" onclick="adminSignOut()">Sign out</button></div></div><p id="adminWelcome" style="font-size:11px;color:var(--muted)"></p><div id="adminRequests"><div class="admin-empty">Loading shipment requests…</div></div></div></div></div>
+<div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Sign in with an administrator account.</div></form><div id="adminDashboard" hidden><div class="admin-card-head"><h3 style="font-size:17px">Shipment requests</h3><div class="admin-toolbar"><button class="btn btn-ghost" type="button" onclick="loadAdminRequests()">Refresh</button><button class="btn" type="button" onclick="adminSignOut()">Sign out</button></div></div><p id="adminWelcome" style="font-size:11px;color:var(--muted)"></p><div id="adminRequests"><div class="admin-empty">Loading shipment requests…</div></div><section class="admin-chat"><div class="admin-card-head"><h3 style="font-size:17px">Customer support inbox</h3><button class="btn btn-ghost" type="button" onclick="loadSupportInbox()">Refresh inbox</button></div><div class="support-admin-layout"><div id="supportConversations" class="support-conversations"><div class="admin-empty">Loading conversations…</div></div><div class="support-thread"><div id="supportThreadTitle" class="support-thread-title">Select a conversation to reply</div><div id="supportThreadMessages" class="support-thread-messages"><p class="admin-empty">Customer messages will appear here.</p></div><form id="supportReplyForm" class="support-reply-form"><input id="supportReplyInput" maxlength="2000" placeholder="Write a reply…" aria-label="Reply to customer" required><button class="btn btn-blue" type="submit">Reply</button></form></div></div></section></div></div></div>
 <button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle">● &nbsp; Live Chat</button>
-<div id="chat" aria-label="Facil Express chat preview"><div class="chathead"><span class="chat-brand"><span class="chat-shield" aria-hidden="true">✓</span><span><strong>Facil Express</strong><small>Customer Support</small></span></span><button onclick="toggleChat()" aria-label="Close chat">×</button></div><div class="chat-status"><span></span> Support message preview</div><div id="messages"><p class="support-welcome">Welcome to Facil Express Support. How can we help you with your shipment today?</p><p class="support-disclaimer">This is a website chat preview and is not connected to a live support agent yet.</p></div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Write your message…"><button onclick="sendChat()">Send</button></div></div>
+<div id="chat" aria-label="Facil Express chat preview"><div class="chathead"><span class="chat-brand"><span class="chat-shield" aria-hidden="true">✓</span><span><strong>Facil Express</strong><small>Customer Support</small></span></span><button onclick="toggleChat()" aria-label="Close chat">×</button></div><div class="chat-status"><span></span> Support message preview</div><div id="messages"><p class="support-welcome">Welcome to Facil Express Support. Send us a message and our team can respond through this chat.</p><p class="support-disclaimer">Messages are saved so the support team can follow up. Please do not send payment details or passwords.</p></div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Write your message…"><button onclick="sendChat()">Send</button></div></div>
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -512,6 +512,7 @@ document.getElementById("adminForm").addEventListener("submit",async function(e)
  document.getElementById("adminWelcome").textContent="Signed in as "+(membership.email||data.user.email||"administrator")+". Only authorized administrators can view these requests.";
  message.textContent="";
  await loadAdminRequests();
+ await loadSupportInbox();
 });
 async function loadAdminRequests(){
  const client=await window.facilSupabaseReady;
@@ -619,7 +620,78 @@ async function track(inputId){
 
 window.track=track;window.openAdminLogin=openAdminLogin;window.closeAdminLogin=closeAdminLogin;window.loadAdminRequests=loadAdminRequests;window.adminSignOut=adminSignOut;
 function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));}
-function sendChat(){const input=document.getElementById("chatInput");const message=input.value.trim();if(!message)return;const box=document.getElementById("messages");const p=document.createElement("p");p.className="user-message";p.textContent=message;box.appendChild(p);const reply=document.createElement("p");reply.className="support-reply";reply.textContent="Thanks for your message. This website chat is a preview and is not connected to a live support agent yet.";box.appendChild(reply);box.scrollTop=box.scrollHeight;input.value="";}
+let supportConversationId=null;
+let supportInboxCache=[];
+function visitorChatToken(){
+ let token=localStorage.getItem("facil_support_visitor_token");
+ if(!token){token=crypto.randomUUID();localStorage.setItem("facil_support_visitor_token",token);}
+ return token;
+}
+async function supportChatCall(payload){
+ const client=await window.facilSupabaseReady;
+ if(!client)throw new Error("Support chat is unavailable because the connection could not load.");
+ const {data,error}=await client.functions.invoke("support-chat",{body:payload});
+ if(error)throw new Error(error.message||"Support chat request failed.");
+ if(data&&data.error)throw new Error(data.error);
+ return data||{};
+}
+function renderVisitorMessages(messages){
+ const box=document.getElementById("messages");
+ box.replaceChildren();
+ if(!messages.length){const p=document.createElement("p");p.className="support-welcome";p.textContent="Welcome to Facil Express Support. How can we help with your shipment?";box.appendChild(p);}
+ messages.forEach(m=>{const p=document.createElement("p");p.className=m.sender==="visitor"?"user-message":"support-reply";const label=document.createElement("small");label.textContent=m.sender==="admin"?"Facil Express Support":"You";label.style.cssText="display:block;font-size:9px;margin-bottom:4px;color:#9eb0c7";p.appendChild(label);p.appendChild(document.createTextNode(m.body));box.appendChild(p);});
+ const note=document.createElement("p");note.className="support-disclaimer";note.textContent="Please do not send payment details or passwords.";box.appendChild(note);box.scrollTop=box.scrollHeight;
+}
+async function refreshVisitorMessages(){
+ try{const result=await supportChatCall({action:"visitor_messages",visitorToken:visitorChatToken()});renderVisitorMessages(result.messages||[]);}catch(e){if(!supportConversationId){const box=document.getElementById("messages");const p=document.createElement("p");p.className="support-disclaimer";p.textContent="Send your first message to start a conversation with our support team.";box.appendChild(p);}}
+}
+async function sendChat(){
+ const input=document.getElementById("chatInput"),message=input.value.trim();if(!message)return;
+ const button=document.querySelector(".chatrow button");button.disabled=true;
+ try{
+  const result=await supportChatCall({action:"visitor_send",visitorToken:visitorChatToken(),name:"Website visitor",message});
+  supportConversationId=result.conversationId||supportConversationId;input.value="";await refreshVisitorMessages();
+ }catch(e){const box=document.getElementById("messages");const p=document.createElement("p");p.className="support-disclaimer";p.textContent=e.message||"Could not send your message. Please try again.";box.appendChild(p);}
+ finally{button.disabled=false;}
+}
+let selectedSupportConversation=null;
+async function loadSupportInbox(){
+ const client=await window.facilSupabaseReady;if(!client)return;
+ const {data,error}=await client.functions.invoke("support-chat",{body:{action:"admin_list"}});
+ const target=document.getElementById("supportConversations");
+ if(error||data?.error){target.innerHTML='<p class="admin-empty">Could not load inbox. Sign in again and refresh.</p>';return;}
+ supportInboxCache=data.conversations||[];
+ if(!supportInboxCache.length){target.innerHTML='<p class="admin-empty">No customer messages yet.</p>';document.getElementById("supportThreadMessages").innerHTML='<p class="admin-empty">New conversations will appear here.</p>';return;}
+ target.innerHTML=supportInboxCache.map(v=>'<button type="button" class="support-conversation '+(Number(selectedSupportConversation)===Number(v.id)?"active":"")+'" data-id="'+v.id+'"><strong>'+safe(v.visitor_name||"Website visitor")+'</strong><small>'+safe(v.last_message_preview||"No messages yet")+'</small><small>'+safe(new Date(v.last_message_at).toLocaleString())+(v.admin_unread?' · New':'')+'</small></button>').join("");
+ target.querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>openSupportConversation(Number(b.dataset.id))));
+ if(selectedSupportConversation&&supportInboxCache.some(v=>Number(v.id)===Number(selectedSupportConversation)))await openSupportConversation(Number(selectedSupportConversation));
+}
+async function openSupportConversation(id){
+ selectedSupportConversation=id;const convo=supportInboxCache.find(v=>Number(v.id)===Number(id));if(!convo)return;
+ document.getElementById("supportThreadTitle").textContent=convo.visitor_name||"Website visitor";
+ const box=document.getElementById("supportThreadMessages");box.innerHTML='<p class="admin-empty">Loading messages…</p>';
+ const result=await supportChatCall({action:"admin_messages",conversationId:id});
+ box.replaceChildren();
+ (result.messages||[]).forEach(m=>{const p=document.createElement("div");p.className="support-msg "+(m.sender==="admin"?"admin":"");const small=document.createElement("small");small.textContent=(m.sender==="admin"?"You · ":"Customer · ")+new Date(m.created_at).toLocaleString();p.appendChild(small);p.appendChild(document.createTextNode(m.body));box.appendChild(p);});
+ if(!result.messages?.length){box.textContent="No messages yet.";}
+ box.scrollTop=box.scrollHeight;await loadSupportInboxWithoutThread();
+}
+async function loadSupportInboxWithoutThread(){
+ const client=await window.facilSupabaseReady;const {data,error}=await client.functions.invoke("support-chat",{body:{action:"admin_list"}});
+ if(error||!data?.conversations)return;supportInboxCache=data.conversations;
+ const target=document.getElementById("supportConversations");
+ target.innerHTML=supportInboxCache.map(v=>'<button type="button" class="support-conversation '+(Number(selectedSupportConversation)===Number(v.id)?"active":"")+'" data-id="'+v.id+'"><strong>'+safe(v.visitor_name||"Website visitor")+'</strong><small>'+safe(v.last_message_preview||"No messages yet")+'</small><small>'+safe(new Date(v.last_message_at).toLocaleString())+(v.admin_unread?' · New':'')+'</small></button>').join("");
+ target.querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>openSupportConversation(Number(b.dataset.id))));
+}
+document.getElementById("supportReplyForm").addEventListener("submit",async e=>{
+ e.preventDefault();const input=document.getElementById("supportReplyInput"),message=input.value.trim();if(!message||!selectedSupportConversation)return;
+ const button=e.submitter;button.disabled=true;
+ try{await supportChatCall({action:"admin_reply",conversationId:selectedSupportConversation,message});input.value="";await openSupportConversation(selectedSupportConversation);}
+ catch(err){alert(err.message||"Could not send reply.");}
+ finally{button.disabled=false;}
+});
+function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));if(open)refreshVisitorMessages();}
+setInterval(()=>{if(document.getElementById("chat")?.classList.contains("open"))refreshVisitorMessages();if(!document.getElementById("adminDashboard")?.hidden)loadSupportInboxWithoutThread();},8000);
 document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 </script>
 </body>
