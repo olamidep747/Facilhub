@@ -197,15 +197,15 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 
 /* Subtle connected-node network motif on the midnight-blue surfaces */
 .hero{isolation:isolate}
-.network-visual{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.9}
-.network-visual .network-lines{fill:none;stroke:#91bfff;stroke-width:1;stroke-opacity:.16;vector-effect:non-scaling-stroke}
-.network-visual .network-blue{fill:none;stroke:#278bff;stroke-width:1.15;stroke-opacity:.26;vector-effect:non-scaling-stroke;stroke-dasharray:5 8;animation:network-drift 24s linear infinite}
-.network-visual .network-node{fill:#cce4ff;fill-opacity:.62}
+.network-visual{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:1;display:block}
+.network-visual .network-lines{fill:none;stroke:#b9d8ff;stroke-width:1;stroke-opacity:.24;vector-effect:non-scaling-stroke}
+.network-visual .network-blue{fill:none;stroke:#278bff;stroke-width:1.15;stroke-opacity:.34;vector-effect:non-scaling-stroke}
+.network-visual .network-node{fill:#d8eaff;fill-opacity:.82}
 .network-visual .network-node-blue{fill:#278bff;fill-opacity:.88}
-.network-visual .network-halo{fill:#278bff;fill-opacity:.1}
+.network-visual .network-halo{fill:#278bff;fill-opacity:.14}
 .hero-layout,.tracking-band{z-index:1}
 #tracking{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 85% 25%,#0d3158 0,transparent 52%),#091a31}
-#tracking .network-visual{opacity:.75}
+#tracking .network-visual{opacity:.95}
 #tracking .track-section{position:relative;z-index:1}
 #tracking .track-panel{box-shadow:0 20px 55px #0003}
 #tracking .trackrow .btn{min-width:112px}
@@ -219,8 +219,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 @keyframes track-spin{to{transform:rotate(360deg)}}
 @keyframes track-progress{0%{transform:translateX(-110%)}100%{transform:translateX(310%)}}
 @keyframes tracking-appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes network-drift{to{stroke-dashoffset:-180}}
-@media(prefers-reduced-motion:reduce){.network-visual .network-blue,.track-spinner,.track-pulse:after{animation:none}}
+@media(prefers-reduced-motion:reduce){.track-spinner,.track-pulse:after{animation:none}}
 
 </style>
 </head>
