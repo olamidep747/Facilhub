@@ -277,6 +277,13 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
+const FACIL_SUPABASE_URL="https://vdxgbxuxuwzfqizhrwvf.supabase.co";
+const FACIL_SUPABASE_KEY="sb_publishable_BxcVQSKtLMeP0isxtSz1FQ_Jo6qoOmf";
+window.facilSupabaseReady=import("https://esm.sh/@supabase/supabase-js@2")
+ .then(({createClient})=>{window.facilSupabase=createClient(FACIL_SUPABASE_URL,FACIL_SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return window.facilSupabase;})
+ .catch(error=>{console.error("Supabase client could not load",error);return null;});
+
+
 const photoInput=document.getElementById("packagePhoto");
 const imagePreview=document.getElementById("imagePreview");
 photoInput.addEventListener("change",function(){
