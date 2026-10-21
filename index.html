@@ -42,6 +42,30 @@ h1 span{color:var(--yellow)}
 .hero-art{position:relative;min-height:360px;display:grid;place-items:center}
 .route-card{width:min(100%,450px);min-height:290px;border:1px solid #315071;border-radius:18px;background:linear-gradient(145deg,#122d4d,#0b1b32 72%);padding:25px;position:relative;overflow:hidden;box-shadow:0 28px 70px #0003}
 .route-card:before{content:"";position:absolute;width:260px;height:260px;border:1px solid #4e739a25;border-radius:50%;right:-80px;top:-110px;box-shadow:0 0 0 30px #4e739a0c,0 0 0 60px #4e739a08}
+.route-card{padding:25px 25px 21px;border-color:#2e4b6d;background:linear-gradient(150deg,#132d4b 0%,#0b1a30 78%);box-shadow:0 30px 75px #0004}
+.route-top{align-items:flex-start;gap:12px}
+.route-label{font-size:9px;letter-spacing:1.5px;color:#9fb7d2;font-weight:800}
+.route-subtitle{font-size:12px;color:#e6eef8;font-weight:700;margin-top:6px;letter-spacing:-.1px}
+.live-pill{flex-shrink:0;font-size:8px;letter-spacing:.6px;font-weight:800;padding:6px 9px;background:#1478ee16;border-color:#4b9cff3d;color:#a9d0ff}
+.route-live-dot{width:6px;height:6px;border-radius:50%;background:#5ed9b2;box-shadow:0 0 0 3px #5ed9b21c}
+.route-map{height:172px;margin:17px 0 5px}
+.map-point{width:16px;height:16px;border:3px solid #eaf4ff;background:#1478ee;box-shadow:0 0 0 5px #1478ee2c;z-index:2}
+.map-point.two{background:#55dfb4;box-shadow:0 0 0 5px #55dfb426}
+.map-point span{position:absolute;inset:-7px;border:1px solid currentColor;border-radius:50%;opacity:.45}
+.map-point.one{color:#4b9cff}.map-point.two{color:#55dfb4}
+.map-caption{font-size:9px;letter-spacing:.9px;font-weight:800;color:#e3edf8}
+.map-caption small{display:block;font-size:9px;font-weight:500;letter-spacing:0;color:#9fb2c9;margin-top:3px}
+.route-stages{display:flex;align-items:center;gap:9px;padding:14px 0 17px;border-top:1px solid #29415e}
+.route-stage{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:9px;color:#c3d1e2;font-weight:700}
+.stage-marker{width:20px;height:20px;display:grid;place-items:center;border-radius:50%;border:1px solid #3c5b7d;background:#0a1a30;color:#a9c7e8;font-size:9px}
+.route-connector{height:1px;flex:1;background:linear-gradient(90deg,#3e6790,#29415e);min-width:8px}
+.route-bottom{padding-top:14px}
+.route-bottom strong{font-size:13px}
+.route-bottom small{font-size:9px;letter-spacing:.7px}
+.floating-note{right:-6px;bottom:8px;max-width:275px;padding:12px 14px}
+.floating-note strong{font-size:10px}.floating-note small{font-size:9px}
+@media(max-width:390px){.route-card{padding:16px}.route-subtitle{font-size:11px}.route-stages{gap:5px}.route-stage{gap:4px;font-size:8px}.stage-marker{width:18px;height:18px}.floating-note{right:0;max-width:245px}}
+
 .route-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
 .route-label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#9eb0c7}
 .live-pill{display:flex;align-items:center;gap:7px;color:#65e0b5;font-size:10px;background:#65e0b511;border:1px solid #65e0b52e;border-radius:20px;padding:5px 9px}
@@ -246,14 +270,15 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 </div>
 <div class="hero-art" aria-label="Shipment route illustration">
 <div class="route-card">
-<div class="route-top"><span class="route-label">Shipment route overview</span><span class="live-pill">Route preview</span></div>
+<div class="route-top"><div><span class="route-label">SHIPMENT ROUTE OVERVIEW</span><div class="route-subtitle">A clearer view of your delivery journey</div></div><span class="live-pill"><span class="route-live-dot"></span> ROUTE PREVIEW</span></div>
 <div class="route-map">
-<svg viewBox="0 0 420 180" fill="none" aria-hidden="true"><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#284969" stroke-width="1.5" stroke-dasharray="4 7"/><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#4b9cff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 8"/><path d="M47 34l22 0M58 23v22M275 148l16 0M283 140v16M332 82l15 0" stroke="#294764" stroke-width="1.5" stroke-linecap="round"/><circle cx="210" cy="35" r="2" fill="#496b8d"/><circle cx="174" cy="155" r="2" fill="#496b8d"/></svg>
-<span class="map-point one"></span><span class="map-point two"></span><span class="map-caption one">Origin</span><span class="map-caption two">Destination</span>
+<svg viewBox="0 0 420 180" fill="none" aria-hidden="true"><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#284969" stroke-width="2" stroke-dasharray="4 7"/><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#4b9cff" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/><path d="M47 34h22M58 23v22M275 148h16M283 140v16M332 82h15" stroke="#294764" stroke-width="1.5" stroke-linecap="round"/><circle cx="210" cy="35" r="2" fill="#496b8d"/><circle cx="174" cy="155" r="2" fill="#496b8d"/></svg>
+<span class="map-point one"><span></span></span><span class="map-point two"><span></span></span><span class="map-caption one">ORIGIN <small>Collection point</small></span><span class="map-caption two">DESTINATION <small>Delivery point</small></span>
 </div>
-<div class="route-bottom"><div><small>YOUR SHIPMENT, YOUR VIEW</small><strong>Stay informed at every step</strong></div><span class="route-arrow" aria-hidden="true">↗</span></div>
+<div class="route-stages" aria-label="Typical shipment stages"><div class="route-stage"><span class="stage-marker">1</span><span>Pickup</span></div><span class="stage-connector"></span><div class="route-stage"><span class="stage-marker">2</span><span>In transit</span></div><span class="stage-connector"></span><div class="route-stage"><span class="stage-marker">3</span><span>Delivery</span></div></div>
+<div class="route-bottom"><div><small>BUILT FOR CLARITY</small><strong>Know what happens next</strong></div><span class="route-arrow" aria-hidden="true">↗</span></div>
 </div>
-<div class="floating-note"><span class="check">✓</span><span><strong>Simple shipment tracking</strong><small>Find your latest recorded update</small></span></div>
+<div class="floating-note"><span class="check">✓</span><span><strong>Shipment updates, made simple</strong><small>Track progress with your shipment ID</small></span></div>
 </div>
 </div>
 <div class="tracking-band">
