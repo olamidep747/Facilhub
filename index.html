@@ -154,9 +154,63 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
  section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.form-section-title{grid-column:auto}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
 }
 @media(max-width:390px){.grid{grid-template-columns:1fr}.actions .btn{flex:1;padding:12px 10px}.route-card{padding:16px}.floating-note{transform:scale(.9);transform-origin:right bottom}}
+
+/* Booking flow and branded loading animation */
+#shipmentLoader{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(4,14,29,.96);backdrop-filter:blur(10px)}
+#shipmentLoader.active{display:flex}
+.loader-card{text-align:center;width:min(390px,100%);padding:30px 24px;border:1px solid #294767;border-radius:18px;background:linear-gradient(145deg,#102846,#08182d);box-shadow:0 25px 90px #0008}
+.loader-truck{width:170px;height:105px;margin:0 auto 18px;overflow:visible}
+.loader-truck .truck-body{stroke:#f7f9fc;stroke-width:3;stroke-linejoin:round;fill:#1478ee}
+.loader-truck .truck-window{fill:#07152b;stroke:#f7f9fc;stroke-width:2}
+.loader-truck .truck-wheel{fill:#1478ee;stroke:#f7f9fc;stroke-width:2}
+.loader-truck .wheel-inner{fill:#d9eaff}
+.loader-truck .wheel-group{transform-box:fill-box;transform-origin:center;animation:wheel-roll .65s linear infinite}
+.loader-road{width:150px;height:3px;margin:0 auto 20px;background:linear-gradient(90deg,transparent,#1478ee,#7eb8ff,transparent);animation:road-glow 1s ease-in-out infinite}
+.loader-title{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.loader-copy{font-size:12px;color:#a9b8cc;margin-top:7px}
+.loader-dots:after{content:"";animation:loader-dots 1.2s steps(4,end) infinite}
+@keyframes wheel-roll{to{transform:rotate(360deg)}}@keyframes road-glow{0%,100%{opacity:.4;transform:scaleX(.75)}50%{opacity:1;transform:scaleX(1)}}@keyframes loader-dots{0%{content:""}25%{content:"."}50%{content:".."}75%,100%{content:"..."}}
+.booking-back{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;background:transparent;border:1px solid #3a5472;border-radius:7px;padding:10px 14px;color:#e8eef7;font-size:12px;font-weight:800;cursor:pointer}
+.booking-back:hover{border-color:#1478ee;background:#1478ee12}
+body.booking-mode main>section:not(#send-package){display:none}
+body.booking-mode nav,body.booking-mode .header-cta,body.booking-mode footer,body.booking-mode .chatbtn{display:none!important}
+body.booking-mode #send-package{min-height:calc(100vh - 78px);padding-top:38px}
+body.booking-mode #send-package .section-head{max-width:760px}
+body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
+#packageSuccess{margin-top:24px}
+.success-card{max-width:720px;margin:0 auto;padding:clamp(24px,5vw,44px);border:1px solid #2b4868;border-radius:17px;background:linear-gradient(145deg,#102843,#0a1b31);text-align:center;box-shadow:0 25px 65px #0002}
+.success-check{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 18px;border-radius:50%;background:#123c37;border:1px solid #2a9b80;color:#72e6c5;font-size:32px}
+.success-card h2{font-size:clamp(27px,4vw,38px);margin:0 0 10px}
+.success-card>p{max-width:520px;margin:0 auto;color:#b6c6d9;font-size:13px}
+.reference-label{margin-top:26px;color:#a9b8cc;font-size:10px;font-weight:800;letter-spacing:1.5px}
+.reference-code{margin:7px auto 19px;display:inline-flex;align-items:center;gap:10px;padding:12px 15px;border:1px dashed #4a6b90;border-radius:9px;background:#07172e;color:#fff;font-size:clamp(17px,3vw,23px);font-weight:900;letter-spacing:1px;overflow-wrap:anywhere}
+.email-confirmations{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;text-align:left}
+.email-state{padding:14px;border-radius:9px;background:#091a30;border:1px solid #29435f;font-size:11px;color:#c4d2e2;overflow-wrap:anywhere}
+.email-state strong{display:block;font-size:12px;color:#f7f9fc;margin-bottom:5px}
+.email-state .email-icon{color:#70e4c1;font-weight:900;margin-right:6px}
+.email-state.failed .email-icon{color:#ffc928}
+.success-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.success-actions .btn{min-width:155px}
+@media(max-width:700px){body.booking-mode #send-package{min-height:calc(100vh - 68px);padding-top:24px}.email-confirmations{grid-template-columns:1fr}.loader-card{padding:27px 20px}}
+@media(prefers-reduced-motion:reduce){.loader-truck .wheel-group,.loader-road,.loader-dots:after{animation:none}}
+
 </style>
 </head>
 <body>
+<div id="shipmentLoader" role="status" aria-live="polite" aria-hidden="true">
+ <div class="loader-card">
+  <svg class="loader-truck" viewBox="0 0 180 110" role="img" aria-label="Facil Express truck loading">
+   <path class="truck-body" d="M14 20h91v57H14z"/><path class="truck-body" d="M105 42h34l26 25v10h-60z"/>
+   <path class="truck-window" d="M116 48h19l16 16h-35z"/>
+   <path d="M25 31h67M25 40h55" stroke="#bcdcff" stroke-width="3" stroke-linecap="round"/>
+   <g class="wheel-group"><circle class="truck-wheel" cx="45" cy="80" r="14"/><circle class="wheel-inner" cx="45" cy="80" r="5"/></g>
+   <g class="wheel-group"><circle class="truck-wheel" cx="133" cy="80" r="14"/><circle class="wheel-inner" cx="133" cy="80" r="5"/></g>
+   <path d="M8 96h164" stroke="#3d628a" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 7"/>
+  </svg>
+  <div class="loader-road"></div><div class="loader-title" id="loaderTitle">Getting your shipment ready</div>
+  <p class="loader-copy" id="loaderCopy">Please wait while Facil Express prepares the next step<span class="loader-dots"></span></p>
+ </div>
+</div>
 <header>
 <a href="#home" class="brand" aria-label="Facil Express home">
 <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 8.5h16v14H3z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M19 13h5.5l4.5 5v4.5H19z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M22 13v5h7" stroke="white" stroke-width="2"/><circle cx="9" cy="24" r="3" fill="#ffc928" stroke="white" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="#ffc928" stroke="white" stroke-width="1.5"/></svg></span>
@@ -230,7 +284,8 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 </section>
 <section class="content" id="send-package">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">Book a shipment</div><h2>Send a package, right here.</h2><p>Enter the sender and receiver details, choose your shipping method, add package weight and pickup timing, and attach a photo if you wish.</p></div>
+<button class="booking-back" type="button" id="bookingBack" onclick="leaveBooking()">← &nbsp; Back to home</button>
+<div class="section-head package-intro"><div class="eyebrow">Book a shipment</div><h2>Send a package, right here.</h2><p>Enter the sender and receiver details, choose your shipping method, add package weight and pickup timing, and attach a photo if you wish.</p></div>
 <form class="form-panel package-form" id="packageForm">
 <div class="form-grid">
 <div class="form-section-title">1. Sender details</div>
@@ -262,6 +317,7 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <button class="btn btn-blue" type="submit">Review package request <span aria-hidden="true">→</span></button>
 <div id="packageResult" class="notice" role="status" aria-live="polite"></div>
 </form>
+<div id="packageSuccess" hidden aria-live="polite"></div>
 </div>
 </section>
 <section class="content dark" id="contact">
@@ -300,9 +356,10 @@ photoInput.addEventListener("change",function(){
 });
 document.getElementById("packageForm").addEventListener("submit",async function(e){
  e.preventDefault();
- const out=document.getElementById("packageResult");
- const submit=this.querySelector('button[type="submit"]');
- submit.disabled=true;submit.textContent="Sending request…";out.textContent="Securely submitting your package request…";
+ const form=this, out=document.getElementById("packageResult"), submit=form.querySelector('button[type="submit"]');
+ const startedAt=Date.now();
+ submit.disabled=true;submit.textContent="Submitting securely…";
+ showShipmentLoader("Submitting your package","Saving your request and preparing your reference");
  try{
   const fd=new FormData();
   const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","recipientEmail","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
@@ -317,12 +374,70 @@ document.getElementById("packageForm").addEventListener("submit",async function(
    throw new Error(message);
   }
   if(!data||!data.ok)throw new Error(data?.error||"Request could not be submitted.");
-  out.textContent="Your package request was submitted successfully. Reference: "+data.requestId+". Our team can review it and confirm the next steps.";
-  const old=document.getElementById("requestPreview");if(old)old.remove();
-  this.reset();imagePreview.style.display="none";imagePreview.removeAttribute("src");
- }catch(error){out.textContent=error instanceof Error?error.message:"We couldn't submit the request. Please try again.";}
- finally{submit.disabled=false;submit.innerHTML='Submit package request <span aria-hidden="true">→</span>';}
+  await new Promise(resolve=>setTimeout(resolve,Math.max(0,750-(Date.now()-startedAt))));
+  hideShipmentLoader();
+  showPackageSuccess(data, {
+   senderEmail:document.getElementById("senderEmail").value.trim(),
+   recipientEmail:document.getElementById("recipientEmail").value.trim()
+  });
+  form.reset();imagePreview.style.display="none";imagePreview.removeAttribute("src");
+ }catch(error){
+  await new Promise(resolve=>setTimeout(resolve,Math.max(0,650-(Date.now()-startedAt))));
+  hideShipmentLoader();
+  out.textContent=error instanceof Error?error.message:"We couldn't submit the request. Please try again.";
+ }finally{
+  submit.disabled=false;submit.innerHTML='Submit package request <span aria-hidden="true">→</span>';
+ }
 });
+
+
+function showShipmentLoader(title,copy){
+ const loader=document.getElementById("shipmentLoader");
+ document.getElementById("loaderTitle").textContent=title||"Getting your shipment ready";
+ document.getElementById("loaderCopy").textContent=copy||"Please wait while Facil Express prepares the next step";
+ loader.classList.add("active");loader.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+}
+function hideShipmentLoader(){
+ const loader=document.getElementById("shipmentLoader");loader.classList.remove("active");loader.setAttribute("aria-hidden","true");document.body.style.overflow="";
+}
+function enterBooking(){
+ document.body.classList.add("booking-mode");
+ document.getElementById("packageSuccess").hidden=true;
+ document.getElementById("packageForm").hidden=false;
+ document.querySelector(".package-intro").hidden=false;
+ document.getElementById("bookingBack").hidden=false;
+ history.replaceState(null,"",location.pathname+location.search+"#send-package");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function leaveBooking(){
+ document.body.classList.remove("booking-mode");
+ history.replaceState(null,"",location.pathname+location.search+"#home");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function showPackageSuccess(data,emails){
+ document.body.classList.add("booking-mode");
+ document.querySelector(".package-intro").hidden=true;
+ document.getElementById("packageForm").hidden=true;
+ document.getElementById("bookingBack").hidden=false;
+ const target=document.getElementById("packageSuccess");
+ const reference="FXR-"+String(data.requestId||"").replaceAll("-","").slice(0,8).toUpperCase();
+ const sent=Number(data.emailsQueued||0), expected=Number(data.emailsExpected||2);
+ const senderSent=sent>=1, receiverSent=sent>=2;
+ const emailState=(label,email,ok)=>'<div class="email-state '+(ok?"":"failed")+'"><strong><span class="email-icon">'+(ok?"✓":"!")+'</span>'+label+'</strong>'+safe(email||"Email address")+'<br><span>'+(ok?"Confirmation accepted for delivery":"Email delivery could not be confirmed; please contact support")+'</span></div>';
+ target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your request has been saved securely. Keep this reference code to identify your request while the Facil Express team reviews the shipment details.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Return to home</button><button class="btn btn-ghost" type="button" onclick="startAnotherRequest()">Send another package</button></div></div>';
+ target.hidden=false;
+ document.getElementById("copyReference").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(reference);document.getElementById("copyMessage").textContent="Reference copied.";}catch{document.getElementById("copyMessage").textContent="Reference: "+reference;}});
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function startAnotherRequest(){
+ document.getElementById("packageSuccess").hidden=true;
+ document.querySelector(".package-intro").hidden=false;
+ document.getElementById("packageForm").hidden=false;
+ document.getElementById("packageResult").textContent="";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll('a[href="#send-package"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showShipmentLoader("Opening Send a Package","Preparing your secure shipment form");setTimeout(()=>{hideShipmentLoader();enterBooking();},650);}));
+document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener("click",e=>{if(document.body.classList.contains("booking-mode")){e.preventDefault();leaveBooking();}}));
 
 function openAdminLogin(e){if(e)e.preventDefault();document.getElementById("adminModal").classList.add("open");document.body.style.overflow="hidden";}
 function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open");document.body.style.overflow="";}
@@ -379,7 +494,7 @@ async function updateRequestStatus(id,status){
  const {error}=await client.from("package_requests").update({status,updated_at:new Date().toISOString()}).eq("id",id);
  if(error){alert("Could not update the request status.");return;}
  const {data:notice,error:noticeError}=await client.functions.invoke("notify-shipment-status",{body:{requestId:id,status}});
- if(noticeError||!notice?.ok){alert("Status saved, but the notification email could not be sent. Check the Resend email configuration in Supabase.");}
+ if(noticeError||!notice?.ok){alert("Status saved, but the notification email could not be sent. Check the Brevo email configuration in Supabase.");}
  else if((notice.sent||[]).length){alert("Status saved. Email notification sent to "+notice.sent.length+" contact(s).");}
  await loadAdminRequests();
 }
@@ -402,7 +517,7 @@ async function createShipmentFromRequest(id,button){
   const {error:updateError}=await client.from("package_requests").update({status:"converted",tracking_id:trackingId,updated_at:new Date().toISOString()}).eq("id",id);
   if(updateError)throw new Error("Shipment created with tracking ID "+trackingId+", but the request record did not update. Please record the ID and refresh.");
   const {data:notice,error:noticeError}=await client.functions.invoke("notify-shipment-status",{body:{requestId:id,status:"converted"}});
-  alert("Shipment created. Tracking ID: "+trackingId+(noticeError||!notice?.ok?"\nEmail notification needs configuration.":"\nEmail notification sent."));
+  alert("Shipment created. Tracking ID: "+trackingId+(noticeError||!notice?.ok?"\nEmail notification could not be confirmed. Check Brevo configuration.":"\nEmail notification accepted for delivery."));
   await loadAdminRequests();
  }catch(error){alert(error instanceof Error?error.message:"Could not create the shipment.");button.disabled=false;button.textContent="Create shipment & tracking ID";}
 }
