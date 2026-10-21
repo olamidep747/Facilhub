@@ -172,6 +172,8 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 @keyframes wheel-roll{to{transform:rotate(360deg)}}@keyframes road-glow{0%,100%{opacity:.4;transform:scaleX(.75)}50%{opacity:1;transform:scaleX(1)}}@keyframes loader-dots{0%{content:""}25%{content:"."}50%{content:".."}75%,100%{content:"..."}}
 .booking-back{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;background:transparent;border:1px solid #3a5472;border-radius:7px;padding:10px 14px;color:#e8eef7;font-size:12px;font-weight:800;cursor:pointer}
 .booking-back:hover{border-color:#1478ee;background:#1478ee12}
+main>section#send-package{display:none}
+body.booking-mode main>section#send-package{display:block}
 body.booking-mode main>section:not(#send-package){display:none}
 body.booking-mode nav,body.booking-mode .header-cta,body.booking-mode footer,body.booking-mode .chatbtn{display:none!important}
 body.booking-mode #send-package{min-height:calc(100vh - 78px);padding-top:38px}
