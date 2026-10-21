@@ -1,256 +1,246 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facil Express | Global Shipping</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07152b">
+<title>Facil Express | Shipping & Logistics</title>
+<meta name="description" content="Facil Express shipping services for documents, parcels and freight. Track your shipment and request a delivery quote.">
 <style>
+:root{--navy:#07152b;--navy2:#0b1d37;--panel:#10243f;--line:#243b59;--white:#f7f9fc;--muted:#a9b8cc;--blue:#1478ee;--yellow:#ffc928;--teal:#46d6c6}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#07162d;color:#f4f7fb;line-height:1.6}
-header{padding:18px 6%;display:flex;justify-content:space-between;align-items:center;background:#091a33;border-bottom:1px solid #203148;position:sticky;top:0;z-index:10}
-.logo{font-size:22px;font-weight:bold;color:white}.logo span{color:#ffc400}
-nav a{color:#c5d0df;text-decoration:none;margin-left:18px;font-size:13px}
-button,.btn{background:#ffc400;color:#07162d;border:0;border-radius:8px;padding:12px 17px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
-.blue{background:#0878f9;color:white}
-.outline{background:transparent;color:white;border:1px solid #40536c}
-.wrap{max-width:1100px;margin:auto;padding:0 22px}
-.hero{padding:75px 0 50px;background:radial-gradient(ellipse at 85% 20%,#123e70,#07162d 60%)}
-.tag{color:#38d6c3;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:bold}
-h1{font-size:clamp(40px,7vw,68px);line-height:1.05;letter-spacing:-2px;margin:18px 0}
-h1 span{color:#ffc400}
-p{color:#aab9ce}
-.hero p{max-width:540px;font-size:15px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}
-.trackbox,.panel,.service{background:#111e2e;border:1px solid #233750;border-radius:13px;padding:20px}
-.trackbox{max-width:550px;margin-top:25px}
-label{display:block;font-size:11px;color:#aab9ce;margin-bottom:7px}
-input,select,textarea{width:100%;padding:13px;background:#07162d;color:white;border:1px solid #2a405b;border-radius:8px;margin-bottom:12px;font-size:14px}
-.trackrow{display:flex;gap:8px}
-.trackrow input{flex:1;min-width:0}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:35px}
-.stats strong{display:block;font-size:25px;color:white}
-.stats small{color:#aab9ce}
-section.content{padding:65px 0}
-h2{font-size:clamp(28px,4vw,40px);line-height:1.2;margin:12px 0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px}
-.service{padding:24px}
-.service .ico{font-size:27px;color:#ffc400;margin-bottom:12px}
-.service h3{margin-bottom:8px;font-size:16px}
-.service p{font-size:13px}
-.dark{background:#0b192b}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:25px}
-.steps b{font-size:27px;color:#ffc400}
-.steps p{font-size:13px;margin-top:7px}
-#trackingResult{margin-top:18px;font-size:13px;overflow-wrap:anywhere}
-.status{border-left:3px solid #38d6c3;padding:10px 13px;margin:12px 0;background:#0b192b;border-radius:4px}
-form{max-width:650px}
-footer{background:#061123;border-top:1px solid #203148;padding:30px 0;color:#aab9ce;font-size:12px}
-.chatbtn{position:fixed;right:18px;bottom:18px;z-index:20;border-radius:30px;background:#0878f9;color:white;box-shadow:0 6px 25px #0007}
-#chat{display:none;position:fixed;right:18px;bottom:75px;width:320px;max-width:calc(100% - 36px);background:#111e2e;border:1px solid #2a405b;border-radius:12px;z-index:21;overflow:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--navy);color:var(--white);line-height:1.6}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button,a{ -webkit-tap-highlight-color:transparent}
+.wrap{width:min(1160px,100% - 44px);margin-inline:auto}
+header{height:78px;padding:0 max(22px,calc((100% - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:26px;background:rgba(7,21,43,.96);border-bottom:1px solid rgba(169,184,204,.14);position:sticky;top:0;z-index:30;backdrop-filter:blur(14px)}
+.brand{display:inline-flex;align-items:center;gap:11px;flex-shrink:0;font-weight:800;font-size:22px;letter-spacing:-.7px}
+.brand-mark{width:42px;height:42px;border-radius:10px;background:var(--blue);display:grid;place-items:center;box-shadow:0 8px 24px #1478ee30}
+.brand-mark svg{width:28px;height:28px}
+.brand .express{color:var(--yellow)}
+nav{display:flex;align-items:center;gap:30px}
+nav a{font-size:13px;color:#c1ccdb;transition:color .2s}
+nav a:hover{color:white}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:7px;padding:12px 18px;background:var(--yellow);color:#101a2a;font-size:13px;font-weight:800;cursor:pointer;transition:transform .2s,filter .2s}
+.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.btn-blue{background:var(--blue);color:white}
+.btn-ghost{background:transparent;border-color:#52647d;color:white}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:7px;color:white;padding:8px 10px;cursor:pointer}
+.hero{position:relative;overflow:hidden;padding:76px 0 64px;background:radial-gradient(ellipse at 80% 38%,#123b69 0,rgba(10,34,63,.65) 25%,transparent 56%),linear-gradient(115deg,#07152b 0%,#091b34 64%,#0a203d 100%)}
+.hero:after{content:"";position:absolute;right:-120px;top:-190px;width:560px;height:560px;border:1px solid #41618520;border-radius:50%;box-shadow:0 0 0 48px #4161850b,0 0 0 96px #41618508;pointer-events:none}
+.hero-layout{display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:52px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:800;color:var(--teal)}
+.eyebrow:before{content:"";width:23px;height:2px;background:var(--teal)}
+h1{font-size:clamp(42px,5.2vw,67px);letter-spacing:-2.9px;line-height:1.06;margin:19px 0 20px;max-width:650px}
+h1 span{color:var(--yellow)}
+.hero-copy>p{font-size:15px;line-height:1.85;color:var(--muted);max-width:525px}
+.actions{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 29px}
+.trustline{display:flex;align-items:center;gap:11px;color:#bdc9d8;font-size:12px}
+.trust-icon{width:29px;height:29px;border:1px solid #2b4867;border-radius:50%;display:grid;place-items:center;color:var(--teal);font-weight:800}
+.hero-art{position:relative;min-height:360px;display:grid;place-items:center}
+.route-card{width:min(100%,450px);min-height:290px;border:1px solid #315071;border-radius:18px;background:linear-gradient(145deg,#122d4d,#0b1b32 72%);padding:25px;position:relative;overflow:hidden;box-shadow:0 28px 70px #0003}
+.route-card:before{content:"";position:absolute;width:260px;height:260px;border:1px solid #4e739a25;border-radius:50%;right:-80px;top:-110px;box-shadow:0 0 0 30px #4e739a0c,0 0 0 60px #4e739a08}
+.route-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.route-label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#9eb0c7}
+.live-pill{display:flex;align-items:center;gap:7px;color:#65e0b5;font-size:10px;background:#65e0b511;border:1px solid #65e0b52e;border-radius:20px;padding:5px 9px}
+.live-pill:before{content:"";width:6px;height:6px;background:#65e0b5;border-radius:50%}
+.route-map{height:170px;position:relative;margin:13px 0 8px}
+.route-map svg{width:100%;height:100%;position:absolute;inset:0}
+.map-point{position:absolute;width:12px;height:12px;border:3px solid #fff;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px #1478ee33}
+.map-point.one{left:13%;top:60%}.map-point.two{right:15%;top:21%;background:var(--yellow);box-shadow:0 0 0 5px #ffc92824}
+.map-caption{position:absolute;font-size:10px;color:#d9e4f1}.map-caption.one{left:5%;bottom:13%}.map-caption.two{right:4%;top:9%;text-align:right}
+.route-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #29415e;padding-top:16px;gap:12px}
+.route-bottom strong{font-size:14px;display:block}.route-bottom small{font-size:10px;color:var(--muted)}
+.route-arrow{width:38px;height:38px;display:grid;place-items:center;border-radius:9px;background:#ffc928;color:#101a2a;font-size:20px;font-weight:800}
+.floating-note{position:absolute;right:-12px;bottom:16px;display:flex;align-items:center;gap:11px;padding:13px 16px;background:#f8fafc;color:#14243a;border-radius:10px;box-shadow:0 14px 36px #0003}
+.floating-note .check{width:29px;height:29px;border-radius:50%;background:#dff8ef;color:#087a5a;display:grid;place-items:center;font-weight:900}
+.floating-note strong{display:block;font-size:11px}.floating-note small{display:block;color:#68788d;font-size:10px}
+.tracking-band{position:relative;z-index:2;margin-top:38px}
+.trackbox{display:grid;grid-template-columns:1fr minmax(220px,1.5fr) auto;align-items:end;gap:14px;padding:20px;background:#10243feF;border:1px solid #2b4260;border-radius:12px;box-shadow:0 18px 45px #0002}
+.track-heading strong{display:block;font-size:14px}.track-heading small{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+label{display:block;font-size:10px;font-weight:800;letter-spacing:.7px;color:#c1cddd;margin-bottom:7px}
+input,select,textarea{width:100%;min-width:0;border:1px solid #304866;background:#07172e;color:white;border-radius:7px;padding:12px 13px;outline:none;font-size:13px}
+input:focus,select:focus,textarea:focus{border-color:#398cf1;box-shadow:0 0 0 3px #1478ee20}
+input::placeholder,textarea::placeholder{color:#71839b}
+.trackbox input{margin:0}
+.trackbox .btn{min-height:44px}
+#heroResult,#trackingResult,#formResult{font-size:12px;color:var(--teal);overflow-wrap:anywhere}
+#heroResult{grid-column:2 / 4}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:28px 0 0}
+.stat{border-left:2px solid #274362;padding-left:15px}
+.stat strong{display:block;font-size:22px;line-height:1.2;color:white;letter-spacing:-.6px}
+.stat small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+section.content{padding:78px 0}
+.section-head{max-width:630px}
+h2{font-size:clamp(30px,4vw,43px);line-height:1.15;letter-spacing:-1.5px;margin:13px 0}
+.section-head>p{font-size:14px;color:var(--muted);max-width:540px}
+.dark{background:#091a31;border-top:1px solid #1b304a;border-bottom:1px solid #1b304a}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:34px}
+.service{background:linear-gradient(145deg,#10243e,#0d1d34);border:1px solid #223a56;border-radius:11px;padding:24px;min-height:185px;transition:border-color .2s,transform .2s}
+.service:hover{border-color:#42658b;transform:translateY(-3px)}
+.service .ico{width:43px;height:43px;display:grid;place-items:center;border-radius:9px;background:#1478ee17;border:1px solid #1478ee35;color:#6baaff;margin-bottom:18px}
+.service .ico svg{width:22px;height:22px}
+.service h3{font-size:15px;margin-bottom:7px}.service p{font-size:12px;line-height:1.75;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:36px}
+.step{border-top:1px solid #2b4360;padding-top:19px}
+.step b{font-size:12px;letter-spacing:1px;color:var(--yellow)}
+.step h3{font-size:15px;margin:11px 0 6px}.step p{font-size:12px;color:var(--muted)}
+.track-section{display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;align-items:center}
+.track-panel,.form-panel{background:#10243f;border:1px solid #263e5c;border-radius:12px;padding:25px}
+.track-panel .trackrow{display:flex;gap:9px}
+.trackrow input{margin:0}
+#trackingResult{margin-top:16px;color:#d9e4f1}
+.status{border-left:3px solid var(--teal);padding:12px 14px;margin-top:12px;background:#0a1a30;border-radius:0 6px 6px 0;color:#b7c8da;font-size:12px}
+.contact-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:start}
+.contact-points{margin-top:25px;display:grid;gap:14px}
+.contact-point{display:flex;gap:12px;align-items:flex-start;color:#c2cede;font-size:12px}
+.contact-point span{color:var(--teal);font-weight:900}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}
+.field.full{grid-column:1/-1}
+.form-panel input,.form-panel select,.form-panel textarea{margin-bottom:15px}
+.form-panel .btn{width:100%;margin-top:2px}
+.notice{font-size:11px;color:#a9b8cc;margin-top:12px}
+footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:22px}
+.footer-inner p{font-size:11px;color:#8293aa}.footer-brand{font-size:17px;font-weight:800}.footer-brand span{color:var(--yellow)}
+.footer-links{display:flex;gap:18px;font-size:11px;color:#aab9cc}
+.chatbtn{position:fixed;right:20px;bottom:20px;z-index:40;border-radius:30px;background:var(--blue);color:white;border:0;padding:13px 17px;box-shadow:0 8px 25px #0005;font-size:12px;font-weight:800;cursor:pointer}
+#chat{display:none;position:fixed;right:20px;bottom:78px;width:330px;max-width:calc(100% - 40px);background:#10243f;border:1px solid #304866;border-radius:12px;z-index:41;overflow:hidden;box-shadow:0 20px 60px #0006}
 #chat.open{display:block}
-.chathead{padding:13px;background:#12345b;font-weight:bold;display:flex;justify-content:space-between}
-#messages{padding:14px;min-height:100px;font-size:13px;max-height:230px;overflow:auto}
-.chatrow{display:flex;padding:10px;gap:6px}
-.chatrow input{margin:0;min-width:0}
-.chatrow button{padding:10px}
-.notice{font-size:12px;margin-top:12px;color:#38d6c3}
+.chathead{padding:14px 16px;background:#14345a;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.chathead button{background:transparent;color:white;border:0;font-size:21px;cursor:pointer}
+#messages{padding:14px;min-height:100px;font-size:12px;max-height:230px;overflow:auto;color:#c4d1e0}
+.chatrow{display:flex;padding:11px;gap:7px;border-top:1px solid #29415d}
+.chatrow input{margin:0}.chatrow button{padding:8px 11px;border:0;border-radius:6px;background:var(--yellow);font-size:11px;font-weight:800}
+@media(max-width:900px){header{gap:14px}.hero-layout{gap:24px}.hero-art{min-height:320px}.route-card{padding:20px}.trackbox{grid-template-columns:1fr 1.4fr auto}.contact-layout{gap:28px}}
 @media(max-width:700px){
-header{padding:15px 5%}nav{display:none}
-.grid{grid-template-columns:1fr}
-.steps{grid-template-columns:1fr 1fr}
-.stats{grid-template-columns:1fr 1fr}
-.hero{padding-top:50px}
-.trackrow{flex-direction:column}
-.trackrow button{width:100%}
+ header{height:68px;padding:0 20px}.brand{font-size:20px}.brand-mark{width:38px;height:38px}nav{display:none;position:absolute;top:67px;left:0;right:0;padding:15px 22px 20px;background:#091a31;border-bottom:1px solid #263e5a;flex-direction:column;align-items:stretch;gap:0}nav.open{display:flex}nav a{padding:12px 0;border-bottom:1px solid #1e334d}.header-cta{display:none}.menu-toggle{display:block}
+ .wrap{width:calc(100% - 36px)}.hero{padding:52px 0 45px}.hero-layout{grid-template-columns:1fr;gap:28px}.hero-copy{max-width:590px}h1{font-size:clamp(42px,11vw,58px);letter-spacing:-2px}.hero-copy>p{font-size:14px}.hero-art{min-height:295px}.route-card{width:100%;max-width:460px}.floating-note{right:-3px;bottom:3px}.tracking-band{margin-top:25px}.trackbox{grid-template-columns:1fr;gap:12px;padding:17px}.trackbox .btn{width:100%}#heroResult{grid-column:auto}.stats{grid-template-columns:1fr 1fr;gap:19px 12px;padding-top:24px}.stat strong{font-size:20px}
+ section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
 }
+@media(max-width:390px){.grid{grid-template-columns:1fr}.actions .btn{flex:1;padding:12px 10px}.route-card{padding:16px}.floating-note{transform:scale(.9);transform-origin:right bottom}}
 </style>
 </head>
 <body>
-
 <header>
-<a href="#home" class="logo" style="text-decoration:none">🚚 Facil <span>Express</span></a>
-<nav>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#tracking">Tracking</a>
-<a href="#contact">Contact</a>
+<a href="#home" class="brand" aria-label="Facil Express home">
+<span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 8.5h16v14H3z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M19 13h5.5l4.5 5v4.5H19z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M22 13v5h7" stroke="white" stroke-width="2"/><circle cx="9" cy="24" r="3" fill="#ffc928" stroke="white" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="#ffc928" stroke="white" stroke-width="1.5"/></svg></span>
+<span>Facil <span class="express">Express</span></span>
+</a>
+<nav id="mainNav" aria-label="Main navigation">
+<a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#how">How it works</a><a href="#contact">Contact</a>
 </nav>
-<a class="btn" href="#contact">Ship with us</a>
+<a class="btn header-cta" href="#contact">Ship with us <span aria-hidden="true">↗</span></a>
+<button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 </header>
-
 <main>
 <section class="hero" id="home">
 <div class="wrap">
-<div class="tag">Global shipping network</div>
-<h1>Wherever you send it,<br><span>we deliver.</span></h1>
-<p>Shipping solutions for documents, parcels and freight. Get clear shipment information and follow your tracking updates in one place.</p>
-<div class="actions">
-<a class="btn" href="#contact">Send a shipment ↗</a>
-<a class="btn outline" href="#services">Explore services</a>
+<div class="hero-layout">
+<div class="hero-copy">
+<div class="eyebrow">Shipping made straightforward</div>
+<h1>Wherever you send it,<br><span>we deliver the trust.</span></h1>
+<p>From important documents to parcels and freight, Facil Express helps make shipping simpler, clearer, and easier to follow.</p>
+<div class="actions"><a class="btn" href="#contact">Send a shipment <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#services">Explore services</a></div>
+<div class="trustline"><span class="trust-icon">✓</span><span>Clear updates. Helpful support. Shipping with confidence.</span></div>
 </div>
+<div class="hero-art" aria-label="Shipment route illustration">
+<div class="route-card">
+<div class="route-top"><span class="route-label">Shipment route overview</span><span class="live-pill">Route preview</span></div>
+<div class="route-map">
+<svg viewBox="0 0 420 180" fill="none" aria-hidden="true"><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#284969" stroke-width="1.5" stroke-dasharray="4 7"/><path d="M30 128C79 128 81 82 132 82S194 135 245 110 306 35 388 38" stroke="#4b9cff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 8"/><path d="M47 34l22 0M58 23v22M275 148l16 0M283 140v16M332 82l15 0" stroke="#294764" stroke-width="1.5" stroke-linecap="round"/><circle cx="210" cy="35" r="2" fill="#496b8d"/><circle cx="174" cy="155" r="2" fill="#496b8d"/></svg>
+<span class="map-point one"></span><span class="map-point two"></span><span class="map-caption one">Origin</span><span class="map-caption two">Destination</span>
+</div>
+<div class="route-bottom"><div><small>YOUR SHIPMENT, YOUR VIEW</small><strong>Stay informed at every step</strong></div><span class="route-arrow" aria-hidden="true">↗</span></div>
+</div>
+<div class="floating-note"><span class="check">✓</span><span><strong>Simple shipment tracking</strong><small>Find your latest recorded update</small></span></div>
+</div>
+</div>
+<div class="tracking-band">
 <div class="trackbox">
-<label for="heroTrack">TRACK YOUR SHIPMENT</label>
-<div class="trackrow">
-<input id="heroTrack" placeholder="Enter tracking ID">
-<button class="blue" onclick="track('heroTrack')">Track shipment</button>
+<div class="track-heading"><strong>Track your shipment</strong><small>Enter the tracking ID provided to you.</small></div>
+<div><label for="heroTrack">TRACKING NUMBER</label><input id="heroTrack" autocomplete="off" placeholder="e.g. FX-123456"></div>
+<button class="btn" onclick="track('heroTrack')">Track shipment <span aria-hidden="true">→</span></button>
+<div id="heroResult" role="status" aria-live="polite"></div>
 </div>
-<div style="font-size:11px;color:#8294ac">Enter the tracking number supplied by your shipping provider.</div>
-<div id="heroResult" class="notice"></div>
 </div>
 <div class="stats">
-<div><strong>220+</strong><small>Countries*</small></div>
-<div><strong>1.4K</strong><small>Routes*</small></div>
-<div><strong>24/7</strong><small>Online access</small></div>
-<div><strong>Global</strong><small>Shipping solutions</small></div>
+<div class="stat"><strong>Reliable</strong><small>Shipment information</small></div><div class="stat"><strong>Clear</strong><small>Tracking experience</small></div><div class="stat"><strong>Flexible</strong><small>Shipping options</small></div><div class="stat"><strong>Helpful</strong><small>Customer support</small></div>
 </div>
 </div>
 </section>
-
 <section class="content dark" id="services">
 <div class="wrap">
-<div class="tag">Our services</div>
-<h2>Shipping made simple.</h2>
-<p>Solutions for personal and business deliveries.</p>
+<div class="section-head"><div class="eyebrow">What we offer</div><h2>Shipping solutions for<br>every kind of delivery.</h2><p>Choose a service that fits your shipment, from essential documents to larger cargo.</p></div>
 <div class="grid">
-<div class="service"><div class="ico">✈️</div><h3>Express Air</h3><p>Air-shipping options for time-sensitive packages and deliveries.</p></div>
-<div class="service"><div class="ico">📦</div><h3>Parcels & Packages</h3><p>Shipping options for boxes, personal belongings and business goods.</p></div>
-<div class="service"><div class="ico">🚢</div><h3>Ocean Freight</h3><p>Freight options for larger shipments and container cargo.</p></div>
-<div class="service"><div class="ico">📄</div><h3>Documents</h3><p>Shipping options for contracts, certificates and paperwork.</p></div>
-<div class="service"><div class="ico">🌍</div><h3>International Shipping</h3><p>Plan shipments between destinations across borders.</p></div>
-<div class="service"><div class="ico">📍</div><h3>Shipment Tracking</h3><p>Look up shipment statuses using a valid tracking reference.</p></div>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 16.5 21 7l-8 14-2.5-6.5L3 12z" stroke-linejoin="round"/><path d="m10.5 14.5 5-5" stroke-linecap="round"/></svg></div><h3>Express Air</h3><p>Explore air-shipping options for time-sensitive packages and deliveries.</p></article>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 7 9-4 9 4-9 4-9-4Z" stroke-linejoin="round"/><path d="M3 7v10l9 4 9-4V7M12 11v10" stroke-linejoin="round"/></svg></div><h3>Parcels & Packages</h3><p>Shipping options for boxes, personal belongings, and business goods.</p></article>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 16h18l-2 4H6l-3-4Z" stroke-linejoin="round"/><path d="M5 12h14l-2 4H7l-2-4ZM8 8h8l-2 4h-4L8 8Z" stroke-linejoin="round"/></svg></div><h3>Ocean Freight</h3><p>Freight options for larger shipments, cargo, and container loads.</p></article>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h8l4 4v14H6z" stroke-linejoin="round"/><path d="M14 3v5h4M9 13h6M9 17h6" stroke-linecap="round"/></svg></div><h3>Documents</h3><p>Shipping options for important paperwork, certificates, and contracts.</p></article>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="10" r="7"/><path d="m8 16-1 5 5-2 5 2-1-5M9 10l2 2 4-4" stroke-linejoin="round" stroke-linecap="round"/></svg></div><h3>International Shipping</h3><p>Plan shipments between destinations and across international borders.</p></article>
+<article class="service"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Shipment Tracking</h3><p>Check the latest recorded shipment status using your tracking reference.</p></article>
 </div>
 </div>
 </section>
-
 <section class="content" id="how">
-<div class="wrap">
-<div class="tag">How it works</div>
-<h2>Four simple steps.</h2>
-<div class="steps">
-<div><b>01</b><h3>Request</h3><p>Provide your shipment details.</p></div>
-<div><b>02</b><h3>Confirm</h3><p>Confirm service and delivery details.</p></div>
-<div><b>03</b><h3>Track</h3><p>Check recorded shipment updates.</p></div>
-<div><b>04</b><h3>Receive</h3><p>Follow your shipment through delivery.</p></div>
-</div>
+<div class="wrap"><div class="section-head"><div class="eyebrow">A simple process</div><h2>What happens next?</h2><p>Four clear steps to help you move a shipment forward.</p></div>
+<div class="steps"><div class="step"><b>STEP 01</b><h3>Request</h3><p>Share the basic details of your shipment and destination.</p></div><div class="step"><b>STEP 02</b><h3>Confirm</h3><p>Review the service, shipment information, and next steps.</p></div><div class="step"><b>STEP 03</b><h3>Track</h3><p>Use your tracking reference to check recorded progress.</p></div><div class="step"><b>STEP 04</b><h3>Receive</h3><p>Follow the updates and stay informed through delivery.</p></div></div>
 </div>
 </section>
-
 <section class="content dark" id="tracking">
-<div class="wrap">
-<div class="tag">Shipment tracking</div>
-<h2>Track your package.</h2>
-<p>Enter your tracking ID below.</p>
-<div class="panel" style="max-width:650px;margin-top:22px">
-<label for="trackInput">TRACKING NUMBER</label>
-<div class="trackrow">
-<input id="trackInput" placeholder="Example: FX-123456">
-<button class="blue" onclick="track('trackInput')">Track</button>
-</div>
-<div id="trackingResult"><p>Your tracking results will appear here.</p></div>
-</div>
+<div class="wrap track-section">
+<div class="section-head"><div class="eyebrow">Stay up to date</div><h2>Every update,<br>in one place.</h2><p>Enter your shipment reference to look up the latest tracking information available.</p><p class="notice">Tracking results require a valid shipment record in the connected database.</p></div>
+<div class="track-panel"><label for="trackInput">TRACKING NUMBER</label><div class="trackrow"><input id="trackInput" autocomplete="off" placeholder="Enter your tracking ID"><button class="btn btn-blue" onclick="track('trackInput')">Track now</button></div><div id="trackingResult" role="status" aria-live="polite"><p>Tracking updates will appear here when a valid shipment record is available.</p></div></div>
 </div>
 </section>
-
 <section class="content" id="contact">
-<div class="wrap">
-<div class="tag">Get started</div>
-<h2>Request a shipment quote.</h2>
-<p>Enter your details and prepare a shipment request.</p>
-<form class="panel" id="quoteForm" style="margin-top:22px">
-<label for="name">Full name *</label>
-<input id="name" required maxlength="100" placeholder="Your name">
-<label for="email">Email address *</label>
-<input id="email" type="email" required maxlength="200" placeholder="you@example.com">
-<label for="type">Shipment type *</label>
-<select id="type" required>
-<option value="">Select shipment type</option>
-<option>Documents</option>
-<option>Parcel / Box</option>
-<option>Air Freight</option>
-<option>Ocean Freight</option>
-</select>
-<label for="destination">Destination *</label>
-<input id="destination" required maxlength="150" placeholder="City and country">
-<label for="details">Shipment details</label>
-<textarea id="details" rows="4" maxlength="1500" placeholder="Approximate weight and dimensions"></textarea>
-<button class="blue" type="submit" style="width:100%">Prepare request</button>
-<div id="formResult" class="notice"></div>
+<div class="wrap contact-layout">
+<div class="section-head"><div class="eyebrow">Get started</div><h2>Let's move your shipment.</h2><p>Tell us a little about what you need to send. Prepare a request to share with the Facil Express team.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Share your destination and shipment type.</span></div><div class="contact-point"><span>✓</span><span>Include any important package details.</span></div><div class="contact-point"><span>✓</span><span>Review your request before sending it.</span></div></div></div>
+<form class="form-panel" id="quoteForm">
+<div class="form-grid">
+<div class="field"><label for="name">FULL NAME *</label><input id="name" required maxlength="100" autocomplete="name" placeholder="Your full name"></div>
+<div class="field"><label for="email">EMAIL ADDRESS *</label><input id="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@example.com"></div>
+<div class="field"><label for="type">SHIPMENT TYPE *</label><select id="type" required><option value="">Select a service</option><option>Documents</option><option>Parcel / Box</option><option>Express Air</option><option>Ocean Freight</option><option>International Shipping</option></select></div>
+<div class="field"><label for="destination">DESTINATION *</label><input id="destination" required maxlength="150" placeholder="City and country"></div>
+<div class="field full"><label for="details">SHIPMENT DETAILS</label><textarea id="details" rows="4" maxlength="1500" placeholder="Approximate weight, dimensions, and any special details"></textarea></div>
+</div>
+<button class="btn btn-blue" type="submit">Prepare shipment request <span aria-hidden="true">→</span></button><div id="formResult" class="notice" role="status" aria-live="polite"></div>
 </form>
 </div>
 </section>
 </main>
-
-<footer><div class="wrap">
-<strong style="font-size:18px;color:white">Facil <span style="color:#ffc400">Express</span></strong>
-<p style="margin:8px 0">Documents, parcels and freight shipping solutions.</p>
-<p>© <span id="year"></span> Facil Express. Replace unverified company claims before publishing.</p>
-</div></footer>
-
-<button class="chatbtn" onclick="toggleChat()">● Live Chat</button>
-<div id="chat">
-<div class="chathead">Facil Express Support <button onclick="toggleChat()" style="padding:0 7px">×</button></div>
-<div id="messages">Hello! This is a chat preview. It is not connected to a live support agent yet.</div>
-<div class="chatrow"><input id="chatInput" placeholder="Type a message"><button onclick="sendChat()">Send</button></div>
-</div>
-
+<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#contact">Contact</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle">● &nbsp; Live Chat</button>
+<div id="chat" aria-label="Facil Express chat preview"><div class="chathead">Facil Express Support <button onclick="toggleChat()" aria-label="Close chat">×</button></div><div id="messages">Welcome to Facil Express. Send a message to preview the chat experience. This chat is not connected to a live support agent yet.</div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Type a message"><button onclick="sendChat()">Send</button></div></div>
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
-
+document.getElementById("year").textContent = new Date().getFullYear();
+const nav = document.getElementById("mainNav");
+const menuToggle = document.getElementById("menuToggle");
+menuToggle.addEventListener("click", function(){const open=nav.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.textContent=open?"×":"☰";});
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");menuToggle.textContent="☰";}));
+function safe(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function track(inputId){
  const code=document.getElementById(inputId).value.trim().toUpperCase();
  const output=document.getElementById("trackingResult");
  const heroOutput=document.getElementById("heroResult");
- if(!code){
-  alert("Please enter your tracking ID.");
-  return;
- }
- document.getElementById("trackInput").value=code;
- document.getElementById("heroTrack").value=code;
- output.innerHTML='<p>Tracking ID: <strong>'+safe(code)+'</strong></p><div class="status">No live tracking database is connected yet. Connect a database and add a real shipment record to display its status.</div>';
- heroOutput.textContent="Tracking interface ready. Live database connection is required for actual results.";
+ if(!code){document.getElementById(inputId).focus();(inputId==="heroTrack"?heroOutput:output).textContent="Please enter your tracking number.";return;}
+ document.getElementById("trackInput").value=code;document.getElementById("heroTrack").value=code;
+ output.innerHTML='<p>Tracking ID: <strong>'+safe(code)+'</strong></p><div class="status">No matching live tracking result can be shown until the secure shipment database is connected and contains this tracking ID.</div>';
+ heroOutput.textContent="Tracking ID entered. Check the tracking section for details.";
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
-}
-function safe(value){
- return String(value).replace(/[&<>"']/g,function(c){
-  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
- });
 }
 document.getElementById("quoteForm").addEventListener("submit",function(e){
  e.preventDefault();
- const data={
-  name:document.getElementById("name").value.trim(),
-  email:document.getElementById("email").value.trim(),
-  type:document.getElementById("type").value,
-  destination:document.getElementById("destination").value.trim(),
-  details:document.getElementById("details").value.trim()
- };
- const text="Facil Express shipment request\n\nName: "+data.name+"\nEmail: "+data.email+"\nType: "+data.type+"\nDestination: "+data.destination+"\nDetails: "+data.details;
- document.getElementById("formResult").textContent="Request prepared on this device. Choose OK to open your email app and send it.";
- if(confirm("Open your email app to send this shipment request?")){
-  window.location.href="mailto:?subject="+encodeURIComponent("Facil Express shipment request")+"&body="+encodeURIComponent(text);
- }
+ const data={name:document.getElementById("name").value.trim(),email:document.getElementById("email").value.trim(),type:document.getElementById("type").value,destination:document.getElementById("destination").value.trim(),details:document.getElementById("details").value.trim()};
+ const body="Facil Express shipment request\n\nName: "+data.name+"\nEmail: "+data.email+"\nType: "+data.type+"\nDestination: "+data.destination+"\nDetails: "+data.details;
+ document.getElementById("formResult").textContent="Your request is ready. Your email app can open so you can review and send it.";
+ if(confirm("Open your email app to review and send this shipment request?")){window.location.href="mailto:?subject="+encodeURIComponent("Facil Express shipment request")+"&body="+encodeURIComponent(body);}
 });
-function toggleChat(){document.getElementById("chat").classList.toggle("open")}
-function sendChat(){
- const input=document.getElementById("chatInput");
- const message=input.value.trim();
- if(!message)return;
- const box=document.getElementById("messages");
- const p=document.createElement("p");
- p.style.cssText="margin-top:12px;padding:9px;background:#07162d;border-radius:8px;overflow-wrap:anywhere";
- p.textContent="You: "+message;
- box.appendChild(p);
- const reply=document.createElement("p");
- reply.style.cssText="margin-top:10px;color:#38d6c3";
- reply.textContent="Thanks for your message. This preview is not connected to a live agent yet.";
- box.appendChild(reply);
- input.value="";
-}
-document.getElementById("chatInput").addEventListener("keydown",function(e){
- if(e.key==="Enter")sendChat();
-});
+function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));}
+function sendChat(){const input=document.getElementById("chatInput");const message=input.value.trim();if(!message)return;const box=document.getElementById("messages");const p=document.createElement("p");p.style.cssText="margin-top:12px;padding:9px;background:#07172e;border-radius:7px;overflow-wrap:anywhere";p.textContent="You: "+message;box.appendChild(p);const reply=document.createElement("p");reply.style.cssText="margin-top:10px;color:#46d6c6";reply.textContent="Thanks for your message. This chat preview is not connected to a live agent yet.";box.appendChild(reply);box.scrollTop=box.scrollHeight;input.value="";}
+document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 </script>
 </body>
-  </html>
-  
+</html>
