@@ -114,11 +114,44 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 #messages{padding:14px;min-height:100px;font-size:12px;max-height:230px;overflow:auto;color:#c4d1e0}
 .chatrow{display:flex;padding:11px;gap:7px;border-top:1px solid #29415d}
 .chatrow input{margin:0}.chatrow button{padding:8px 11px;border:0;border-radius:6px;background:var(--yellow);font-size:11px;font-weight:800}
+
+.admin-nav{color:var(--yellow)!important;font-weight:800}
+#send-package .section-head{max-width:760px}
+.package-form{margin-top:28px}
+.form-section-title{grid-column:1/-1;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);padding:16px 0 11px;border-bottom:1px solid #2b4360;margin-bottom:14px}
+.form-section-title:first-child{padding-top:0}
+.form-panel .field{min-width:0}
+.form-panel input[type="file"]{padding:10px;background:#07172e}
+.upload-hint{font-size:10px;color:var(--muted);margin:-8px 0 15px}
+.image-preview{display:none;max-width:100%;max-height:180px;object-fit:contain;border:1px solid #304866;border-radius:8px;margin:0 0 15px}
+.form-note{padding:12px 14px;border:1px solid #665221;background:#332a12;border-radius:8px;color:#f4d986;font-size:11px;line-height:1.6;margin:0 0 18px}
+.package-form .btn{margin-top:4px}
+#adminModal{display:none;position:fixed;inset:0;z-index:70;background:#020916d9;align-items:center;justify-content:center;padding:20px}
+#adminModal.open{display:flex}
+.admin-card{width:min(720px,100%);max-height:90vh;overflow:auto;background:#10243f;border:1px solid #304866;border-radius:14px;padding:25px;box-shadow:0 24px 70px #0008}
+.admin-card-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px}
+.admin-card h2{font-size:25px;margin:0}
+.admin-close{background:transparent;color:white;border:0;font-size:25px;cursor:pointer}
+.admin-card p{font-size:12px;color:var(--muted);margin:10px 0 18px}
+.admin-card input{margin-bottom:14px}
+.admin-card .btn{width:100%}
+#adminMessage{font-size:11px;color:var(--yellow);margin-top:12px}
+#adminRequests{display:grid;gap:12px;margin-top:16px}
+.admin-request{background:#091a31;border:1px solid #2a4260;border-radius:9px;padding:14px}
+.admin-request h4{font-size:14px;margin-bottom:6px;overflow-wrap:anywhere}
+.admin-request p{margin:4px 0;font-size:11px;overflow-wrap:anywhere;color:#bdc9d8}
+.admin-request .admin-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.admin-request select{width:auto;min-width:130px;flex:1}
+.admin-request .btn{padding:9px 11px;font-size:11px}
+.admin-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.admin-toolbar .btn{padding:9px 12px}
+.admin-empty{font-size:12px;color:var(--muted);padding:18px;border:1px dashed #304866;border-radius:8px}
+
 @media(max-width:900px){header{gap:14px}.hero-layout{gap:24px}.hero-art{min-height:320px}.route-card{padding:20px}.trackbox{grid-template-columns:1fr 1.4fr auto}.contact-layout{gap:28px}}
 @media(max-width:700px){
  header{height:68px;padding:0 20px}.brand{font-size:20px}.brand-mark{width:38px;height:38px}nav{display:none;position:absolute;top:67px;left:0;right:0;padding:15px 22px 20px;background:#091a31;border-bottom:1px solid #263e5a;flex-direction:column;align-items:stretch;gap:0}nav.open{display:flex}nav a{padding:12px 0;border-bottom:1px solid #1e334d}.header-cta{display:none}.menu-toggle{display:block}
  .wrap{width:calc(100% - 36px)}.hero{padding:52px 0 45px}.hero-layout{grid-template-columns:1fr;gap:28px}.hero-copy{max-width:590px}h1{font-size:clamp(42px,11vw,58px);letter-spacing:-2px}.hero-copy>p{font-size:14px}.hero-art{min-height:295px}.route-card{width:100%;max-width:460px}.floating-note{right:-3px;bottom:3px}.tracking-band{margin-top:25px}.trackbox{grid-template-columns:1fr;gap:12px;padding:17px}.trackbox .btn{width:100%}#heroResult{grid-column:auto}.stats{grid-template-columns:1fr 1fr;gap:19px 12px;padding-top:24px}.stat strong{font-size:20px}
- section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
+ section.content{padding:58px 0}.grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}.service{padding:18px;min-height:180px}.service h3{font-size:14px}.service p{font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:24px 16px;margin-top:28px}.track-section,.contact-layout{grid-template-columns:1fr;gap:24px}.form-section-title{grid-column:auto}.track-panel,.form-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
 }
 @media(max-width:390px){.grid{grid-template-columns:1fr}.actions .btn{flex:1;padding:12px 10px}.route-card{padding:16px}.floating-note{transform:scale(.9);transform-origin:right bottom}}
 </style>
@@ -130,9 +163,9 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <span>Facil <span class="express">Express</span></span>
 </a>
 <nav id="mainNav" aria-label="Main navigation">
-<a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#how">How it works</a><a href="#contact">Contact</a>
+<a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#how">How it works</a><a href="#send-package">Send a Package</a><a href="#contact">Contact</a><a href="#admin-login" class="admin-nav" onclick="openAdminLogin(event)">Admin Login</a>
 </nav>
-<a class="btn header-cta" href="#contact">Ship with us <span aria-hidden="true">↗</span></a>
+<a class="btn header-cta" href="#send-package">Send a Package <span aria-hidden="true">↗</span></a>
 <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 </header>
 <main>
@@ -195,49 +228,218 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 <div class="track-panel"><label for="trackInput">TRACKING NUMBER</label><div class="trackrow"><input id="trackInput" autocomplete="off" placeholder="Enter your tracking ID"><button class="btn btn-blue" onclick="track('trackInput')">Track now</button></div><div id="trackingResult" role="status" aria-live="polite"><p>Tracking updates will appear here when a valid shipment record is available.</p></div></div>
 </div>
 </section>
-<section class="content" id="contact">
-<div class="wrap contact-layout">
-<div class="section-head"><div class="eyebrow">Get started</div><h2>Let's move your shipment.</h2><p>Tell us a little about what you need to send. Prepare a request to share with the Facil Express team.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Share your destination and shipment type.</span></div><div class="contact-point"><span>✓</span><span>Include any important package details.</span></div><div class="contact-point"><span>✓</span><span>Review your request before sending it.</span></div></div></div>
-<form class="form-panel" id="quoteForm">
+<section class="content" id="send-package">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow">Book a shipment</div><h2>Send a package, right here.</h2><p>Enter the sender and receiver details, choose your shipping method, add package weight and pickup timing, and attach a photo if you wish.</p></div>
+<form class="form-panel package-form" id="packageForm">
 <div class="form-grid">
-<div class="field"><label for="name">FULL NAME *</label><input id="name" required maxlength="100" autocomplete="name" placeholder="Your full name"></div>
-<div class="field"><label for="email">EMAIL ADDRESS *</label><input id="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@example.com"></div>
-<div class="field"><label for="type">SHIPMENT TYPE *</label><select id="type" required><option value="">Select a service</option><option>Documents</option><option>Parcel / Box</option><option>Express Air</option><option>Ocean Freight</option><option>International Shipping</option></select></div>
-<div class="field"><label for="destination">DESTINATION *</label><input id="destination" required maxlength="150" placeholder="City and country"></div>
-<div class="field full"><label for="details">SHIPMENT DETAILS</label><textarea id="details" rows="4" maxlength="1500" placeholder="Approximate weight, dimensions, and any special details"></textarea></div>
+<div class="form-section-title">1. Sender details</div>
+<div class="field"><label for="senderName">SENDER FULL NAME *</label><input id="senderName" required maxlength="100" autocomplete="name" placeholder="Your full name"></div>
+<div class="field"><label for="senderEmail">SENDER EMAIL *</label><input id="senderEmail" type="email" required maxlength="200" autocomplete="email" placeholder="you@example.com"></div>
+<div class="field"><label for="senderPhone">SENDER PHONE *</label><input id="senderPhone" type="tel" required maxlength="40" autocomplete="tel" placeholder="+ country code and number"></div>
+<div class="field"><label for="origin">PICKUP CITY / COUNTRY *</label><input id="origin" required maxlength="150" placeholder="Where is the package now?"></div>
+
+<div class="form-section-title">2. Receiver details</div>
+<div class="field"><label for="recipientName">RECEIVER FULL NAME *</label><input id="recipientName" required maxlength="100" placeholder="Person receiving the package"></div>
+<div class="field"><label for="recipientPhone">RECEIVER PHONE *</label><input id="recipientPhone" type="tel" required maxlength="40" placeholder="+ country code and number"></div>
+<div class="field full"><label for="destination">DELIVERY CITY / COUNTRY *</label><input id="destination" required maxlength="150" placeholder="Where should we deliver it?"></div>
+
+<div class="form-section-title">3. Shipping and package details</div>
+<div class="field"><label for="shipMethod">SHIPPING METHOD *</label><select id="shipMethod" required><option value="air" selected>Air freight — usually faster</option><option value="ocean">Ocean freight — usually more economical for large cargo</option><option value="road">Road freight</option></select></div>
+<div class="field"><label for="speed">DELIVERY SPEED *</label><select id="speed" required><option value="express" selected>Express / fastest available</option><option value="standard">Standard</option><option value="economy">Economy</option></select></div>
+<div class="field"><label for="packageType">PACKAGE TYPE *</label><select id="packageType" required><option value="">Select package type</option><option>Documents</option><option>Parcel / box</option><option>Clothing / personal items</option><option>Electronics</option><option>Business goods</option><option>Commercial cargo</option><option>Other</option></select></div>
+<div class="field"><label for="weight">WEIGHT (KG) *</label><input id="weight" type="number" required min="0.1" max="30000" step="0.1" placeholder="e.g. 2.5"></div>
+<div class="field"><label for="length">LENGTH (CM)</label><input id="length" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="width">WIDTH (CM)</label><input id="width" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="height">HEIGHT (CM)</label><input id="height" type="number" min="0" max="100000" step="0.1" placeholder="Optional"></div>
+<div class="field"><label for="pickupDate">PREFERRED PICKUP DATE</label><input id="pickupDate" type="date"></div>
+<div class="field"><label for="pickupTime">PREFERRED PICKUP TIME</label><select id="pickupTime"><option value="">Choose a time window</option><option>08:00–10:00</option><option>10:00–12:00</option><option>12:00–14:00</option><option>14:00–16:00</option><option>16:00–18:00</option><option>Flexible</option></select></div>
+<div class="field full"><label for="packagePhoto">PACKAGE PHOTO (OPTIONAL)</label><input id="packagePhoto" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-hint">Choose one JPG, PNG or WebP image, up to 5 MB. Avoid photos showing sensitive documents.</div><img id="imagePreview" class="image-preview" alt="Preview of selected package photo"></div>
+<div class="field full"><label for="packageNotes">PACKAGE DESCRIPTION / SPECIAL INSTRUCTIONS</label><textarea id="packageNotes" rows="4" maxlength="1500" placeholder="Describe the contents, dimensions if known, and any handling instructions. Do not include prohibited items."></textarea></div>
 </div>
-<button class="btn btn-blue" type="submit">Prepare shipment request <span aria-hidden="true">→</span></button><div id="formResult" class="notice" role="status" aria-live="polite"></div>
+<div class="form-note">Please note: this booking form is now on the website, but it is not yet connected to secure shipment storage or image uploads. Do not submit sensitive information until the secure backend connection is completed.</div>
+<button class="btn btn-blue" type="submit">Review package request <span aria-hidden="true">→</span></button>
+<div id="packageResult" class="notice" role="status" aria-live="polite"></div>
 </form>
 </div>
 </section>
+<section class="content dark" id="contact">
+<div class="wrap contact-layout">
+<div class="section-head"><div class="eyebrow">Need help?</div><h2>Questions about your shipment?</h2><p>Use the package request form to provide your shipment details. For help with the site, open the support chat preview.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Choose air, ocean, or road freight.</span></div><div class="contact-point"><span>✓</span><span>Provide package weight and pickup preferences.</span></div><div class="contact-point"><span>✓</span><span>Add a package photo if it helps describe your shipment.</span></div></div></div>
+<div class="form-panel"><h3 style="font-size:16px;margin-bottom:9px">Ready to ship?</h3><p style="font-size:12px;color:var(--muted);margin-bottom:18px">Start your request on the website instead of opening an email draft.</p><a class="btn btn-blue" href="#send-package">Send a Package <span aria-hidden="true">→</span></a><p class="notice">Delivery speed and price depend on route, cargo, and availability. Air freight is often faster; ocean freight can be more economical for larger shipments.</p></div>
+</div>
+</section>
 </main>
-<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#contact">Contact</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Tracking</a><a href="#send-package">Send a Package</a><a href="#contact">Contact</a><a href="#admin-login" onclick="openAdminLogin(event)">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Sign in with an administrator account.</div></form><div id="adminDashboard" hidden><div class="admin-card-head"><h3 style="font-size:17px">Shipment requests</h3><div class="admin-toolbar"><button class="btn btn-ghost" type="button" onclick="loadAdminRequests()">Refresh</button><button class="btn" type="button" onclick="adminSignOut()">Sign out</button></div></div><p id="adminWelcome" style="font-size:11px;color:var(--muted)"></p><div id="adminRequests"><div class="admin-empty">Loading shipment requests…</div></div></div></div></div>
 <button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle">● &nbsp; Live Chat</button>
 <div id="chat" aria-label="Facil Express chat preview"><div class="chathead">Facil Express Support <button onclick="toggleChat()" aria-label="Close chat">×</button></div><div id="messages">Welcome to Facil Express. Send a message to preview the chat experience. This chat is not connected to a live support agent yet.</div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Type a message"><button onclick="sendChat()">Send</button></div></div>
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+
+const FACIL_SUPABASE_URL="https://vdxgbxuxuwzfqizhrwvf.supabase.co";
+const FACIL_SUPABASE_KEY="sb_publishable_BxcVQSKtLMeP0isxtSz1FQ_Jo6qoOmf";
+window.facilSupabaseReady=import("https://esm.sh/@supabase/supabase-js@2")
+ .then(({createClient})=>{window.facilSupabase=createClient(FACIL_SUPABASE_URL,FACIL_SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return window.facilSupabase;})
+ .catch(error=>{console.error("Supabase client could not load",error);return null;});
+
+
+const photoInput=document.getElementById("packagePhoto");
+const imagePreview=document.getElementById("imagePreview");
+photoInput.addEventListener("change",function(){
+ const file=this.files&&this.files[0];
+ imagePreview.style.display="none";imagePreview.removeAttribute("src");
+ if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+  this.value="";document.getElementById("packageResult").textContent="Please choose one JPG, PNG or WebP image smaller than 5 MB.";return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{imagePreview.src=reader.result;imagePreview.style.display="block";};
+ reader.readAsDataURL(file);
+});
+document.getElementById("packageForm").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const out=document.getElementById("packageResult");
+ const submit=this.querySelector('button[type="submit"]');
+ submit.disabled=true;submit.textContent="Sending request…";out.textContent="Securely submitting your package request…";
+ try{
+  const fd=new FormData();
+  const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
+  fields.forEach(id=>fd.append(id,document.getElementById(id).value.trim()));
+  const photo=photoInput.files&&photoInput.files[0];if(photo)fd.append("packagePhoto",photo,photo.name);
+  const client=await window.facilSupabaseReady;
+  if(!client)throw new Error("The secure booking service could not load. Please check your internet connection and try again.");
+  const {data,error}=await client.functions.invoke("create-package-request",{body:fd});
+  if(error){
+   let message=error.message||"Request could not be submitted.";
+   try{const payload=await error.context.json();if(payload&&payload.error)message=payload.error;}catch{}
+   throw new Error(message);
+  }
+  if(!data||!data.ok)throw new Error(data?.error||"Request could not be submitted.");
+  out.textContent="Your package request was submitted successfully. Reference: "+data.requestId+". Our team can review it and confirm the next steps.";
+  const old=document.getElementById("requestPreview");if(old)old.remove();
+  this.reset();imagePreview.style.display="none";imagePreview.removeAttribute("src");
+ }catch(error){out.textContent=error instanceof Error?error.message:"We couldn't submit the request. Please try again.";}
+ finally{submit.disabled=false;submit.innerHTML='Submit package request <span aria-hidden="true">→</span>';}
+});
+
+function openAdminLogin(e){if(e)e.preventDefault();document.getElementById("adminModal").classList.add("open");document.body.style.overflow="hidden";}
+function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open");document.body.style.overflow="";}
+async function adminSignOut(){
+ const client=await window.facilSupabaseReady;
+ if(client)await client.auth.signOut();
+ document.getElementById("adminDashboard").hidden=true;
+ document.getElementById("adminForm").hidden=false;
+ document.getElementById("adminPassword").value="";
+ document.getElementById("adminMessage").textContent="Signed out.";
+}
+document.getElementById("adminForm").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const message=document.getElementById("adminMessage");
+ message.textContent="Signing in securely…";
+ const client=await window.facilSupabaseReady;
+ if(!client){message.textContent="The secure sign-in service could not load. Check your connection and try again.";return;}
+ const {data,error}=await client.auth.signInWithPassword({email:document.getElementById("adminEmail").value.trim(),password:document.getElementById("adminPassword").value});
+ if(error||!data.user){message.textContent="Sign-in failed. Check your email and password.";return;}
+ const {data:membership,error:memberError}=await client.from("admin_members").select("user_id,role,email").eq("user_id",data.user.id).maybeSingle();
+ if(memberError||!membership){await client.auth.signOut();message.textContent="This account is not authorized as a Facil Express administrator.";return;}
+ document.getElementById("adminForm").hidden=true;
+ document.getElementById("adminDashboard").hidden=false;
+ document.getElementById("adminWelcome").textContent="Signed in as "+(membership.email||data.user.email||"administrator")+". Only authorized administrators can view these requests.";
+ message.textContent="";
+ await loadAdminRequests();
+});
+async function loadAdminRequests(){
+ const client=await window.facilSupabaseReady;
+ const target=document.getElementById("adminRequests");
+ if(!client){target.innerHTML='<div class="admin-empty">Supabase client is unavailable.</div>';return;}
+ target.innerHTML='<div class="admin-empty">Loading requests…</div>';
+ const {data,error}=await client.from("package_requests").select("*").order("created_at",{ascending:false}).limit(50);
+ if(error){target.innerHTML='<div class="admin-empty">Could not load requests. Please sign in again if your session expired.</div>';return;}
+ if(!data||!data.length){target.innerHTML='<div class="admin-empty">No package requests yet. New customer bookings will appear here.</div>';return;}
+ target.innerHTML=data.map(r=>{
+  const details=[["From",r.origin],["To",r.destination],["Method",r.service_type],["Speed",r.delivery_speed],["Package",r.package_type],["Weight",r.weight_kg+" kg"],["Pickup",r.pickup_date||"Not selected"],["Time",r.pickup_time||"Flexible"],["Sender",r.sender_name+" · "+r.sender_email],["Phone",r.sender_phone],["Receiver",r.recipient_name+" · "+r.recipient_phone],["Description",r.package_description||"—"]];
+  const detailHtml=details.map(([k,v])=>'<p><strong>'+safe(k)+':</strong> '+safe(v==null?"":v)+'</p>').join("");
+  const photo=r.package_photo_path?'<button type="button" class="btn btn-ghost photo-button" data-path="'+safe(r.package_photo_path)+'">View package photo</button>':"";
+  const statuses=["pending","reviewing","quoted","approved","rejected","converted"];
+  const options=statuses.map(s=>'<option value="'+s+'" '+(r.status===s?"selected":"")+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>').join("");
+  const tracking=r.tracking_id?'<p><strong>Tracking ID:</strong> '+safe(r.tracking_id)+'</p>':"";
+  const create=r.tracking_id?'':'<button type="button" class="btn create-shipment" data-id="'+safe(r.id)+'">Create shipment & tracking ID</button>';
+  return '<article class="admin-request"><h4>Request '+safe(r.id.slice(0,8).toUpperCase())+' · '+safe(new Date(r.created_at).toLocaleString())+'</h4>'+detailHtml+tracking+'<p><strong>Status:</strong> '+safe(r.status)+'</p><div class="admin-controls"><select aria-label="Update request status" class="request-status" data-id="'+safe(r.id)+'">'+options+'</select><button type="button" class="btn btn-ghost save-status" data-id="'+safe(r.id)+'">Save status</button>'+photo+create+'</div></article>';
+ }).join("");
+ target.querySelectorAll(".save-status").forEach(b=>b.addEventListener("click",()=>updateRequestStatus(b.dataset.id,target.querySelector('.request-status[data-id="'+b.dataset.id+'"]').value)));
+ target.querySelectorAll(".create-shipment").forEach(b=>b.addEventListener("click",()=>createShipmentFromRequest(b.dataset.id,b)));
+ target.querySelectorAll(".photo-button").forEach(b=>b.addEventListener("click",()=>viewPackagePhoto(b.dataset.path)));
+}
+async function updateRequestStatus(id,status){
+ const client=await window.facilSupabaseReady;
+ const allowed=["pending","reviewing","quoted","approved","rejected","converted"];
+ if(!allowed.includes(status))return;
+ const {error}=await client.from("package_requests").update({status,updated_at:new Date().toISOString()}).eq("id",id);
+ if(error){alert("Could not update the request status.");return;}
+ await loadAdminRequests();
+}
+async function createShipmentFromRequest(id,button){
+ const client=await window.facilSupabaseReady;
+ button.disabled=true;button.textContent="Creating…";
+ try{
+  const {data:r,error:readError}=await client.from("package_requests").select("*").eq("id",id).single();
+  if(readError||!r)throw new Error("Could not load this request.");
+  if(r.tracking_id){await loadAdminRequests();return;}
+  const trackingId="FX-"+crypto.randomUUID().replaceAll("-","").slice(0,12).toUpperCase();
+  const {data:shipment,error:insertError}=await client.from("shipments").insert({
+   tracking_id:trackingId,sender_name:r.sender_name,sender_email:r.sender_email,
+   recipient_name:r.recipient_name,recipient_phone:r.recipient_phone,
+   origin:r.origin,destination:r.destination,package_description:r.package_description||r.package_type,
+   service_type:r.service_type==="air"?"Express Air":r.service_type==="ocean"?"Ocean Freight":"Road Freight",
+   weight_kg:r.weight_kg,status:"Created"
+  }).select("id").single();
+  if(insertError||!shipment)throw new Error("Shipment could not be created. Check your admin permissions.");
+  const {error:updateError}=await client.from("package_requests").update({status:"converted",tracking_id:trackingId,updated_at:new Date().toISOString()}).eq("id",id);
+  if(updateError)throw new Error("Shipment created with tracking ID "+trackingId+", but the request record did not update. Please record the ID and refresh.");
+  alert("Shipment created. Tracking ID: "+trackingId);
+  await loadAdminRequests();
+ }catch(error){alert(error instanceof Error?error.message:"Could not create the shipment.");button.disabled=false;button.textContent="Create shipment & tracking ID";}
+}
+async function viewPackagePhoto(path){
+ const client=await window.facilSupabaseReady;
+ const {data,error}=await client.storage.from("package-photos").createSignedUrl(path,120);
+ if(error||!data?.signedUrl){alert("Could not open this private package photo.");return;}
+ window.open(data.signedUrl,"_blank","noopener,noreferrer");
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAdminLogin();});
+
 const nav = document.getElementById("mainNav");
 const menuToggle = document.getElementById("menuToggle");
 menuToggle.addEventListener("click", function(){const open=nav.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.textContent=open?"×":"☰";});
 nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");menuToggle.textContent="☰";}));
 function safe(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function track(inputId){
+async function track(inputId){
  const code=document.getElementById(inputId).value.trim().toUpperCase();
  const output=document.getElementById("trackingResult");
  const heroOutput=document.getElementById("heroResult");
  if(!code){document.getElementById(inputId).focus();(inputId==="heroTrack"?heroOutput:output).textContent="Please enter your tracking number.";return;}
  document.getElementById("trackInput").value=code;document.getElementById("heroTrack").value=code;
- output.innerHTML='<p>Tracking ID: <strong>'+safe(code)+'</strong></p><div class="status">No matching live tracking result can be shown until the secure shipment database is connected and contains this tracking ID.</div>';
- heroOutput.textContent="Tracking ID entered. Check the tracking section for details.";
+ output.textContent="Looking up shipment…";heroOutput.textContent="Looking up tracking details…";
+ try{
+  const client=await window.facilSupabaseReady;
+  if(!client)throw new Error("Tracking service could not load. Please try again.");
+  const {data,error}=await client.functions.invoke("lookup-shipment",{body:{trackingId:code}});
+  if(error){
+   let message=error.message||"Tracking lookup failed.";
+   try{const payload=await error.context.json();if(payload&&payload.error)message=payload.error;}catch{}
+   throw new Error(message);
+  }
+  if(!data||!data.ok)throw new Error(data?.error||"No shipment found for that tracking number.");
+  const s=data.shipment;
+  const events=(data.events||[]).slice().reverse().map(ev=>'<div class="status"><strong>'+safe(ev.status)+'</strong>'+(ev.location?' · '+safe(ev.location):'')+'<br><small>'+safe(new Date(ev.eventTime).toLocaleString())+'</small></div>').join("");
+  output.innerHTML='<p>Tracking ID: <strong>'+safe(s.trackingId)+'</strong></p><div class="status"><strong>Current status:</strong> '+safe(s.status)+'<br><strong>Route:</strong> '+safe(s.origin||"—")+' → '+safe(s.destination||"—")+'<br><strong>Service:</strong> '+safe(s.serviceType||"—")+'</div><h3 style="font-size:13px;margin-top:14px">Shipment updates</h3>'+(events||'<p style="margin-top:10px;color:#a9b8cc;font-size:12px">No tracking events have been recorded yet.</p>');
+  heroOutput.textContent="Shipment found. Current status: "+s.status+".";
+ }catch(error){output.textContent=error instanceof Error?error.message:"Tracking is temporarily unavailable.";heroOutput.textContent="No tracking result available.";}
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
 }
-document.getElementById("quoteForm").addEventListener("submit",function(e){
- e.preventDefault();
- const data={name:document.getElementById("name").value.trim(),email:document.getElementById("email").value.trim(),type:document.getElementById("type").value,destination:document.getElementById("destination").value.trim(),details:document.getElementById("details").value.trim()};
- const body="Facil Express shipment request\n\nName: "+data.name+"\nEmail: "+data.email+"\nType: "+data.type+"\nDestination: "+data.destination+"\nDetails: "+data.details;
- document.getElementById("formResult").textContent="Your request is ready. Your email app can open so you can review and send it.";
- if(confirm("Open your email app to review and send this shipment request?")){window.location.href="mailto:?subject="+encodeURIComponent("Facil Express shipment request")+"&body="+encodeURIComponent(body);}
-});
+
+window.track=track;window.openAdminLogin=openAdminLogin;window.closeAdminLogin=closeAdminLogin;window.loadAdminRequests=loadAdminRequests;window.adminSignOut=adminSignOut;
 function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));}
 function sendChat(){const input=document.getElementById("chatInput");const message=input.value.trim();if(!message)return;const box=document.getElementById("messages");const p=document.createElement("p");p.style.cssText="margin-top:12px;padding:9px;background:#07172e;border-radius:7px;overflow-wrap:anywhere";p.textContent="You: "+message;box.appendChild(p);const reply=document.createElement("p");reply.style.cssText="margin-top:10px;color:#46d6c6";reply.textContent="Thanks for your message. This chat preview is not connected to a live agent yet.";box.appendChild(reply);box.scrollTop=box.scrollHeight;input.value="";}
 document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
