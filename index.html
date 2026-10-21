@@ -194,6 +194,34 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 @media(max-width:700px){body.booking-mode #send-package{min-height:calc(100vh - 68px);padding-top:24px}.email-confirmations{grid-template-columns:1fr}.loader-card{padding:27px 20px}}
 @media(prefers-reduced-motion:reduce){.loader-truck .wheel-group,.loader-road,.loader-dots:after{animation:none}}
 
+
+/* Subtle connected-node network motif on the midnight-blue surfaces */
+.hero{isolation:isolate}
+.network-visual{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.9}
+.network-visual .network-lines{fill:none;stroke:#91bfff;stroke-width:1;stroke-opacity:.16;vector-effect:non-scaling-stroke}
+.network-visual .network-blue{fill:none;stroke:#278bff;stroke-width:1.15;stroke-opacity:.26;vector-effect:non-scaling-stroke;stroke-dasharray:5 8;animation:network-drift 24s linear infinite}
+.network-visual .network-node{fill:#cce4ff;fill-opacity:.62}
+.network-visual .network-node-blue{fill:#278bff;fill-opacity:.88}
+.network-visual .network-halo{fill:#278bff;fill-opacity:.1}
+.hero-layout,.tracking-band{z-index:1}
+#tracking{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 85% 25%,#0d3158 0,transparent 52%),#091a31}
+#tracking .network-visual{opacity:.75}
+#tracking .track-section{position:relative;z-index:1}
+#tracking .track-panel{box-shadow:0 20px 55px #0003}
+#tracking .trackrow .btn{min-width:112px}
+.track-loading{display:flex;align-items:center;gap:11px;color:#9fcaff!important;padding:12px 0}
+.track-spinner{width:22px;height:22px;flex:0 0 22px;border:2px solid #2b4e75;border-top-color:#53a5ff;border-right-color:#53a5ff;border-radius:50%;animation:track-spin .7s linear infinite}
+.track-loading-copy strong{display:block;color:#eaf4ff;font-size:12px}
+.track-loading-copy small{display:block;color:#9db4d0;font-size:10px}
+.track-pulse{height:3px;overflow:hidden;background:#183455;border-radius:3px;margin-top:9px;max-width:220px}
+.track-pulse:after{content:"";display:block;height:100%;width:38%;background:linear-gradient(90deg,transparent,#48a0ff,#d7ebff,transparent);animation:track-progress 1.1s ease-in-out infinite}
+#trackingResult .status{animation:tracking-appear .35s ease both}
+@keyframes track-spin{to{transform:rotate(360deg)}}
+@keyframes track-progress{0%{transform:translateX(-110%)}100%{transform:translateX(310%)}}
+@keyframes tracking-appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes network-drift{to{stroke-dashoffset:-180}}
+@media(prefers-reduced-motion:reduce){.network-visual .network-blue,.track-spinner,.track-pulse:after{animation:none}}
+
 </style>
 </head>
 <body>
@@ -223,7 +251,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 </header>
 <main>
-<section class="hero" id="home">
+<section class="hero" id="home"><svg class="network-visual" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="netFade" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#9bcaff" stop-opacity="0"/><stop offset=".45" stop-color="#9bcaff" stop-opacity=".8"/><stop offset="1" stop-color="#1478ee" stop-opacity="0"/></linearGradient></defs><g class="network-lines"><path d="M-30 130 140 80 280 165 405 75 545 145 700 70 835 155 1000 65 1135 140 1290 65 1480 145"/><path d="M-40 310 115 240 260 340 405 250 545 330 700 230 850 330 1000 245 1155 325 1300 230 1480 300"/><path d="M-20 490 130 420 270 510 420 420 565 510 715 410 865 500 1015 420 1160 500 1320 410 1480 490"/><path d="M140 80 115 240 130 420M280 165 260 340 270 510M405 75 405 250 420 420M545 145 545 330 565 510M700 70 700 230 715 410M835 155 850 330 865 500M1000 65 1000 245 1015 420M1135 140 1155 325 1160 500M1290 65 1300 230 1320 410"/></g><g class="network-blue"><path d="M-30 130 140 80 280 165 405 75 545 145 700 70 835 155 1000 65 1135 140 1290 65 1480 145"/><path d="M-40 310 115 240 260 340 405 250 545 330 700 230 850 330 1000 245 1155 325 1300 230 1480 300"/></g><g><circle class="network-halo" cx="405" cy="250" r="19"/><circle class="network-halo" cx="850" cy="330" r="20"/><circle class="network-halo" cx="1155" cy="325" r="18"/><circle class="network-node" cx="140" cy="80" r="3"/><circle class="network-node-blue" cx="280" cy="165" r="4"/><circle class="network-node" cx="405" cy="75" r="3"/><circle class="network-node" cx="545" cy="145" r="3.5"/><circle class="network-node-blue" cx="700" cy="230" r="4"/><circle class="network-node" cx="835" cy="155" r="3"/><circle class="network-node-blue" cx="1000" cy="245" r="4"/><circle class="network-node" cx="1135" cy="140" r="3.5"/><circle class="network-node" cx="1290" cy="65" r="3"/><circle class="network-node-blue" cx="115" cy="240" r="4"/><circle class="network-node" cx="260" cy="340" r="3"/><circle class="network-node-blue" cx="405" cy="250" r="4"/><circle class="network-node" cx="545" cy="330" r="3.5"/><circle class="network-node" cx="700" cy="70" r="3"/><circle class="network-node-blue" cx="850" cy="330" r="4"/><circle class="network-node" cx="1000" cy="65" r="3"/><circle class="network-node-blue" cx="1155" cy="325" r="4"/><circle class="network-node" cx="1300" cy="230" r="3.5"/><circle class="network-node" cx="130" cy="420" r="3"/><circle class="network-node-blue" cx="270" cy="510" r="4"/><circle class="network-node" cx="420" cy="420" r="3"/><circle class="network-node-blue" cx="565" cy="510" r="4"/><circle class="network-node" cx="715" cy="410" r="3.5"/><circle class="network-node-blue" cx="865" cy="500" r="4"/><circle class="network-node" cx="1015" cy="420" r="3"/><circle class="network-node-blue" cx="1160" cy="500" r="4"/><circle class="network-node" cx="1320" cy="410" r="3"/></g></svg>
 <div class="wrap">
 <div class="hero-layout">
 <div class="hero-copy">
@@ -276,7 +304,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 <div class="steps"><div class="step"><b>STEP 01</b><h3>Request</h3><p>Share the basic details of your shipment and destination.</p></div><div class="step"><b>STEP 02</b><h3>Confirm</h3><p>Review the service, shipment information, and next steps.</p></div><div class="step"><b>STEP 03</b><h3>Track</h3><p>Use your tracking reference to check recorded progress.</p></div><div class="step"><b>STEP 04</b><h3>Receive</h3><p>Follow the updates and stay informed through delivery.</p></div></div>
 </div>
 </section>
-<section class="content dark" id="tracking">
+<section class="content dark" id="tracking"><svg class="network-visual" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="netFade" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#9bcaff" stop-opacity="0"/><stop offset=".45" stop-color="#9bcaff" stop-opacity=".8"/><stop offset="1" stop-color="#1478ee" stop-opacity="0"/></linearGradient></defs><g class="network-lines"><path d="M-30 130 140 80 280 165 405 75 545 145 700 70 835 155 1000 65 1135 140 1290 65 1480 145"/><path d="M-40 310 115 240 260 340 405 250 545 330 700 230 850 330 1000 245 1155 325 1300 230 1480 300"/><path d="M-20 490 130 420 270 510 420 420 565 510 715 410 865 500 1015 420 1160 500 1320 410 1480 490"/><path d="M140 80 115 240 130 420M280 165 260 340 270 510M405 75 405 250 420 420M545 145 545 330 565 510M700 70 700 230 715 410M835 155 850 330 865 500M1000 65 1000 245 1015 420M1135 140 1155 325 1160 500M1290 65 1300 230 1320 410"/></g><g class="network-blue"><path d="M-30 130 140 80 280 165 405 75 545 145 700 70 835 155 1000 65 1135 140 1290 65 1480 145"/><path d="M-40 310 115 240 260 340 405 250 545 330 700 230 850 330 1000 245 1155 325 1300 230 1480 300"/></g><g><circle class="network-halo" cx="405" cy="250" r="19"/><circle class="network-halo" cx="850" cy="330" r="20"/><circle class="network-halo" cx="1155" cy="325" r="18"/><circle class="network-node" cx="140" cy="80" r="3"/><circle class="network-node-blue" cx="280" cy="165" r="4"/><circle class="network-node" cx="405" cy="75" r="3"/><circle class="network-node" cx="545" cy="145" r="3.5"/><circle class="network-node-blue" cx="700" cy="230" r="4"/><circle class="network-node" cx="835" cy="155" r="3"/><circle class="network-node-blue" cx="1000" cy="245" r="4"/><circle class="network-node" cx="1135" cy="140" r="3.5"/><circle class="network-node" cx="1290" cy="65" r="3"/><circle class="network-node-blue" cx="115" cy="240" r="4"/><circle class="network-node" cx="260" cy="340" r="3"/><circle class="network-node-blue" cx="405" cy="250" r="4"/><circle class="network-node" cx="545" cy="330" r="3.5"/><circle class="network-node" cx="700" cy="70" r="3"/><circle class="network-node-blue" cx="850" cy="330" r="4"/><circle class="network-node" cx="1000" cy="65" r="3"/><circle class="network-node-blue" cx="1155" cy="325" r="4"/><circle class="network-node" cx="1300" cy="230" r="3.5"/><circle class="network-node" cx="130" cy="420" r="3"/><circle class="network-node-blue" cx="270" cy="510" r="4"/><circle class="network-node" cx="420" cy="420" r="3"/><circle class="network-node-blue" cx="565" cy="510" r="4"/><circle class="network-node" cx="715" cy="410" r="3.5"/><circle class="network-node-blue" cx="865" cy="500" r="4"/><circle class="network-node" cx="1015" cy="420" r="3"/><circle class="network-node-blue" cx="1160" cy="500" r="4"/><circle class="network-node" cx="1320" cy="410" r="3"/></g></svg>
 <div class="wrap track-section">
 <div class="section-head"><div class="eyebrow">Stay up to date</div><h2>Every update,<br>in one place.</h2><p>Enter your shipment reference to look up the latest tracking information available.</p><p class="notice">Tracking results require a valid shipment record in the connected database.</p></div>
 <div class="track-panel"><label for="trackInput">TRACKING NUMBER</label><div class="trackrow"><input id="trackInput" autocomplete="off" placeholder="Enter your tracking ID"><button class="btn btn-blue" onclick="track('trackInput')">Track now</button></div><div id="trackingResult" role="status" aria-live="polite"><p>Tracking updates will appear here when a valid shipment record is available.</p></div></div>
@@ -540,7 +568,12 @@ async function track(inputId){
  const heroOutput=document.getElementById("heroResult");
  if(!code){document.getElementById(inputId).focus();(inputId==="heroTrack"?heroOutput:output).textContent="Please enter your tracking number.";return;}
  document.getElementById("trackInput").value=code;document.getElementById("heroTrack").value=code;
- output.textContent="Looking up shipment…";heroOutput.textContent="Looking up tracking details…";
+ const startedAt=Date.now();
+ const loading='<div class="track-loading"><span class="track-spinner" aria-hidden="true"></span><span class="track-loading-copy"><strong>Locating your shipment</strong><small>Checking the latest available tracking updates…</small><span class="track-pulse"></span></span></div>';
+ output.innerHTML=loading;heroOutput.innerHTML=loading;
+ const trackButtons=[...document.querySelectorAll('button[onclick*="track("]')];
+ trackButtons.forEach(button=>{button.disabled=true;button.dataset.originalText=button.textContent;button.textContent="Searching…";});
+ showShipmentLoader("Tracking your package","Connecting to your shipment record");
  try{
   const client=await window.facilSupabaseReady;
   if(!client)throw new Error("Tracking service could not load. Please try again.");
@@ -551,11 +584,16 @@ async function track(inputId){
    throw new Error(message);
   }
   if(!data||!data.ok)throw new Error(data?.error||"No shipment found for that tracking number.");
-  const s=data.shipment;
+  const shipment=data.shipment;
   const events=(data.events||[]).slice().reverse().map(ev=>'<div class="status"><strong>'+safe(ev.status)+'</strong>'+(ev.location?' · '+safe(ev.location):'')+'<br><small>'+safe(new Date(ev.eventTime).toLocaleString())+'</small></div>').join("");
-  output.innerHTML='<p>Tracking ID: <strong>'+safe(s.trackingId)+'</strong></p><div class="status"><strong>Current status:</strong> '+safe(s.status)+'<br><strong>Route:</strong> '+safe(s.origin||"—")+' → '+safe(s.destination||"—")+'<br><strong>Service:</strong> '+safe(s.serviceType||"—")+'</div><h3 style="font-size:13px;margin-top:14px">Shipment updates</h3>'+(events||'<p style="margin-top:10px;color:#a9b8cc;font-size:12px">No tracking events have been recorded yet.</p>');
-  heroOutput.textContent="Shipment found. Current status: "+s.status+".";
+  output.innerHTML='<p>Tracking ID: <strong>'+safe(shipment.trackingId)+'</strong></p><div class="status"><strong>Current status:</strong> '+safe(shipment.status)+'<br><strong>Route:</strong> '+safe(shipment.origin||"—")+' → '+safe(shipment.destination||"—")+'<br><strong>Service:</strong> '+safe(shipment.serviceType||"—")+'</div><h3 style="font-size:13px;margin-top:14px">Shipment updates</h3>'+(events||'<p style="margin-top:10px;color:#a9b8cc;font-size:12px">No tracking events have been recorded yet.</p>');
+  heroOutput.textContent="Shipment found. Current status: "+shipment.status+".";
  }catch(error){output.textContent=error instanceof Error?error.message:"Tracking is temporarily unavailable.";heroOutput.textContent="No tracking result available.";}
+ finally{
+  await new Promise(resolve=>setTimeout(resolve,Math.max(0,700-(Date.now()-startedAt))));
+  hideShipmentLoader();
+  trackButtons.forEach(button=>{button.disabled=false;button.textContent=button.dataset.originalText||"Track now";delete button.dataset.originalText;});
+ }
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
 }
 
