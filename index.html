@@ -331,13 +331,6 @@ function track(inputId){
  heroOutput.textContent="Tracking ID entered. Check the tracking section for details.";
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
 }
-document.getElementById("quoteForm").addEventListener("submit",function(e){
- e.preventDefault();
- const data={name:document.getElementById("name").value.trim(),email:document.getElementById("email").value.trim(),type:document.getElementById("type").value,destination:document.getElementById("destination").value.trim(),details:document.getElementById("details").value.trim()};
- const body="Facil Express shipment request\n\nName: "+data.name+"\nEmail: "+data.email+"\nType: "+data.type+"\nDestination: "+data.destination+"\nDetails: "+data.details;
- document.getElementById("formResult").textContent="Your request is ready. Your email app can open so you can review and send it.";
- if(confirm("Open your email app to review and send this shipment request?")){window.location.href="mailto:?subject="+encodeURIComponent("Facil Express shipment request")+"&body="+encodeURIComponent(body);}
-});
 function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));}
 function sendChat(){const input=document.getElementById("chatInput");const message=input.value.trim();if(!message)return;const box=document.getElementById("messages");const p=document.createElement("p");p.style.cssText="margin-top:12px;padding:9px;background:#07172e;border-radius:7px;overflow-wrap:anywhere";p.textContent="You: "+message;box.appendChild(p);const reply=document.createElement("p");reply.style.cssText="margin-top:10px;color:#46d6c6";reply.textContent="Thanks for your message. This chat preview is not connected to a live agent yet.";box.appendChild(reply);box.scrollTop=box.scrollHeight;input.value="";}
 document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
