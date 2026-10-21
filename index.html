@@ -243,6 +243,50 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 @keyframes tracking-appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.track-spinner,.track-pulse:after{animation:none}}
 
+
+/* Restored homepage showcase sections */
+.showcase-section{position:relative;overflow:hidden;padding:64px 0;border-top:1px solid rgba(169,184,204,.1)}
+.showcase-section:nth-of-type(even){background:linear-gradient(135deg,#091a31,#07152b 65%)}
+.showcase-head{max-width:720px;margin-bottom:28px}
+.showcase-eyebrow{display:inline-flex;align-items:center;gap:9px;color:#68aaff;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.showcase-eyebrow:before{content:"";width:22px;height:2px;background:#ffc400;border-radius:2px}
+.showcase-head h2,.story-copy h2{font-size:clamp(27px,4vw,39px);line-height:1.15;letter-spacing:-1px;margin:0 0 12px}
+.showcase-head p,.story-copy>p{max-width:620px;color:#a9b8cc;font-size:14px;line-height:1.8}
+.network-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
+.network-points{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.network-point{padding:13px;border:1px solid #233d5d;border-radius:10px;background:#0c2038}
+.network-point strong{display:block;font-size:13px;margin-bottom:3px}
+.network-point span{display:block;color:#91a7c0;font-size:11px}
+.globe-card{min-height:230px;border:1px solid #21466c;border-radius:16px;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at center,#103d6a 0%,#0a203b 54%,#07152b 100%);position:relative}
+.globe-card:before,.globe-card:after{content:"";position:absolute;width:82%;aspect-ratio:1.6;border:1px solid #2485d355;border-radius:50%;transform:rotate(-18deg)}
+.globe-card:after{width:65%;transform:rotate(28deg)}
+.globe-card svg{width:100%;max-width:620px;position:relative;z-index:1}
+.story-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
+.story-photo{position:relative;min-height:300px;border:1px solid #294766;border-radius:16px;overflow:hidden;background:#10243f}
+.story-photo img{display:block;width:100%;height:100%;min-height:300px;position:absolute;inset:0;object-fit:cover;object-position:center 38%}
+.story-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,14,29,.92),transparent 66%),linear-gradient(90deg,rgba(4,14,29,.22),transparent)}
+.story-photo-caption{position:absolute;z-index:1;left:20px;right:20px;bottom:18px}
+.story-photo-caption strong{display:block;font-size:17px}
+.story-photo-caption span{display:block;font-size:12px;color:#c2d0e0;margin-top:3px}
+.story-copy .benefit-points{display:grid;gap:13px;margin-top:22px}
+.benefit-point{display:flex;gap:12px;align-items:flex-start}
+.benefit-check{flex:0 0 27px;height:27px;border-radius:8px;background:#0b3444;border:1px solid #1b5b66;color:#62e1d1;display:grid;place-items:center;font-weight:900}
+.benefit-point strong{display:block;font-size:14px;margin-bottom:2px}
+.benefit-point span{display:block;color:#a4b5c9;font-size:12px;line-height:1.65}
+.story-quote{margin-top:20px;padding:15px 17px;border-left:3px solid #ffc400;border-radius:0 10px 10px 0;background:#0d2037;color:#d7e2ee;font-size:13px;line-height:1.75}
+.reviews-grid{display:grid;grid-template-columns:1fr;gap:13px;margin-top:26px}
+.review-card{height:100%;padding:20px;border:1px solid #263e5a;border-radius:13px;background:linear-gradient(145deg,#10243d,#0a1a30)}
+.review-stars{color:#ffc400;letter-spacing:3px;font-size:14px}
+.review-card blockquote{margin:13px 0 20px;color:#d0dbe8;font-size:13px;line-height:1.8}
+.review-author{display:flex;align-items:center;gap:11px;border-top:1px solid #243951;padding-top:14px}
+.review-avatar{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#1b69b9,#17314e);color:#fff;font-weight:800}
+.review-author strong{display:block;font-size:12px}
+.review-author span{display:block;font-size:11px;color:#8fa5bd;margin-top:2px}
+.stories-cta{margin-top:25px;border:1px solid #24486b;border-radius:15px;padding:25px;background:radial-gradient(ellipse at 90% 0%,#124477,#0b2340 58%,#091a30);display:flex;flex-direction:column;gap:17px;align-items:flex-start}
+.stories-cta h3{font-size:23px;line-height:1.25;margin-bottom:5px}
+.stories-cta p{font-size:13px;color:#b2c2d5}
+@media(min-width:720px){.showcase-section{padding:78px 0}.network-grid{grid-template-columns:.86fr 1.14fr;gap:36px}.globe-card{min-height:340px}.story-grid{grid-template-columns:1fr 1fr;gap:42px}.story-photo,.story-photo img{min-height:420px}.reviews-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stories-cta{flex-direction:row;align-items:center;justify-content:space-between;padding:30px}.stories-cta .btn{flex-shrink:0}}
+
 </style>
 </head>
 <body>
@@ -356,6 +400,57 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 <div id="packageSuccess" hidden aria-live="polite"></div>
 </div>
 </section>
+
+<section class="showcase-section" id="global-network">
+  <div class="wrap">
+    <div class="network-grid">
+      <div>
+        <div class="showcase-eyebrow">Our delivery network</div>
+        <div class="showcase-head"><h2>Closer to every destination.</h2><p>From local collection to international delivery, Facil Express keeps your shipment journey clear and connected.</p></div>
+        <div class="network-points">
+          <div class="network-point"><strong>Americas</strong><span>Regional collection and delivery</span></div>
+          <div class="network-point"><strong>Europe</strong><span>Connected shipping routes</span></div>
+          <div class="network-point"><strong>Africa & Middle East</strong><span>Local support along the way</span></div>
+          <div class="network-point"><strong>Asia Pacific</strong><span>International delivery options</span></div>
+        </div>
+      </div>
+      <div class="globe-card" role="img" aria-label="Illustration of connected global shipping routes">
+        <svg viewBox="0 0 640 360" aria-hidden="true"><defs><radialGradient id="showcaseGlow"><stop stop-color="#168aff" stop-opacity=".4"/><stop offset="1" stop-color="#168aff" stop-opacity="0"/></radialGradient><pattern id="showcaseDots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#5aa9ee" opacity=".7"/></pattern></defs><ellipse cx="320" cy="180" rx="270" ry="145" fill="url(#showcaseGlow)"/><g fill="url(#showcaseDots)" stroke="#226cb0" stroke-width=".6"><path d="M64 75 104 51 152 58 174 84 160 103 185 118 171 145 143 156 133 183 110 174 96 145 77 133 61 104Z"/><path d="M174 182 203 195 216 225 206 260 222 290 204 314 184 286 179 250 164 221Z"/><path d="M272 73 299 59 321 72 314 94 289 99Z"/><path d="M302 108 337 93 378 104 394 132 374 153 346 148 330 173 308 158 288 132Z"/><path d="M321 169 348 178 365 210 350 249 330 270 314 240 304 208Z"/><path d="M377 74 417 56 463 65 499 88 537 102 552 130 529 146 490 137 469 160 437 150 417 128 388 118Z"/><path d="M466 182 492 193 508 220 496 246 474 230Z"/></g><g stroke="#168aff" stroke-width="2" fill="none"><path d="M124 119Q245 18 354 126"/><path d="M354 126Q422 66 483 111"/><path d="M354 126Q390 235 476 211"/><path d="M124 119Q140 204 193 238"/><path d="M193 238Q325 286 476 211"/></g><g fill="#ffc400"><circle cx="124" cy="119" r="5"/><circle cx="354" cy="126" r="5"/><circle cx="483" cy="111" r="5"/><circle cx="476" cy="211" r="5"/><circle cx="193" cy="238" r="5"/></g><g fill="#c7e5ff" font-size="11" font-family="Arial,sans-serif"><text x="93" y="106">AMERICAS</text><text x="326" y="112">EUROPE</text><text x="454" y="98">ASIA</text><text x="444" y="231">PACIFIC</text></g></svg>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="showcase-section" id="why-facil">
+  <div class="wrap story-grid">
+    <div class="story-photo">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85" alt="Packages carefully handled in a professional shipping warehouse" loading="lazy">
+      <div class="story-photo-caption"><strong>Every parcel, handled with care.</strong><span>From collection to delivery.</span></div>
+    </div>
+    <div class="story-copy">
+      <div class="showcase-eyebrow">Why Facil Express</div>
+      <h2>Peace of mind, shipped with every parcel.</h2>
+      <p>Sending something important should feel simple. We focus on clear updates, careful handling and helpful support throughout your shipment journey.</p>
+      <div class="benefit-points">
+        <div class="benefit-point"><div class="benefit-check">✓</div><div><strong>Clear shipment updates</strong><span>See the latest recorded progress without the guesswork.</span></div></div>
+        <div class="benefit-point"><div class="benefit-check">✓</div><div><strong>Careful handling</strong><span>Keep your parcel journey organised from collection to delivery.</span></div></div>
+        <div class="benefit-point"><div class="benefit-check">✓</div><div><strong>Helpful human support</strong><span>Get guidance when you need help with your shipment.</span></div></div>
+      </div>
+      <div class="story-quote">“A good delivery service is about more than moving a box — it’s about keeping people informed and giving them confidence.”</div>
+    </div>
+  </div>
+</section>
+<section class="showcase-section" id="customer-stories">
+  <div class="wrap">
+    <div class="showcase-head"><div class="showcase-eyebrow">Customer stories</div><h2>Trusted for the things that matter.</h2><p>We want every customer to feel informed, supported and confident from the first step to the final handover.</p></div>
+    <div class="reviews-grid">
+      <article class="review-card"><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“The process felt clear from the start. I knew where to go for updates and what to expect next.”</blockquote><div class="review-author"><div class="review-avatar" aria-hidden="true">P</div><div><strong>Priya M.</strong><span>Small business customer</span></div></div></article>
+      <article class="review-card"><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Booking was straightforward and the shipment information was easy to understand. That made a real difference.”</blockquote><div class="review-author"><div class="review-avatar" aria-hidden="true">M</div><div><strong>Marcus B.</strong><span>Regular shipper</span></div></div></article>
+      <article class="review-card"><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“I appreciate having the key details in one place instead of wondering what is happening with my parcel.”</blockquote><div class="review-author"><div class="review-avatar" aria-hidden="true">A</div><div><strong>Amara O.</strong><span>Online seller</span></div></div></article>
+    </div>
+    <div class="stories-cta"><div><h3>Ready to send your next parcel?</h3><p>Start a shipment request or check the latest recorded tracking update.</p></div><a class="btn btn-blue" href="#send-package" onclick="event.preventDefault(); if(typeof openBooking==='function'){openBooking();}else{document.getElementById('send-package').scrollIntoView({behavior:'smooth'});}">Send a package <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
 <section class="content dark" id="contact">
 <div class="wrap contact-layout">
 <div class="section-head"><div class="eyebrow">Need help?</div><h2>Questions about your shipment?</h2><p>Use the package request form to provide your shipment details. For help with the site, open the support chat preview.</p><div class="contact-points"><div class="contact-point"><span>✓</span><span>Choose air, ocean, or road freight.</span></div><div class="contact-point"><span>✓</span><span>Provide package weight and pickup preferences.</span></div><div class="contact-point"><span>✓</span><span>Add a package photo if it helps describe your shipment.</span></div></div></div>
