@@ -777,5 +777,13 @@ window.toggleChat=toggleChat;
 setInterval(()=>{if(document.getElementById("chat")?.classList.contains("open"))refreshVisitorMessages();if(!document.getElementById("adminDashboard")?.hidden)loadSupportInboxWithoutThread();},8000);
 document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 </script>
+
+<script>
+// Worldwide city/place suggestions for pickup and delivery.
+(function(){
+ const fields=[document.getElementById('origin'),document.getElementById('destination')].filter(Boolean);
+ fields.forEach((input,i)=>{const list=document.createElement('datalist');list.id='world-place-suggestions-'+i;input.setAttribute('list',list.id);input.setAttribute('autocomplete','off');input.insertAdjacentElement('afterend',list);let timer;input.addEventListener('input',()=>{clearTimeout(timer);const q=input.value.trim();if(q.length<3){list.replaceChildren();return;}timer=setTimeout(async()=>{try{const res=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=7&q='+encodeURIComponent(q),{headers:{'Accept-Language':'en'}});if(!res.ok)return;const data=await res.json();list.replaceChildren(...data.map(place=>{const option=document.createElement('option');option.value=place.display_name;return option;}));}catch(e){console.warn('Place suggestions unavailable',e);}},350);});});
+})();
+</script>
 </body>
 </html>
