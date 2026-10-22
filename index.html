@@ -239,8 +239,8 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 #tracking .track-section{position:relative;z-index:1}
 #tracking .track-panel{box-shadow:0 20px 55px #0003}
 #tracking .trackrow .btn{min-width:112px}
-.track-loading{display:flex;align-items:center;gap:11px;color:#9fcaff!important;padding:12px 0}
-.track-spinner{width:22px;height:22px;flex:0 0 22px;border:2px solid #2b4e75;border-top-color:#53a5ff;border-right-color:#53a5ff;border-radius:50%;animation:track-spin .7s linear infinite}
+
+
 .track-loading-copy strong{display:block;color:#eaf4ff;font-size:12px}
 .track-loading-copy small{display:block;color:#9db4d0;font-size:10px}
 .track-pulse{height:3px;overflow:hidden;background:#183455;border-radius:3px;margin-top:9px;max-width:220px}
@@ -494,7 +494,7 @@ photoInput.addEventListener("change",function(){
 document.getElementById("packageForm").addEventListener("submit",async function(e){
  e.preventDefault();
  const form=this, out=document.getElementById("packageResult"), submit=form.querySelector('button[type="submit"]');
- const startedAt=Date.now();
+ 
  submit.disabled=true;submit.innerHTML='<span class="package-submit-spinner" aria-hidden="true"></span> Submitting…';out.innerHTML='<div class="package-submit-loading" role="status" aria-live="polite"><span class="package-submit-spinner" aria-hidden="true"></span><span><strong>Submitting your package request</strong><small>Please wait while we securely save your details.</small></span></div>';
  try{
   const fd=new FormData();
@@ -566,7 +566,7 @@ document.querySelectorAll('a[href="#tracking"]').forEach(a=>a.addEventListener("
  if(document.body.classList.contains("booking-mode"))return;
  e.preventDefault();
  history.replaceState(null,"",location.pathname+location.search+"#tracking");
- document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
+ document.getElementById("tracking").scrollIntoView();
 }));
 
 function openAdminLogin(e){if(e)e.preventDefault();const modal=document.getElementById("adminModal");if(modal){modal.classList.add("open");modal.style.display="flex";document.body.style.overflow="hidden";}}
@@ -674,8 +674,8 @@ async function track(inputId){
  if(!code){document.getElementById(inputId).focus();(inputId==="heroTrack"?heroOutput:output).textContent="Please enter your tracking number.";return;}
  document.getElementById("trackInput").value=code;document.getElementById("heroTrack").value=code;
  const startedAt=Date.now();
- const loading='<div class="track-loading"><span class="track-spinner" aria-hidden="true"></span><span class="track-loading-copy"><strong>Locating your shipment</strong><small>Checking the latest available tracking updates…</small><span class="track-pulse"></span></span></div>';
- output.innerHTML=loading;heroOutput.innerHTML=loading;
+ const loading="<p>Checking the latest available tracking updates…</p>";
+ output.textContent="Checking the latest available tracking updates…";heroOutput.textContent="Checking the latest available tracking updates…";
  const trackButtons=[...document.querySelectorAll('button[onclick*="track("]')];
  trackButtons.forEach(button=>{button.disabled=true;button.dataset.originalText=button.textContent;button.textContent="Searching…";});
  try{
@@ -694,7 +694,7 @@ async function track(inputId){
   heroOutput.textContent="Shipment found. Current status: "+shipment.status+".";
  }catch(error){output.textContent=error instanceof Error?error.message:"Tracking is temporarily unavailable.";heroOutput.textContent="No tracking result available.";}
  finally{
-  await new Promise(resolve=>setTimeout(resolve,Math.max(0,700-(Date.now()-startedAt))));
+  
   trackButtons.forEach(button=>{button.disabled=false;button.textContent=button.dataset.originalText||"Track now";delete button.dataset.originalText;});
  }
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
