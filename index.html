@@ -241,10 +241,10 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 #tracking .trackrow .btn{min-width:112px}
 
 
-.track-loading-copy strong{display:block;color:#eaf4ff;font-size:12px}
-.track-loading-copy small{display:block;color:#9db4d0;font-size:10px}
-.track-pulse{height:3px;overflow:hidden;background:#183455;border-radius:3px;margin-top:9px;max-width:220px}
-.track-pulse:after{content:"";display:block;height:100%;width:38%;background:linear-gradient(90deg,transparent,#48a0ff,#d7ebff,transparent);animation:track-progress 1.1s ease-in-out infinite}
+
+
+
+
 #trackingResult .status{animation:tracking-appear .35s ease both}
 @keyframes track-spin{to{transform:rotate(360deg)}}
 @keyframes track-progress{0%{transform:translateX(-110%)}100%{transform:translateX(310%)}}
@@ -673,8 +673,6 @@ async function track(inputId){
  const heroOutput=document.getElementById("heroResult");
  if(!code){document.getElementById(inputId).focus();(inputId==="heroTrack"?heroOutput:output).textContent="Please enter your tracking number.";return;}
  document.getElementById("trackInput").value=code;document.getElementById("heroTrack").value=code;
- const startedAt=Date.now();
- const loading="<p>Checking the latest available tracking updates…</p>";
  output.textContent="Checking the latest available tracking updates…";heroOutput.textContent="Checking the latest available tracking updates…";
  const trackButtons=[...document.querySelectorAll('button[onclick*="track("]')];
  trackButtons.forEach(button=>{button.disabled=true;button.dataset.originalText=button.textContent;button.textContent="Searching…";});
