@@ -500,6 +500,7 @@ photoInput.addEventListener("change",function(){
 document.getElementById("packageForm").addEventListener("submit",async function(e){
  e.preventDefault();
  const form=this, out=document.getElementById("packageResult"), submit=form.querySelector('button[type="submit"]');
+ const startedAt=Date.now();
  
  submit.disabled=true;submit.innerHTML='<span class="package-submit-spinner" aria-hidden="true"></span> Submitting…';out.innerHTML='<div class="package-submit-loading" role="status" aria-live="polite"><span class="package-submit-spinner" aria-hidden="true"></span><span><strong>Submitting your package request</strong><small>Please wait while we securely save your details.</small></span></div>';
  try{
@@ -509,7 +510,8 @@ document.getElementById("packageForm").addEventListener("submit",async function(
   const photo=photoInput.files&&photoInput.files[0];if(photo)fd.append("packagePhoto",photo,photo.name);
   const client=await window.facilSupabaseReady;
   if(!client)throw new Error("The secure booking service could not load. Please check your internet connection and try again.");
-  const {data,error}=await client.functions.invoke("create-package-request",{body:fd});
+  const result=await Promise.race([client.functions.invoke("create-package-request",{body:fd}),new Promise((_,reject)=>setTimeout(()=>reject(new Error("The booking service is taking too long to respond. Check your connection and try again. If you already received a reference number, do not submit again.")),30000))]);
+  const {data,error}=result;
   if(error){
    let message=error.message||"Request could not be submitted.";
    try{const payload=await error.context.json();if(payload&&payload.error)message=payload.error;}catch{}
@@ -792,10 +794,48 @@ document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="
 </script>
 
 <script>
-// Worldwide city/place suggestions for pickup and delivery.
+// Reliable mobile-friendly pickup and destination suggestions.
 (function(){
  const fields=[document.getElementById('origin'),document.getElementById('destination')].filter(Boolean);
- fields.forEach((input,i)=>{const list=document.createElement('datalist');list.id='world-place-suggestions-'+i;input.setAttribute('list',list.id);input.setAttribute('autocomplete','off');input.insertAdjacentElement('afterend',list);let timer;input.addEventListener('input',()=>{clearTimeout(timer);const q=input.value.trim();if(q.length<3){list.replaceChildren();return;}timer=setTimeout(async()=>{try{const res=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=7&q='+encodeURIComponent(q),{headers:{'Accept-Language':'en'}});if(!res.ok)return;const data=await res.json();list.replaceChildren(...data.map(place=>{const option=document.createElement('option');option.value=place.display_name;return option;}));}catch(e){console.warn('Place suggestions unavailable',e);}},350);});});
+ fields.forEach((input,i)=>{
+  input.removeAttribute('list');input.setAttribute('autocomplete','off');
+  const panel=document.createElement('div');
+  panel.className='place-suggestions';panel.hidden=true;
+  panel.setAttribute('role','listbox');
+  panel.style.cssText='position:absolute;left:0;right:0;top:100%;z-index:60;max-height:220px;overflow:auto;background:#10243f;border:1px solid #3a5472;border-radius:8px;box-shadow:0 12px 30px #0007';
+  const parent=input.parentElement;parent.style.position='relative';parent.appendChild(panel);
+  let timer,controller,sequence=0;
+  function close(){panel.hidden=true;panel.replaceChildren();}
+  input.addEventListener('input',()=>{
+   clearTimeout(timer);if(controller)controller.abort();const q=input.value.trim();sequence++;
+   if(q.length<3){close();return;}
+   panel.hidden=false;panel.innerHTML='<div style="padding:11px 13px;color:#a9b8cc;font-size:12px">Searching cities and countries…</div>';
+   const current=sequence;
+   timer=setTimeout(async()=>{
+    controller=new AbortController();
+    try{
+     const res=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=8&q='+encodeURIComponent(q),{headers:{'Accept-Language':'en'},signal:controller.signal});
+     if(!res.ok)throw new Error('Search unavailable');
+     const data=await res.json();if(current!==sequence)return;
+     panel.replaceChildren();
+     if(!data.length){panel.innerHTML='<div style="padding:11px 13px;color:#a9b8cc;font-size:12px">No matching places. You can enter the city and country manually.</div>';return;}
+     data.forEach(place=>{
+      const address=place.address||{};
+      const city=address.city||address.town||address.village||address.county||address.state||place.name||'';
+      const country=address.country||'';
+      const label=[city,country].filter(Boolean).join(', ')||place.display_name;
+      const button=document.createElement('button');button.type='button';button.setAttribute('role','option');
+      button.textContent=label;button.style.cssText='display:block;width:100%;text-align:left;padding:11px 13px;border:0;border-bottom:1px solid #243b59;background:#10243f;color:#f7f9fc;font-size:12px;cursor:pointer';
+      button.addEventListener('click',()=>{input.value=label;close();input.dispatchEvent(new Event('change',{bubbles:true}));});
+      panel.appendChild(button);
+     });
+    }catch(err){if(err.name==='AbortError')return;if(current===sequence)panel.innerHTML='<div style="padding:11px 13px;color:#f4d986;font-size:12px">Place search is unavailable. Enter the city and country manually.</div>';}
+   },450);
+  });
+  input.addEventListener('focus',()=>{if(input.value.trim().length>=3&&panel.childElementCount)panel.hidden=false;});
+  document.addEventListener('click',e=>{if(!parent.contains(e.target))close();});
+  input.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+ });
 })();
 </script>
 </body>
