@@ -27,7 +27,7 @@ nav a:hover{color:white}
 .btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .btn-blue{background:var(--blue);color:white}
 .btn-ghost{background:transparent;border-color:#52647d;color:white}
-.menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:7px;color:white;padding:8px 10px;cursor:pointer}.menu-toggle{position:relative;z-index:35;flex-shrink:0;touch-action:manipulation}nav.open{z-index:34}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:7px;color:white;padding:8px 10px;cursor:pointer}.menu-toggle{position:relative;z-index:100;flex-shrink:0;touch-action:manipulation;pointer-events:auto;min-width:44px;min-height:44px}nav.open{z-index:90;pointer-events:auto}
 .hero{position:relative;overflow:hidden;padding:76px 0 64px;background:radial-gradient(ellipse at 80% 38%,#123b69 0,rgba(10,34,63,.65) 25%,transparent 56%),linear-gradient(115deg,#07152b 0%,#091b34 64%,#0a203d 100%)}
 .hero:after{content:"";position:absolute;right:-120px;top:-190px;width:560px;height:560px;border:1px solid #41618520;border-radius:50%;box-shadow:0 0 0 48px #4161850b,0 0 0 96px #41618508;pointer-events:none}
 .hero-layout{display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:52px;position:relative;z-index:1}
@@ -670,8 +670,14 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAdminLogin();})
 
 const nav = document.getElementById("mainNav");
 const menuToggle = document.getElementById("menuToggle");
-if(nav && menuToggle){menuToggle.addEventListener("click", function(){const open=nav.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation":"Open navigation");menuToggle.textContent=open?"×":"☰";});
-nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");menuToggle.setAttribute("aria-label","Open navigation");menuToggle.textContent="☰";}));}
+if(nav && menuToggle){
+ const closeMobileNav=()=>{nav.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");menuToggle.setAttribute("aria-label","Open navigation");menuToggle.textContent="☰";};
+ menuToggle.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();const open=!nav.classList.contains("open");nav.classList.toggle("open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation":"Open navigation");menuToggle.textContent=open?"×":"☰";});
+ nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{closeMobileNav();}));
+ document.addEventListener("click",e=>{if(nav.classList.contains("open")&&!nav.contains(e.target)&&!menuToggle.contains(e.target))closeMobileNav();});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMobileNav();});
+ window.addEventListener("resize",()=>{if(window.innerWidth>760)closeMobileNav();});
+}
 function safe(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function track(inputId){
  const code=document.getElementById(inputId).value.trim().toUpperCase();
