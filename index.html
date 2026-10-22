@@ -459,7 +459,7 @@ button:disabled::before{content:"";display:inline-block;width:13px;height:13px;m
       <article class="review-card"><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Booking was straightforward and the shipment information was easy to understand. That made a real difference.”</blockquote><div class="review-author"><div class="review-avatar" aria-hidden="true">M</div><div><strong>Marcus B.</strong><span>Regular shipper</span></div></div></article>
       <article class="review-card"><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“I appreciate having the key details in one place instead of wondering what is happening with my parcel.”</blockquote><div class="review-author"><div class="review-avatar" aria-hidden="true">A</div><div><strong>Amara O.</strong><span>Online seller</span></div></div></article>
     </div>
-    <div class="stories-cta"><div><h3>Ready to send your next parcel?</h3><p>Start a shipment request or check the latest recorded tracking update.</p></div><a class="btn btn-blue" href="#send-package" onclick="event.preventDefault(); if(typeof openBooking==='function'){openBooking();}else{document.getElementById('send-package').scrollIntoView({behavior:'smooth'});}">Send a package <span aria-hidden="true">→</span></a></div>
+    <div class="stories-cta"><div><h3>Ready to send your next parcel?</h3><p>Start a shipment request or check the latest recorded tracking update.</p></div><a class="btn btn-blue" href="#send-package" onclick="event.preventDefault(); enterBooking();">Send a package <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
@@ -565,6 +565,7 @@ function startAnotherRequest(){
  document.getElementById("packageResult").textContent="";
  window.scrollTo({top:0,behavior:"smooth"});
 }
+document.querySelectorAll('a[href="?page=send-package"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();enterBooking();}));
 // Send Package uses a normal page URL so it still navigates if JavaScript navigation handlers fail.
  if(new URLSearchParams(location.search).get("page")==="send-package"){document.body.classList.add("booking-mode");document.getElementById("bookingBack").hidden=false;document.getElementById("packageForm").hidden=false;document.querySelector(".package-intro").hidden=false;window.scrollTo(0,0);}
 document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener("click",e=>{if(document.body.classList.contains("booking-mode")){e.preventDefault();leaveBooking();}}));
