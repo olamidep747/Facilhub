@@ -205,6 +205,14 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 #packageSuccess{margin-top:24px}
 .success-card{max-width:720px;margin:0 auto;padding:clamp(24px,5vw,44px);border:1px solid #2b4868;border-radius:17px;background:linear-gradient(145deg,#102843,#0a1b31);text-align:center;box-shadow:0 25px 65px #0002}
 .success-check{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 18px;border-radius:50%;background:#123c37;border:1px solid #2a9b80;color:#72e6c5;font-size:32px}
+@keyframes package-check-pop{0%{transform:scale(.55);opacity:0}65%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes package-ring-draw{from{stroke-dashoffset:176}to{stroke-dashoffset:0}}
+.success-check{animation:package-check-pop .45s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 0 0 7px #2a9b8012}
+.package-submit-loading{display:flex;align-items:center;gap:11px;padding:13px 14px;margin:14px 0;border:1px solid #2b4868;border-radius:9px;background:#0a1a30;color:#c5d9f2;font-size:12px}
+.package-submit-spinner{width:24px;height:24px;flex:0 0 24px;border:3px solid #294866;border-top-color:#55a5ff;border-right-color:#55a5ff;border-radius:50%;animation:track-spin .7s linear infinite}
+.package-submit-loading strong{display:block;color:#edf6ff;font-size:12px}
+.package-submit-loading small{display:block;color:#9eb5d0;font-size:10px;margin-top:2px}
+@media(prefers-reduced-motion:reduce){.success-check,.package-submit-spinner{animation:none}}
 .success-card h2{font-size:clamp(27px,4vw,38px);margin:0 0 10px}
 .success-card>p{max-width:520px;margin:0 auto;color:#b6c6d9;font-size:13px}
 .reference-label{margin-top:26px;color:#a9b8cc;font-size:10px;font-weight:800;letter-spacing:1.5px}
@@ -487,7 +495,7 @@ document.getElementById("packageForm").addEventListener("submit",async function(
  e.preventDefault();
  const form=this, out=document.getElementById("packageResult"), submit=form.querySelector('button[type="submit"]');
  const startedAt=Date.now();
- submit.disabled=true;submit.textContent="Submitting securely…";
+ submit.disabled=true;submit.innerHTML='<span class="package-submit-spinner" aria-hidden="true"></span> Submitting…';out.innerHTML='<div class="package-submit-loading" role="status" aria-live="polite"><span class="package-submit-spinner" aria-hidden="true"></span><span><strong>Submitting your package request</strong><small>Please wait while we securely save your details.</small></span></div>';
  try{
   const fd=new FormData();
   const fields=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","recipientEmail","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
@@ -539,7 +547,7 @@ function showPackageSuccess(data,emails){
  const sent=Number(data.emailsQueued||0), expected=Number(data.emailsExpected||2);
  const sameEmail=(emails.senderEmail||"").toLowerCase()===(emails.recipientEmail||"").toLowerCase(); const senderSent=sent>=1, receiverSent=sent>=2||(sameEmail&&sent>=1);
  const emailState=(label,email,ok)=>'<div class="email-state '+(ok?"":"failed")+'"><strong><span class="email-icon">'+(ok?"✓":"!")+'</span>'+label+'</strong>'+safe(email||"Email address")+'<br><span>'+(ok?"Confirmation accepted for delivery":"Email delivery could not be confirmed; please contact support")+'</span></div>';
- target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your request has been saved securely. Keep this reference code to identify your request while the Facil Express team reviews the shipment details.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Go back to home</button><button class="btn btn-ghost" type="button" onclick="window.location.href=location.pathname+&quot;#tracking&quot;">Track your package</button></div></div>';
+ target.innerHTML='<div class="success-card"><div class="success-check" aria-hidden="true">✓</div><h2>Package request received</h2><p>Your package request was submitted successfully and saved securely. Keep this reference code for your records. The shipping team will handle the shipment arrangements next.</p><div class="reference-label">YOUR REQUEST REFERENCE</div><div class="reference-code">'+safe(reference)+' <button type="button" class="btn btn-ghost" id="copyReference" style="padding:7px 9px;font-size:10px">Copy</button></div><p id="copyMessage" style="font-size:11px;min-height:16px"></p><div class="email-confirmations">'+emailState("Sender confirmation",emails.senderEmail,senderSent)+emailState("Receiver confirmation",emails.recipientEmail,receiverSent)+'</div><p>'+(senderSent&&receiverSent?"Both confirmation emails were accepted by the email service for delivery. Please check inbox and spam folders.": "Your request is saved, but the system could not confirm delivery to both email addresses. The reference code above is valid; please contact support if no confirmation arrives.")+'</p><div class="success-actions"><button class="btn btn-blue" type="button" onclick="leaveBooking()">Go back to home</button><button class="btn btn-ghost" type="button" onclick="window.location.href=location.pathname+&quot;#tracking&quot;">Track your package</button></div></div>';
  target.hidden=false;
  document.getElementById("copyReference").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(reference);document.getElementById("copyMessage").textContent="Reference copied.";}catch{document.getElementById("copyMessage").textContent="Reference: "+reference;}});
  window.scrollTo({top:0,behavior:"smooth"});
