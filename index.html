@@ -295,6 +295,12 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 .stories-cta p{font-size:13px;color:#b2c2d5}
 @media(min-width:720px){.showcase-section{padding:78px 0}.network-grid{grid-template-columns:.86fr 1.14fr;gap:36px}.globe-card{min-height:340px}.story-grid{grid-template-columns:1fr 1fr;gap:42px}.story-photo,.story-photo img{min-height:420px}.reviews-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stories-cta{flex-direction:row;align-items:center;justify-content:space-between;padding:30px}.stories-cta .btn{flex-shrink:0}}
 
+
+/* Consistent circular loading indicator across Facil Express */
+.loading-ring,.global-spinner{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:facil-spin .7s linear infinite;vertical-align:middle;flex-shrink:0}
+@keyframes facil-spin{to{transform:rotate(360deg)}}
+button:disabled{cursor:wait;opacity:.88}
+button:disabled::before{content:"";display:inline-block;width:13px;height:13px;margin-right:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:facil-spin .7s linear infinite;vertical-align:-2px}
 </style>
 </head>
 <body>
