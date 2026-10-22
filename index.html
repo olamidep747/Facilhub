@@ -711,7 +711,9 @@ async function track(inputId){
  document.getElementById("tracking").scrollIntoView({behavior:"smooth"});
 }
 
-window.track=track;window.openAdminLogin=openAdminLogin;\n// Open a tracking link with ?tracking=FX-... and automatically load the shipment.\nconst trackingFromLink=new URLSearchParams(location.search).get("tracking");if(trackingFromLink){const code=trackingFromLink.trim().toUpperCase();const hero=document.getElementById("heroTrack"),field=document.getElementById("trackInput");if(hero)hero.value=code;if(field)field.value=code;window.addEventListener("load",()=>track("trackInput"));}window.closeAdminLogin=closeAdminLogin;window.loadAdminRequests=loadAdminRequests;window.adminSignOut=adminSignOut;
+window.track=track;window.openAdminLogin=openAdminLogin;
+// Open a tracking link with ?tracking=FX-... and automatically load the shipment.
+const trackingFromLink=new URLSearchParams(location.search).get("tracking");if(trackingFromLink){const code=trackingFromLink.trim().toUpperCase();const hero=document.getElementById("heroTrack"),field=document.getElementById("trackInput");if(hero)hero.value=code;if(field)field.value=code;window.addEventListener("load",()=>track("trackInput"));}window.closeAdminLogin=closeAdminLogin;window.loadAdminRequests=loadAdminRequests;window.adminSignOut=adminSignOut;
 function toggleChat(){const chat=document.getElementById("chat");const open=chat.classList.toggle("open");document.getElementById("chatToggle").setAttribute("aria-expanded",String(open));}
 let supportConversationId=null;
 let supportInboxCache=[];
