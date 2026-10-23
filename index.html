@@ -171,7 +171,18 @@ footer{border-top:1px solid #20344f;background:#061124;padding:28px 0}
 .admin-card .btn{width:100%}
 #adminMessage{font-size:11px;color:var(--yellow);margin-top:12px}
 #adminRequests{display:grid;gap:12px;margin-top:16px}
-.admin-request{background:#091a31;border:1px solid #2a4260;border-radius:9px;padding:14px}
+.admin-request{display:grid;grid-template-columns:minmax(110px,.85fr) minmax(150px,1fr) minmax(140px,1fr) minmax(150px,1fr) minmax(210px,1.25fr);align-items:center;gap:14px;background:#091a31;border:1px solid #2a4260;border-radius:9px;padding:14px}
+.admin-request .admin-cell{min-width:0;font-size:11px;color:#bdc9d8;overflow-wrap:anywhere}
+.admin-request .admin-cell strong{display:block;font-size:9px;letter-spacing:.7px;text-transform:uppercase;color:#8fa6c1;margin-bottom:5px}
+.admin-request .admin-cell .primary{display:block;color:#f7f9fc;font-size:12px;font-weight:800}
+.admin-request .admin-cell .secondary{display:block;color:#a9b8cc;font-size:10px;margin-top:3px}
+.admin-request .admin-controls{display:flex;flex-wrap:wrap;gap:7px;margin:0;align-items:center;justify-content:flex-end}
+.admin-request .admin-controls select{width:100%;min-width:110px;flex:1}
+.admin-request .admin-controls .btn{padding:8px 10px;font-size:10px;white-space:nowrap}
+.admin-request .admin-controls .status-save-group{display:flex;gap:6px;width:100%}
+.admin-request .admin-controls .status-save-group select{min-width:90px}
+@media(max-width:1000px){.admin-request{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-request .admin-controls{grid-column:1/-1;justify-content:flex-start}.admin-request .admin-controls .status-save-group{width:auto;flex:1}}
+@media(max-width:600px){.admin-request{grid-template-columns:1fr;gap:10px}.admin-request .admin-controls{grid-column:auto;display:grid;grid-template-columns:1fr 1fr}.admin-request .admin-controls .status-save-group{grid-column:1/-1;width:100%}.admin-request .admin-controls .btn{width:100%;white-space:normal}}
 .admin-request h4{font-size:14px;margin-bottom:6px;overflow-wrap:anywhere}
 .admin-request p{margin:4px 0;font-size:11px;overflow-wrap:anywhere;color:#bdc9d8}
 .admin-request .admin-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
@@ -615,19 +626,27 @@ async function loadAdminRequests(){
  const {data,error}=await client.from("package_requests").select("*").order("created_at",{ascending:false}).limit(50);
  if(error){target.innerHTML='<div class="admin-empty">Could not load requests. Please sign in again if your session expired.</div>';return;}
  if(!data||!data.length){target.innerHTML='<div class="admin-empty">No package requests yet. New customer bookings will appear here.</div>';return;}
- target.innerHTML=data.map(r=>{
-  const details=[["From",r.origin],["To",r.destination],["Method",r.service_type],["Speed",r.delivery_speed],["Package",r.package_type],["Weight",r.weight_kg+" kg"],["Pickup",r.pickup_date||"Not selected"],["Time",r.pickup_time||"Flexible"],["Sender",r.sender_name+" · "+r.sender_email],["Phone",r.sender_phone],["Receiver",r.recipient_name+" · "+r.recipient_phone],["Receiver email",r.recipient_email||"—"],["Description",r.package_description||"—"]];
-  const detailHtml=details.map(([k,v])=>'<p><strong>'+safe(k)+':</strong> '+safe(v==null?"":v)+'</p>').join("");
-  const photo=r.package_photo_path?'<button type="button" class="btn btn-ghost photo-button" data-path="'+safe(r.package_photo_path)+'">View package photo</button>':"";
+ target.innerHTML='<div class="admin-request admin-request-header"><div class="admin-cell"><strong>Request / status</strong></div><div class="admin-cell"><strong>Sender</strong></div><div class="admin-cell"><strong>Route</strong></div><div class="admin-cell"><strong>Receiver</strong></div><div class="admin-cell"><strong>Actions</strong></div></div>'+data.map(r=>{
+  const id=safe(r.id.slice(0,8).toUpperCase());
+  const sender='<span class="primary">'+safe(r.sender_name||"—")+'</span><span class="secondary">'+safe(r.sender_email||"No email")+'</span><span class="secondary">'+safe(r.sender_phone||"")+'</span>';
+  const route='<span class="primary">'+safe(r.origin||"—")+' → '+safe(r.destination||"—")+'</span><span class="secondary">'+safe(r.service_type||"")+(r.delivery_speed?' · '+safe(r.delivery_speed):'')+'</span>';
+  const receiver='<span class="primary">'+safe(r.recipient_name||"—")+'</span><span class="secondary">'+safe(r.recipient_phone||"")+'</span><span class="secondary">'+safe(r.recipient_email||"")+'</span>';
   const statuses=["pending","reviewing","quoted","approved","rejected","converted"];
   const options=statuses.map(s=>'<option value="'+s+'" '+(r.status===s?"selected":"")+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>').join("");
-  const tracking=r.tracking_id?'<p><strong>Tracking ID:</strong> '+safe(r.tracking_id)+'</p>':"";
-  const create=r.tracking_id?'':'<button type="button" class="btn create-shipment" data-id="'+safe(r.id)+'">Create shipment & tracking ID</button>';
-  return '<article class="admin-request"><h4>Request '+safe(r.id.slice(0,8).toUpperCase())+' · '+safe(new Date(r.created_at).toLocaleString())+'</h4>'+detailHtml+tracking+'<p><strong>Status:</strong> '+safe(r.status)+'</p><div class="admin-controls"><select aria-label="Update request status" class="request-status" data-id="'+safe(r.id)+'">'+options+'</select><button type="button" class="btn btn-ghost save-status" data-id="'+safe(r.id)+'">Save status</button>'+photo+create+'</div></article>';
+  const photo=r.package_photo_path?'<button type="button" class="btn btn-ghost photo-button" data-path="'+safe(r.package_photo_path)+'">View photo</button>':"";
+  const tracking=r.tracking_id?'<span class="secondary">Tracking: '+safe(r.tracking_id)+'</span>':"";
+  const copy=r.tracking_id?'<button type="button" class="btn btn-ghost copy-tracking" data-tracking="'+safe(r.tracking_id)+'">Copy link</button>':"";
+  const create=r.tracking_id?'':'<button type="button" class="btn create-shipment" data-id="'+safe(r.id)+'">Create shipment</button>';
+  return '<article class="admin-request"><div class="admin-cell"><span class="primary">#'+id+'</span><span class="secondary">'+safe(new Date(r.created_at).toLocaleString())+'</span><span class="secondary">Status: '+safe(r.status||"pending")+'</span>'+tracking+'</div><div class="admin-cell">'+sender+'</div><div class="admin-cell">'+route+'</div><div class="admin-cell">'+receiver+'</div><div class="admin-controls"><div class="status-save-group"><select aria-label="Update request status" class="request-status" data-id="'+safe(r.id)+'">'+options+'</select><button type="button" class="btn btn-ghost save-status" data-id="'+safe(r.id)+'">Update</button></div>'+copy+photo+create+'</div></article>';
  }).join("");
  target.querySelectorAll(".save-status").forEach(b=>b.addEventListener("click",()=>updateRequestStatus(b.dataset.id,target.querySelector('.request-status[data-id="'+b.dataset.id+'"]').value)));
  target.querySelectorAll(".create-shipment").forEach(b=>b.addEventListener("click",()=>createShipmentFromRequest(b.dataset.id,b)));
  target.querySelectorAll(".photo-button").forEach(b=>b.addEventListener("click",()=>viewPackagePhoto(b.dataset.path)));
+ target.querySelectorAll(".copy-tracking").forEach(b=>b.addEventListener("click",async()=>{
+  const url=new URL(location.href);url.search="";url.hash="";url.searchParams.set("tracking",b.dataset.tracking);
+  try{await navigator.clipboard.writeText(url.toString());b.textContent="Copied!";setTimeout(()=>b.textContent="Copy link",1500);}
+  catch{window.prompt("Copy this tracking link:",url.toString());}
+ }));
 }
 async function updateRequestStatus(id,status){
  const client=await window.facilSupabaseReady;
