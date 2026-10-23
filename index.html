@@ -405,6 +405,11 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
  .footer-links{flex-wrap:wrap;gap:12px 18px}
 }
 
+
+.footer-brand-lockup{display:inline-flex;align-items:center;gap:10px;color:#f5f8fc}
+.footer-brand-lockup .brand-mark{display:grid;place-items:center;width:40px;height:40px;font-size:20px}
+.footer-brand-lockup>span:last-child{color:#f5f8fc}
+.footer-brand-lockup>span:last-child span{color:#e0a000}
 </style>
 </head>
 <body>
@@ -414,7 +419,7 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 <span>Facil <span class="express">Express</span></span>
 </a>
 <nav id="mainNav" aria-label="Main navigation">
-<a href="#home">Home</a><a href="#services">Services</a><a href="tracking.html">Tracking</a><a href="#metrics">About</a><a href="#contact">Contact</a><a href="?page=send-package">Send a Package</a><a href="admin.html" class="admin-nav">Admin Login</a>
+<a href="#home">Home</a><a href="#services">Services</a><a href="tracking.html">Tracking</a><a href="#metrics">About</a><a href="#cta">Contact</a>
 </nav>
 <a class="btn header-cta" href="?page=send-package">Send a Package <span aria-hidden="true">↗</span></a>
 <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-controls="mainNav" aria-expanded="false">☰</button>
@@ -495,7 +500,7 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 <div class="metric-card"><strong>48</strong><span>Regional hubs</span></div>
 <div class="metric-card gold"><strong>99.4%</strong><span>On-time delivery</span></div>
 </div></section>
-<section class="reference-cta"><div class="wrap cta-inner"><div><h2>Not sure which service fits?</h2><p>Tell us about your shipment and we’ll recommend the best route.</p></div><a class="btn cta-button" href="?page=send-package">◉ &nbsp; Talk to our team</a></div></section>
+<section class="reference-cta" id="cta"><div class="wrap cta-inner"><div><h2>Not sure which service fits?</h2><p>Tell us about your shipment and we’ll recommend the best route.</p></div><a class="btn cta-button" href="?page=send-package">◉ &nbsp; Talk to our team</a></div></section>
 <section class="content" id="how" hidden>
 <div class="wrap"><div class="section-head"><div class="eyebrow">A simple process</div><h2>What happens next?</h2><p>Four clear steps to help you move a shipment forward.</p></div>
 <div class="steps"><div class="step"><b>STEP 01</b><h3>Request</h3><p>Share the basic details of your shipment and destination.</p></div><div class="step"><b>STEP 02</b><h3>Confirm</h3><p>Review the service, shipment information, and next steps.</p></div><div class="step"><b>STEP 03</b><h3>Track</h3><p>Use your tracking reference to check recorded progress.</p></div><div class="step"><b>STEP 04</b><h3>Receive</h3><p>Follow the updates and stay informed through delivery.</p></div></div>
@@ -601,7 +606,7 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 </div>
 </section>
 </main>
-<footer><div class="wrap footer-inner"><div><div class="footer-brand">Facil <span>Express</span></div><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="tracking.html">Track a Package</a><a href="?page=send-package">Send a Package</a><a href="#contact">Contact</a><a href="admin.html">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<footer><div class="wrap footer-inner"><div><a class="footer-brand footer-brand-lockup" href="#home" aria-label="Facil Express home"><span class="brand-mark" aria-hidden="true">🚚</span><span>Facil <span>Express</span></span></a><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="tracking.html">Track a Package</a><a href="?page=send-package">Send a Package</a><a href="#cta">Contact</a><a href="admin.html">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
 <div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Sign in with an administrator account.</div></form><div id="adminDashboard" hidden><div class="admin-card-head"><h3 style="font-size:17px">Shipment requests</h3><div class="admin-toolbar"><button class="btn btn-ghost" type="button" onclick="loadAdminRequests()">Refresh</button><button class="btn" type="button" onclick="adminSignOut()">Sign out</button></div></div><p id="adminWelcome" style="font-size:11px;color:var(--muted)"></p><div id="adminRequests"><div class="admin-empty">Loading shipment requests…</div></div><section class="admin-chat"><div class="admin-card-head"><h3 style="font-size:17px">Customer support inbox</h3><button class="btn btn-ghost" type="button" onclick="loadSupportInbox()">Refresh inbox</button></div><div class="support-admin-layout"><div id="supportConversations" class="support-conversations"><div class="admin-empty">Loading conversations…</div></div><div class="support-thread"><div id="supportThreadTitle" class="support-thread-title">Select a conversation to reply</div><div id="supportThreadMessages" class="support-thread-messages"><p class="admin-empty">Customer messages will appear here.</p></div><form id="supportReplyForm" class="support-reply-form"><input id="supportReplyInput" maxlength="2000" placeholder="Write a reply…" aria-label="Reply to customer" required><button class="btn btn-blue" type="submit">Reply</button></form></div></div></section></div></div></div>
 <button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle">● &nbsp; Live Chat</button>
 <div id="chat" aria-label="Facil Express chat preview"><div class="chathead"><span class="chat-brand"><span class="chat-shield" aria-hidden="true">✓</span><span><strong>Facil Express</strong><small>Customer Support</small></span></span><button onclick="toggleChat()" aria-label="Close chat">×</button></div><div class="chat-status"><span></span> Support message preview</div><div id="messages"><p class="support-welcome">Welcome to Facil Express Support. Send us a message and our team can respond through this chat.</p><p class="support-disclaimer">Messages are saved so the support team can follow up. Please do not send payment details or passwords.</p></div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Write your message…"><button onclick="sendChat()">Send</button></div></div>
