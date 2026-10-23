@@ -223,7 +223,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 .package-submit-spinner{width:24px;height:24px;flex:0 0 24px;border:3px solid #294866;border-top-color:#55a5ff;border-right-color:#55a5ff;border-radius:50%;animation:track-spin .7s linear infinite}
 .package-submit-loading strong{display:block;color:#edf6ff;font-size:12px}
 .package-submit-loading small{display:block;color:#9eb5d0;font-size:10px;margin-top:2px}
-@media(prefers-reduced-motion:reduce){.success-check,.package-submit-spinner{animation:facil-spin .7s linear infinite}}
+@media(prefers-reduced-motion:reduce){.success-check,.package-submit-spinner{animation:none}}
 .success-card h2{font-size:clamp(27px,4vw,38px);margin:0 0 10px}
 .success-card>p{max-width:520px;margin:0 auto;color:#b6c6d9;font-size:13px}
 .reference-label{margin-top:26px;color:#a9b8cc;font-size:10px;font-weight:800;letter-spacing:1.5px}
@@ -260,7 +260,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 
 @keyframes track-progress{0%{transform:translateX(-110%)}100%{transform:translateX(310%)}}
 @keyframes tracking-appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.track-spinner,.track-pulse:after{animation:none}}
+@media(prefers-reduced-motion:reduce){.track-spinner,.track-pulse:after,.loading-ring,.global-spinner,.package-submit-spinner{animation:none}}
 
 
 /* Restored homepage showcase sections */
@@ -310,7 +310,7 @@ body.booking-mode #send-package .section-head h2{font-size:clamp(32px,4vw,44px)}
 @keyframes track-spin{to{transform:rotate(360deg)}}
 @keyframes facil-spin{to{transform:rotate(360deg)}}
 /* Consistent circular loading indicator across Facil Express */
-.loading-ring,.global-spinner{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:none;vertical-align:middle;flex-shrink:0}
+.loading-ring,.global-spinner{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:track-spin .7s linear infinite;vertical-align:middle;flex-shrink:0}
 
 button:disabled{cursor:wait;opacity:.88}
 button:disabled::before{content:"";display:inline-block;width:13px;height:13px;margin-right:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:facil-spin .7s linear infinite;vertical-align:-2px}
