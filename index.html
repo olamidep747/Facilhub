@@ -432,6 +432,20 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 @media(max-width:760px){.reference-services{padding-top:70px!important}.cta-button{width:auto!important;align-self:flex-start}}
 
 .reference-footer .footer-group a[href="admin.html"]{color:#e0a000}
+
+/* Split intro band and service-card area to mirror the reference page */
+.reference-services-intro{background:#031a3b;padding:70px 0 88px}
+.reference-services-intro .section-head{max-width:770px;margin-bottom:0}
+.reference-services-intro .eyebrow{font-size:10px;letter-spacing:1.6px;color:#e0a000}
+.reference-services-intro h2{font-size:clamp(32px,9.5vw,42px);letter-spacing:-1.1px;line-height:1.15;margin:16px 0 20px}
+.reference-services-intro .section-head>p{font-size:15px;line-height:1.65;color:#aab8c8;max-width:690px}
+.reference-services{background:#121f2b;padding:26px 0 42px!important}
+.reference-services .grid{margin-top:0}
+@media(max-width:760px){
+ .reference-services-intro{padding:70px 0 78px}
+ .reference-services-intro h2{font-size:clamp(32px,9.5vw,42px)}
+ .reference-services{padding:24px 0 32px!important}
+}
 </style>
 </head>
 <body>
@@ -482,13 +496,17 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 </div>
 </section>
 <span id="home" class="home-anchor" aria-hidden="true"></span>
-<section class="content reference-services" id="services">
-<div class="wrap">
-<div class="section-head">
+
+<section class="reference-services-intro">
+<div class="wrap"><div class="section-head">
 <div class="eyebrow">Our services</div>
 <h2>One partner for every route, speed, and size</h2>
 <p>Whether it is a single document or a full container, Facil Express has a service built for it — with the same transparent tracking on every option.</p>
 </div>
+</div>
+</section>
+<section class="content reference-services" id="services">
+<div class="wrap">
 <div class="grid">
 <article class="service">
 <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 14.5 21 5l-7.8 16-2.6-6.5-8.1-4Z" stroke-linejoin="round"/><path d="m10.6 14.5 4.8-4.8" stroke-linecap="round"/></svg></div>
