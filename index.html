@@ -410,6 +410,19 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 .footer-brand-lockup .brand-mark{display:grid;place-items:center;width:40px;height:40px;font-size:20px}
 .footer-brand-lockup>span:last-child{color:#f5f8fc}
 .footer-brand-lockup>span:last-child span{color:#e0a000}
+
+.reference-footer{background:#031a3b;border-top:0;padding:42px 0 24px}
+.reference-footer .wrap{display:block}
+.reference-footer .footer-brand-block{max-width:600px;margin-bottom:32px}
+.reference-footer .footer-brand-lockup{margin-bottom:18px}
+.reference-footer .footer-brand-block p{color:#a2b2c5;font-size:14px;line-height:1.75;max-width:470px;margin-top:18px}
+.footer-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;padding:0 0 32px}
+.footer-group{display:flex;flex-direction:column;align-items:flex-start;gap:17px}
+.footer-group h3{font-size:14px;font-weight:750;color:#f5f8fc;margin-bottom:2px}
+.footer-group a{font-size:14px;color:#a2b2c5}
+.footer-group a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;border-top:1px solid #18304c;padding-top:18px;color:#8094ad;font-size:11px;flex-wrap:wrap}
+@media(max-width:760px){.reference-footer{padding:42px 0 22px}.reference-footer .footer-brand-block{margin-bottom:36px}.reference-footer .footer-brand-block p{font-size:14px}.footer-columns{grid-template-columns:1fr;gap:36px;padding-bottom:36px}.footer-group{gap:17px}.footer-bottom{flex-direction:column;gap:9px}}
 </style>
 </head>
 <body>
@@ -463,7 +476,7 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 <div class="wrap">
 <div class="section-head">
 <div class="eyebrow">Our services</div>
-<h2>One partner for every route, speed, and size.</h2>
+<h2>One partner for every route, speed, and size</h2>
 <p>Whether it is a single document or a full container, Facil Express has a service built for it — with the same transparent tracking on every option.</p>
 </div>
 <div class="grid">
@@ -606,7 +619,18 @@ footer{background:#031a3b;border-top:1px solid #172c45;padding:28px 0}
 </div>
 </section>
 </main>
-<footer><div class="wrap footer-inner"><div><a class="footer-brand footer-brand-lockup" href="#home" aria-label="Facil Express home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M3 8.5h16v14H3z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M19 13h5.5l4.5 5v4.5H19z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M22 13v5h7" stroke="white" stroke-width="2"/><circle cx="9" cy="24" r="3" fill="#e0a000" stroke="white" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="#e0a000" stroke="white" stroke-width="1.5"/></svg></span><span>Facil <span>Express</span></span></a><p>Shipping solutions for documents, parcels, and freight.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="tracking.html">Track a Package</a><a href="?page=send-package">Send a Package</a><a href="#cta">Contact</a><a href="admin.html">Admin Login</a></div><p>© <span id="year"></span> Facil Express</p></div></footer>
+<footer class="reference-footer"><div class="wrap">
+<div class="footer-brand-block">
+<a class="footer-brand footer-brand-lockup" href="#home" aria-label="Facil Express home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M3 8.5h16v14H3z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M19 13h5.5l4.5 5v4.5H19z" stroke="white" stroke-width="2" stroke-linejoin="round"/><path d="M22 13v5h7" stroke="white" stroke-width="2"/><circle cx="9" cy="24" r="3" fill="#e0a000" stroke="white" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="#e0a000" stroke="white" stroke-width="1.5"/></svg></span><span>Facil <span>Express</span></span></a>
+<p>Facil Express moves what matters, worldwide. Borderless shipping with transparent, real-time tracking and a network built for speed and trust.</p>
+</div>
+<div class="footer-columns">
+<div class="footer-group"><h3>Company</h3><a href="#metrics">About Us</a><a href="#services">Services</a><a href="#cta">Contact</a><a href="#cta">Partner With Us</a></div>
+<div class="footer-group"><h3>Solutions</h3><a href="#services">Express Air</a><a href="#services">Ocean Freight</a><a href="#services">Customs Brokerage</a><a href="#services">Same-Day Local</a></div>
+<div class="footer-group"><h3>Support</h3><a href="tracking.html">Track a Shipment</a><a href="?page=send-package">Send a Shipment</a><a href="#cta">Help Center</a><a href="admin.html">Admin Login</a></div>
+</div>
+<div class="footer-bottom"><span>© <span id="year"></span> Facil Express. All rights reserved.</span><span>Shipping with speed and trust.</span></div>
+</div></footer>
 <div id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" onclick="if(event.target===this)closeAdminLogin()"><div class="admin-card"><div class="admin-card-head"><h2 id="adminTitle">Admin Login</h2><button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Close admin login">×</button></div><p>Administrator access for managing shipments and customer requests.</p><form id="adminForm"><label for="adminEmail">ADMIN EMAIL</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Admin email address"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Password"><button class="btn btn-blue" type="submit">Sign in</button><div id="adminMessage" role="status" aria-live="polite">Sign in with an administrator account.</div></form><div id="adminDashboard" hidden><div class="admin-card-head"><h3 style="font-size:17px">Shipment requests</h3><div class="admin-toolbar"><button class="btn btn-ghost" type="button" onclick="loadAdminRequests()">Refresh</button><button class="btn" type="button" onclick="adminSignOut()">Sign out</button></div></div><p id="adminWelcome" style="font-size:11px;color:var(--muted)"></p><div id="adminRequests"><div class="admin-empty">Loading shipment requests…</div></div><section class="admin-chat"><div class="admin-card-head"><h3 style="font-size:17px">Customer support inbox</h3><button class="btn btn-ghost" type="button" onclick="loadSupportInbox()">Refresh inbox</button></div><div class="support-admin-layout"><div id="supportConversations" class="support-conversations"><div class="admin-empty">Loading conversations…</div></div><div class="support-thread"><div id="supportThreadTitle" class="support-thread-title">Select a conversation to reply</div><div id="supportThreadMessages" class="support-thread-messages"><p class="admin-empty">Customer messages will appear here.</p></div><form id="supportReplyForm" class="support-reply-form"><input id="supportReplyInput" maxlength="2000" placeholder="Write a reply…" aria-label="Reply to customer" required><button class="btn btn-blue" type="submit">Reply</button></form></div></div></section></div></div></div>
 <button class="chatbtn" onclick="toggleChat()" aria-controls="chat" aria-expanded="false" id="chatToggle"><svg class="chat-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="11" width="5" height="7" rx="2" stroke="currentColor" stroke-width="2"/><rect x="16" y="11" width="5" height="7" rx="2" stroke="currentColor" stroke-width="2"/><path d="M18 18a6 6 0 0 1-6 4h-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="4.5" r="2.5" fill="#e0a000" stroke="#e0a000"/></svg><span>Live Chat</span></button>
 <div id="chat" aria-label="Facil Express chat preview"><div class="chathead"><span class="chat-brand"><span class="chat-shield" aria-hidden="true">✓</span><span><strong>Facil Express</strong><small>Customer Support</small></span></span><button onclick="toggleChat()" aria-label="Close chat">×</button></div><div class="chat-status"><span></span> Support message preview</div><div id="messages"><p class="support-welcome">Welcome to Facil Express Support. Send us a message and our team can respond through this chat.</p><p class="support-disclaimer">Messages are saved so the support team can follow up. Please do not send payment details or passwords.</p></div><div class="chatrow"><input id="chatInput" aria-label="Your message" placeholder="Write your message…"><button onclick="sendChat()">Send</button></div></div>
