@@ -865,7 +865,7 @@ async function viewPackagePhoto(path){
  if(error||!data?.signedUrl){alert("Could not open this private package photo.");return;}
  window.open(data.signedUrl,"_blank","noopener,noreferrer");
 }
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAdminLogin();});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;closeAdminLogin();const chat=document.getElementById("chat");if(chat?.classList.contains("open")){chat.classList.remove("open");document.getElementById("chatToggle")?.setAttribute("aria-expanded","false");}const nav=document.getElementById("mainNav"),toggle=document.getElementById("menuToggle");if(nav?.classList.contains("open")){nav.classList.remove("open");toggle?.setAttribute("aria-expanded","false");toggle?.setAttribute("aria-label","Open navigation");if(toggle)toggle.textContent="☰";}});
 
 const nav = document.getElementById("mainNav");
 const menuToggle = document.getElementById("menuToggle");
