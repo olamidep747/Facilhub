@@ -672,6 +672,20 @@ window.facilSupabaseReady=import("https://esm.sh/@supabase/supabase-js@2")
  .catch(error=>{console.error("Supabase client could not load",error);return null;});
 
 
+// Keep a customer's unfinished shipment form through refreshes in this browser tab.
+const PACKAGE_DRAFT_KEY="facil_package_draft_v1";
+const PACKAGE_DRAFT_FIELDS=["senderName","senderEmail","senderPhone","origin","recipientName","recipientPhone","recipientEmail","destination","shipMethod","speed","packageType","weight","length","width","height","pickupDate","pickupTime","packageNotes"];
+function savePackageDraft(){
+ try{const draft={};PACKAGE_DRAFT_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el)draft[id]=el.value;});sessionStorage.setItem(PACKAGE_DRAFT_KEY,JSON.stringify(draft));}catch(error){console.warn("Could not save shipment form draft",error);}
+}
+function restorePackageDraft(){
+ try{const raw=sessionStorage.getItem(PACKAGE_DRAFT_KEY);if(!raw)return;const draft=JSON.parse(raw);PACKAGE_DRAFT_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el&&typeof draft[id]==="string")el.value=draft[id];});}catch(error){console.warn("Could not restore shipment form draft",error);}
+}
+const packageForm=document.getElementById("packageForm");
+packageForm.addEventListener("input",savePackageDraft);
+packageForm.addEventListener("change",savePackageDraft);
+if(new URLSearchParams(location.search).get("page")==="send-package")restorePackageDraft();
+
 const photoInput=document.getElementById("packagePhoto");
 const imagePreview=document.getElementById("imagePreview");
 photoInput.addEventListener("change",function(){
@@ -711,7 +725,7 @@ document.getElementById("packageForm").addEventListener("submit",async function(
    senderEmail:document.getElementById("senderEmail").value.trim(),
    recipientEmail:document.getElementById("recipientEmail").value.trim()
   });
-  form.reset();imagePreview.style.display="none";imagePreview.removeAttribute("src");
+  form.reset();try{sessionStorage.removeItem(PACKAGE_DRAFT_KEY);}catch{}imagePreview.style.display="none";imagePreview.removeAttribute("src");
  }catch(error){
   await new Promise(resolve=>setTimeout(resolve,Math.max(0,650-(Date.now()-startedAt))));
   out.textContent=error instanceof Error?error.message:"We couldn't submit the request. Please try again.";
