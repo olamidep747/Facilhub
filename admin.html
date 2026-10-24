@@ -138,7 +138,7 @@ label{color:#b2c2d2;font-size:10px;letter-spacing:.8px}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script type="module">
 const URL="https://vdxgbxuxuwzfqizhrwvf.supabase.co", KEY="sb_publishable_BxcVQSKtLMeP0isxtSz1FQ_Jo6qoOmf";
 const {createClient}=await import("https://esm.sh/@supabase/supabase-js@2");
-const db=createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const db=createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"facil-express-auth-v1"}});
 const $=id=>document.getElementById(id); let requests=[], shipments=[], selected=null, map=null, marker=null;
 const stages=["Created","Picked Up","In Transit","Custom Clearance","Out for Delivery","Delivered"];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
