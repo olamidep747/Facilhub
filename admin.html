@@ -183,7 +183,7 @@ $("saveTracking").onclick=async()=>{if(!selected)return;const lat=$("latitude").
 setInterval(()=>{if(!$("app").hidden&&$("chatRequests").classList.contains("active"))loadSupportInbox();},12000);
 // Restore the existing Supabase session after refresh instead of treating a temporary lookup failure as a sign-out.
 async function restoreAdminSession(){
- msg("loginMsg",'<span class="loading-ring" aria-hidden="true"></span> Checking your saved admin session…');
+ msg("loginMsg","Checking your saved admin session…");
  const {data:sessionData,error:sessionError}=await db.auth.getSession();
  if(sessionError){msg("loginMsg","Could not restore your saved session. Check your connection and refresh once more. You may sign in again if needed.");return;}
  const session=sessionData?.session;
